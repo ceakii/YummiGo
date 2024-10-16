@@ -1,45 +1,34 @@
-import './App.css'
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
 
-function App() {
+// Components
+import MuiBottomNavigation from "./components/MuiBottomNavigation";
+
+// Pages
+import Adventure from "./pages/Adventure";
+import Recipe from "./pages/Recipe";
+import Profile from "./pages/Profile";
+import Quest from "./pages/Quest";
+import Settings from "./pages/Settings";
+
+export default function App() {
   return (
     <>
+      <Routes>
+          <Route path="/" element={<Adventure />} />
+          <Route path="/recipe" element={<Recipe />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/quest" element={<Quest />} />
+          <Route path="/settings" element={<Settings />} />
+      </Routes>
+
       <h1>
-        <p>
-          YummiGo!
-        </p>
+        Yummigo
       </h1>
 
       <div id="nav">
-        {BottomNav()}
+        <MuiBottomNavigation />
       </div>
     </>
   )
 }
-
-function BottomNav() {
-  const [value, setValue] = React.useState(0);
-
-  return (
-    <Box>
-      <BottomNavigation
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-      >
-        <BottomNavigationAction label="Profile" />
-        <BottomNavigationAction label="Recipes" />
-        <BottomNavigationAction label="Adventure" />
-        <BottomNavigationAction label="Quests" />
-        <BottomNavigationAction label="Settings" />
-      </BottomNavigation>
-    </Box>
-  );
-}
-
-export default App
