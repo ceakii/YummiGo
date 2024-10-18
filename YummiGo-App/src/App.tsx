@@ -1,6 +1,5 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import { Box, Container } from "@mui/material";
 
 // Components
 import MuiAppBar from "./components/MuiAppBar"
