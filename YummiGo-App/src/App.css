@@ -5,7 +5,16 @@ h1 {
   text-align: center;
 }
 
+#appbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 #nav {
+  background-color: #7EAB33;
   width: 100%;
   position: fixed;
   bottom: 0;

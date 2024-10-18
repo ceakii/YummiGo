@@ -1,5 +1,5 @@
 export default function Quest() {
-    return (
-      <h1>Quest Page</h1>  
-    );
+  return (
+    <h1>Quest Page</h1>
+  );
 }
