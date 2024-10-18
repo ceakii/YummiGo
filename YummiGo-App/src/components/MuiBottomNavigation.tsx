@@ -19,8 +19,9 @@ export default function MuiBottomNavigation() {
                 showLabels
                 value={value}
                 onChange={(_event, newValue) => {
-                setValue(newValue);
+                    setValue(newValue);
                 }}
+                sx={{ bgcolor: "#F2B24D" }}
             >
                 <BottomNavigationAction
                     label="Profile"
@@ -48,6 +49,6 @@ export default function MuiBottomNavigation() {
                     onClick={() => navigate("/YummiGo/settings")}
                 />
             </BottomNavigation>
-            </Box>
+        </Box>
     );
 }
