@@ -14,15 +14,14 @@ import Settings from "./pages/Settings";
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/YummiGo/" element={<Adventure />} />
-        <Route path="/YummiGo/recipe" element={<Recipe />} />
-        <Route path="/YummiGo/profile" element={<Profile />} />
-        <Route path="/YummiGo/quest" element={<Quest />} />
-        <Route path="/YummiGo/settings" element={<Settings />} />
-      </Routes>
-
       <MuiAppBar />
+      <Routes>
+        <Route path="/" element={<Adventure />} />
+        <Route path="/recipe" element={<Recipe />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/quest" element={<Quest />} />
+        <Route path="/settings" element={<Settings />} />
+      </Routes>
       <MuiBottomNavigation />
     </>
   )
