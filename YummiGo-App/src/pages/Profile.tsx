@@ -1,5 +1,10 @@
+import { Box } from "@mui/material";
+import { pageStyle } from "../Style";
+
 export default function Profile() {
   return (
-    <h1>Profile Page</h1>
+    <Box sx={pageStyle}>
+      Profile Page
+    </Box>
   );
 }

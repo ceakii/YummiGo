@@ -1,28 +1,34 @@
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-
-// TODO: Make App Bar not overlay elements
+import { AppBar, Box, Button, ThemeProvider, Toolbar, Typography} from "@mui/material";
+import { barStyle, textTheme } from "../Style";
 
 export default function MuiAppBar() {
+    const topBarStyle = { ...barStyle, top: 0};
+
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed" sx={{ bgcolor: "#F2B24D" }}>
-                <Toolbar>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        align="left"
-                        sx={{
-                            flexGrow: 1,
-                        }}>
-                        YummiGo
-                    </Typography>
-                    <Button color="inherit" > Login </Button>
-                </Toolbar>
-            </AppBar>
-        </Box>
+        <ThemeProvider theme = {textTheme}>
+            <Box sx={topBarStyle}>
+                <AppBar sx={topBarStyle}>
+                    <Toolbar>
+                        <Typography
+                            variant="h1"
+                            align="left"
+                            sx={{ flexGrow: 1}}
+                        >
+                            YummiGo
+                        </Typography>
+                        <Button color="inherit">
+                            <Typography
+                                variant="button"
+                                align="center"
+                                sx={{
+                                    flexGrow: 1,
+                                }}>
+                                Login
+                            </Typography>
+                        </Button>
+                    </Toolbar>
+                </AppBar>
+            </Box>
+        </ThemeProvider>
     );
 }

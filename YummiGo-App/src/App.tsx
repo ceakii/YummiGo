@@ -1,4 +1,3 @@
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
 
 // Components
@@ -23,13 +22,8 @@ function App() {
         <Route path="/YummiGo/settings" element={<Settings />} />
       </Routes>
 
-      <div id="appbar">
-        <MuiAppBar />
-      </div>
-
-      <div id="nav">
-        <MuiBottomNavigation />
-      </div>
+      <MuiAppBar />
+      <MuiBottomNavigation />
     </>
   )
 }
