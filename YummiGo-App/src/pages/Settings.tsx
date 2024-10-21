@@ -1,5 +1,10 @@
+import { Box } from "@mui/material";
+import { pageStyle } from "../Style";
+
 export default function Settings() {
-    return (
-      <h1>Settings Page</h1>  
-    );
+  return (
+    <Box sx={pageStyle}>
+      Settings Page
+    </Box>
+  );
 }
