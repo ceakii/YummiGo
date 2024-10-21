@@ -1,5 +1,10 @@
+import { Box } from "@mui/material";
+import { pageStyle } from "../Style";
+
 export default function Quest() {
-    return (
-      <h1>Quest Page</h1>  
-    );
+  return (
+    <Box sx={pageStyle}>
+      Quest Page
+    </Box>
+  );
 }
