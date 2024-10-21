@@ -37,11 +37,13 @@ const barStyle = {
 const pageStyle = {
     width: "vw",
     height: "vh",
+    maxHeight: "calc(100vh - 2*barHeight)",
     top: barHeight,
     bottom: barHeight,
     left: 0,
     right: 0,
-    position: "fixed"
+    position: "fixed",
+    overflow: "auto"
 }
 
 // H1 Font Size
