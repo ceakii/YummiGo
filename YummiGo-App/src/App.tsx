@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 
 // Components
-import MuiAppBar from "./components/MuiAppBar"
-import MuiBottomNavigation from "./components/MuiBottomNavigation";
+import TopBar from "./components/TopBar"
+import BottomNavigationBar from "./components/BottomNavigationBar";
 
 // Pages
 import Adventure from "./pages/Adventure";
@@ -22,8 +22,8 @@ function App() {
         <Route path="/YummiGo/settings" element={<Settings />} />
       </Routes>
 
-      <MuiAppBar />
-      <MuiBottomNavigation />
+      <TopBar />
+      <BottomNavigationBar />
     </>
   )
 }
