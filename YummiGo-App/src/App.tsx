@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 
 // Components
-import MuiAppBar from "./components/MuiAppBar"
-import MuiBottomNavigation from "./components/MuiBottomNavigation";
+import TopBar from "./components/TopBar"
+import BottomNavigationBar from "./components/BottomNavigationBar";
 
 // Pages
 import Adventure from "./pages/Adventure";
@@ -14,7 +14,6 @@ import Settings from "./pages/Settings";
 function App() {
   return (
     <>
-      <MuiAppBar />
       <Routes>
         <Route path="/YummiGo/" element={<Adventure />} />
         <Route path="/YummiGo/recipe" element={<Recipe />} />
@@ -22,7 +21,9 @@ function App() {
         <Route path="/YummiGo/quest" element={<Quest />} />
         <Route path="/YummiGo/settings" element={<Settings />} />
       </Routes>
-      <MuiBottomNavigation />
+
+      <TopBar />
+      <BottomNavigationBar />
     </>
   )
 }

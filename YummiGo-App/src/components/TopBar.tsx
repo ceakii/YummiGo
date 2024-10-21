@@ -1,7 +1,7 @@
 import { AppBar, Box, Button, ThemeProvider, Toolbar, Typography} from "@mui/material";
 import { barStyle, textTheme } from "../Style";
 
-export default function MuiAppBar() {
+export default function TopBar() {
     const topBarStyle = { ...barStyle, top: 0};
 
     return (

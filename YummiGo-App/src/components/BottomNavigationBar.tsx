@@ -8,7 +8,7 @@ import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import SettingsIcon from "@mui/icons-material/Settings";
 
-export default function MuiBottomNavigation() {
+export default function BottomNavigationBar() {
     const bottomBarStyle = { ...barStyle, bottom: 0};
     const [value, setValue] = React.useState(0);
     const navigate=useNavigate();
