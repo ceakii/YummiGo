@@ -12,19 +12,21 @@ import Quest from "./pages/Quest";
 import Settings from "./pages/Settings";
 
 // Recipe Pages
-import Springroll from "./pages/recipes/Springroll";
+import SpringRoll from "./pages/recipes/SpringRoll";
 
 function App() {
   return (
     <>
       <Routes>
+        {/* Main Pages Routing */}
         <Route path="/YummiGo/" element={<Adventure />} />
         <Route path="/YummiGo/recipe" element={<Recipe />} />
         <Route path="/YummiGo/profile" element={<Profile />} />
         <Route path="/YummiGo/quest" element={<Quest />} />
         <Route path="/YummiGo/settings" element={<Settings />} />
 
-        <Route path="/YummiGo/recipes/springroll" element={<Springroll />} />
+        {/* Recipes Pages Routing */}
+        <Route path="/YummiGo/recipes/springroll" element={<SpringRoll />} />
       </Routes>
 
       <TopBar />
