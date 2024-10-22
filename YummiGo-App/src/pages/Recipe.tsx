@@ -6,6 +6,10 @@ import { pageStyle } from "../Style";
 // Image Paths
 import SpringRollImage from "/images/SpringRoll.jpg"
 
+// TODO:
+// - Add more recipes + Descriptions
+// - Add button functionality that makes a pop-up (modal)
+
 export default function Recipe() {
   const recipePageStyle = { ...pageStyle };
   const navigate = useNavigate();
