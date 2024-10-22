@@ -1,10 +1,12 @@
-import { Box } from "@mui/material";
-import { pageStyle } from "../../Style";
+import Container from "../../components/Container"
+import SpringRollImage from "/images/SpringRoll.jpg"
 
 export default function SpringRoll() {
   return (
-    <Box sx={pageStyle}>
-      Springroll page
-    </Box>
+    <Container title='Spring rolls' imageSrc={SpringRollImage}>
+      <div>
+        
+      </div>
+    </Container>
   );
 }
