@@ -86,12 +86,15 @@ export default function Recipe() {
             </CardActionArea>
           </Card>
         </Grid>
-
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
-            <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
-            >
+        
+        <Grid
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          size={"auto"}
+        >
+          <Card sx={{ width: "48vw" }}>
+            <CardActionArea>
               <CardMedia
                 component="img"
                 image={SpringRollImage}
@@ -155,11 +158,14 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
-            <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
-            >
+        <Grid
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          size={"auto"}
+        >
+          <Card sx={{ width: "48vw" }}>
+            <CardActionArea>
               <CardMedia
                 component="img"
                 image={SpringRollImage}
@@ -223,11 +229,14 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
-            <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
-            >
+        <Grid
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          size={"auto"}
+        >
+          <Card sx={{ width: "48vw" }}>
+            <CardActionArea>
               <CardMedia
                 component="img"
                 image={SpringRollImage}
@@ -291,11 +300,14 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
-            <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
-            >
+        <Grid
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          size={"auto"}
+        >
+          <Card sx={{ width: "48vw" }}>
+            <CardActionArea>
               <CardMedia
                 component="img"
                 image={SpringRollImage}
@@ -359,11 +371,14 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
-            <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
-            >
+        <Grid
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          size={"auto"}
+        >
+          <Card sx={{ width: "48vw" }}>
+            <CardActionArea>
               <CardMedia
                 component="img"
                 image={SpringRollImage}
@@ -426,6 +441,11 @@ export default function Recipe() {
             </CardActionArea>
           </Card>
         </Grid>
+
+
+
+
+
       </Grid>
     </Box>
   );
