@@ -1,197 +1,427 @@
-import Grid from "@mui/material/Grid2";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import CardActionArea from "@mui/material/CardActionArea";
-import Modal from "@mui/material/Modal"
-import { Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2"
 import { pageStyle } from "../Style";
 
 // Image Paths
-import SpringRoll from "/images/SpringRoll.jpg"
-
-// TODO:
-// - Add more recipes + Descriptions
-// - Add button functionality that makes a pop-up (modal)
+import SpringRollImage from "/images/SpringRoll.jpg"
 
 export default function Recipe() {
+  const recipePageStyle = { ...pageStyle };
+  const navigate = useNavigate();
+  
   return (
-    <Box sx={pageStyle}>
-      <Grid container spacing={1} columns={2}>
-        <Grid
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          size={"auto"}
-        >
-          <Card sx={{ width: "48vw" }}>
+    <Box sx={recipePageStyle}>
+      <Grid
+        flexGrow={1}
+        flexWrap="wrap"
+        container
+        spacing={0.5}
+        display="flex"
+      >
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
+          <Card sx={{height: 300}}>
             <CardActionArea
-              onClick={() => {
-                alert("Clicked")
-              }}
+              onClick={() => navigate("/YummiGo/recipes/springroll")}
             >
               <CardMedia
                 component="img"
-                height=""
-                image={SpringRoll}
+                image={SpringRollImage}
                 alt="Spring Roll"
+                sx={{
+                  height: 300
+                }}
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Spring Roll
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Vietnamese spring rolls, or "gỏi cuốn," are fresh rice paper rolls 
-                  filled with vegetables, herbs, and proteins like shrimp or tofu. 
-                  Served with dipping sauces like peanut sauce, they offer vibrant 
-                  flavors and a healthy, satisfying bite.
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </Grid>
-        
-        <Grid
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          size={"auto"}
-        >
-          <Card sx={{ width: "48vw" }}>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                height=""
-                image={SpringRoll}
-                alt="Spring Roll"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Spring Roll
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Vietnamese spring rolls, or "gỏi cuốn," are fresh rice paper rolls 
-                  filled with vegetables, herbs, and proteins like shrimp or tofu. 
-                  Served with dipping sauces like peanut sauce, they offer vibrant 
-                  flavors and a healthy, satisfying bite.
-                </Typography>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 30,
+                    left: 0,
+                    width: '100%',
+                    bgcolor: 'rgba(0, 0, 0, 0.54)',
+                    color: 'white',
+                    padding: '10px',
+                  }}
+                >
+                  <Typography gutterBottom variant="h5">
+                    Spring Roll
+                  </Typography>
+                </Box>
               </CardContent>
             </CardActionArea>
           </Card>
         </Grid>
 
-        <Grid
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          size={"auto"}
-        >
-          <Card sx={{ width: "48vw" }}>
-            <CardActionArea>
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
+          <Card sx={{height: 300}}>
+            <CardActionArea
+              onClick={() => navigate("/YummiGo/recipes/springroll")}
+            >
               <CardMedia
                 component="img"
-                height=""
-                image={SpringRoll}
-                alt="Spring Roll"
+                image={SpringRollImage}
+                alt="Food Name Here!"
+                sx={{
+                  height: 300
+                }}
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Spring Roll
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Vietnamese spring rolls, or "gỏi cuốn," are fresh rice paper rolls 
-                  filled with vegetables, herbs, and proteins like shrimp or tofu. 
-                  Served with dipping sauces like peanut sauce, they offer vibrant 
-                  flavors and a healthy, satisfying bite.
-                </Typography>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 30,
+                    left: 0,
+                    width: '100%',
+                    bgcolor: 'rgba(0, 0, 0, 0.54)',
+                    color: 'white',
+                    padding: '10px',
+                  }}
+                >
+                  <Typography gutterBottom variant="h5">
+                    Food Name Here!
+                  </Typography>
+                </Box>
               </CardContent>
             </CardActionArea>
           </Card>
         </Grid>
 
-        <Grid
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          size={"auto"}
-        >
-          <Card sx={{ width: "48vw" }}>
-            <CardActionArea>
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
+          <Card sx={{height: 300}}>
+            <CardActionArea
+              onClick={() => navigate("/YummiGo/recipes/springroll")}
+            >
               <CardMedia
                 component="img"
-                height=""
-                image={SpringRoll}
-                alt="Spring Roll"
+                image={SpringRollImage}
+                alt="Food Name Here!"
+                sx={{
+                  height: 300
+                }}
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Spring Roll
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Vietnamese spring rolls, or "gỏi cuốn," are fresh rice paper rolls 
-                  filled with vegetables, herbs, and proteins like shrimp or tofu. 
-                  Served with dipping sauces like peanut sauce, they offer vibrant 
-                  flavors and a healthy, satisfying bite.
-                </Typography>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 30,
+                    left: 0,
+                    width: '100%',
+                    bgcolor: 'rgba(0, 0, 0, 0.54)',
+                    color: 'white',
+                    padding: '10px',
+                  }}
+                >
+                  <Typography gutterBottom variant="h5">
+                    Food Name Here!
+                  </Typography>
+                </Box>
               </CardContent>
             </CardActionArea>
           </Card>
         </Grid>
 
-        <Grid
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          size={"auto"}
-        >
-          <Card sx={{ width: "48vw" }}>
-            <CardActionArea>
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
+          <Card sx={{height: 300}}>
+            <CardActionArea
+              onClick={() => navigate("/YummiGo/recipes/springroll")}
+            >
               <CardMedia
                 component="img"
-                height=""
-                image={SpringRoll}
-                alt="Spring Roll"
+                image={SpringRollImage}
+                alt="Food Name Here!"
+                sx={{
+                  height: 300
+                }}
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Spring Roll
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Vietnamese spring rolls, or "gỏi cuốn," are fresh rice paper rolls 
-                  filled with vegetables, herbs, and proteins like shrimp or tofu. 
-                  Served with dipping sauces like peanut sauce, they offer vibrant 
-                  flavors and a healthy, satisfying bite.
-                </Typography>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 30,
+                    left: 0,
+                    width: '100%',
+                    bgcolor: 'rgba(0, 0, 0, 0.54)',
+                    color: 'white',
+                    padding: '10px',
+                  }}
+                >
+                  <Typography gutterBottom variant="h5">
+                    Food Name Here!
+                  </Typography>
+                </Box>
               </CardContent>
             </CardActionArea>
           </Card>
         </Grid>
 
-        <Grid
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          size={"auto"}
-        >
-          <Card sx={{ width: "48vw" }}>
-            <CardActionArea>
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
+          <Card sx={{height: 300}}>
+            <CardActionArea
+              onClick={() => navigate("/YummiGo/recipes/springroll")}
+            >
               <CardMedia
                 component="img"
-                height=""
-                image={SpringRoll}
-                alt="Spring Roll"
+                image={SpringRollImage}
+                alt="Food Name Here!"
+                sx={{
+                  height: 300
+                }}
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Spring Roll
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Vietnamese spring rolls, or "gỏi cuốn," are fresh rice paper rolls 
-                  filled with vegetables, herbs, and proteins like shrimp or tofu. 
-                  Served with dipping sauces like peanut sauce, they offer vibrant 
-                  flavors and a healthy, satisfying bite.
-                </Typography>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 30,
+                    left: 0,
+                    width: '100%',
+                    bgcolor: 'rgba(0, 0, 0, 0.54)',
+                    color: 'white',
+                    padding: '10px',
+                  }}
+                >
+                  <Typography gutterBottom variant="h5">
+                    Food Name Here!
+                  </Typography>
+                </Box>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
+          <Card sx={{height: 300}}>
+            <CardActionArea
+              onClick={() => navigate("/YummiGo/recipes/springroll")}
+            >
+              <CardMedia
+                component="img"
+                image={SpringRollImage}
+                alt="Food Name Here!"
+                sx={{
+                  height: 300
+                }}
+              />
+              <CardContent>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 30,
+                    left: 0,
+                    width: '100%',
+                    bgcolor: 'rgba(0, 0, 0, 0.54)',
+                    color: 'white',
+                    padding: '10px',
+                  }}
+                >
+                  <Typography gutterBottom variant="h5">
+                    Food Name Here!
+                  </Typography>
+                </Box>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
+          <Card sx={{height: 300}}>
+            <CardActionArea
+              onClick={() => navigate("/YummiGo/recipes/springroll")}
+            >
+              <CardMedia
+                component="img"
+                image={SpringRollImage}
+                alt="Food Name Here!"
+                sx={{
+                  height: 300
+                }}
+              />
+              <CardContent>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 30,
+                    left: 0,
+                    width: '100%',
+                    bgcolor: 'rgba(0, 0, 0, 0.54)',
+                    color: 'white',
+                    padding: '10px',
+                  }}
+                >
+                  <Typography gutterBottom variant="h5">
+                    Food Name Here!
+                  </Typography>
+                </Box>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
+          <Card sx={{height: 300}}>
+            <CardActionArea
+              onClick={() => navigate("/YummiGo/recipes/springroll")}
+            >
+              <CardMedia
+                component="img"
+                image={SpringRollImage}
+                alt="Food Name Here!"
+                sx={{
+                  height: 300
+                }}
+              />
+              <CardContent>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 30,
+                    left: 0,
+                    width: '100%',
+                    bgcolor: 'rgba(0, 0, 0, 0.54)',
+                    color: 'white',
+                    padding: '10px',
+                  }}
+                >
+                  <Typography gutterBottom variant="h5">
+                    Food Name Here!
+                  </Typography>
+                </Box>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
+          <Card sx={{height: 300}}>
+            <CardActionArea
+              onClick={() => navigate("/YummiGo/recipes/springroll")}
+            >
+              <CardMedia
+                component="img"
+                image={SpringRollImage}
+                alt="Food Name Here!"
+                sx={{
+                  height: 300
+                }}
+              />
+              <CardContent>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 30,
+                    left: 0,
+                    width: '100%',
+                    bgcolor: 'rgba(0, 0, 0, 0.54)',
+                    color: 'white',
+                    padding: '10px',
+                  }}
+                >
+                  <Typography gutterBottom variant="h5">
+                    Food Name Here!
+                  </Typography>
+                </Box>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
+          <Card sx={{height: 300}}>
+            <CardActionArea
+              onClick={() => navigate("/YummiGo/recipes/springroll")}
+            >
+              <CardMedia
+                component="img"
+                image={SpringRollImage}
+                alt="Food Name Here!"
+                sx={{
+                  height: 300
+                }}
+              />
+              <CardContent>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 30,
+                    left: 0,
+                    width: '100%',
+                    bgcolor: 'rgba(0, 0, 0, 0.54)',
+                    color: 'white',
+                    padding: '10px',
+                  }}
+                >
+                  <Typography gutterBottom variant="h5">
+                    Food Name Here!
+                  </Typography>
+                </Box>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
+          <Card sx={{height: 300}}>
+            <CardActionArea
+              onClick={() => navigate("/YummiGo/recipes/springroll")}
+            >
+              <CardMedia
+                component="img"
+                image={SpringRollImage}
+                alt="Food Name Here!"
+                sx={{
+                  height: 300
+                }}
+              />
+              <CardContent>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 30,
+                    left: 0,
+                    width: '100%',
+                    bgcolor: 'rgba(0, 0, 0, 0.54)',
+                    color: 'white',
+                    padding: '10px',
+                  }}
+                >
+                  <Typography gutterBottom variant="h5">
+                    Food Name Here!
+                  </Typography>
+                </Box>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
+          <Card sx={{height: 300}}>
+            <CardActionArea
+              onClick={() => navigate("/YummiGo/recipes/springroll")}
+            >
+              <CardMedia
+                component="img"
+                image={SpringRollImage}
+                alt="Food Name Here!"
+                sx={{
+                  height: 300
+                }}
+              />
+              <CardContent>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 30,
+                    left: 0,
+                    width: '100%',
+                    bgcolor: 'rgba(0, 0, 0, 0.54)',
+                    color: 'white',
+                    padding: '10px',
+                  }}
+                >
+                  <Typography gutterBottom variant="h5">
+                    Food Name Here!
+                  </Typography>
+                </Box>
               </CardContent>
             </CardActionArea>
           </Card>
