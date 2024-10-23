@@ -5,6 +5,10 @@ import { pageStyle } from "../Style";
 
 // Image Paths
 import SpringRollImage from "/images/SpringRoll.jpg"
+import AvocadoSmoothieImage from "/images/AvocadoSmoothie.jpg"
+import ChickenPorridgeImage from "/images/ChickenPorridge.jpg"
+import PastaSaladImage from "/images/PastaSalad.jpg"
+
 
 export default function Recipe() {
   const recipePageStyle = { ...pageStyle };
@@ -328,12 +332,12 @@ export default function Recipe() {
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
           <Card sx={{height: 300}}>
             <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
+              onClick={() => navigate("/YummiGo/recipes/pastasalad")}
             >
               <CardMedia
                 component="img"
-                image={SpringRollImage}
-                alt="Food Name Here!"
+                image={PastaSaladImage}
+                alt="Spinach-Basil Pasta Salad"
                 sx={{
                   height: 300
                 }}
@@ -351,7 +355,7 @@ export default function Recipe() {
                   }}
                 >
                   <Typography gutterBottom variant="h5">
-                    Food Name Here!
+                    Spinach-Basil Pasta Salad
                   </Typography>
                 </Box>
               </CardContent>
@@ -362,12 +366,12 @@ export default function Recipe() {
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
           <Card sx={{height: 300}}>
             <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
+              onClick={() => navigate("/YummiGo/recipes/chickenporridge")}
             >
               <CardMedia
                 component="img"
-                image={SpringRollImage}
-                alt="Food Name Here!"
+                image={ChickenPorridgeImage}
+                alt="Chicken Porridge"
                 sx={{
                   height: 300
                 }}
@@ -385,7 +389,7 @@ export default function Recipe() {
                   }}
                 >
                   <Typography gutterBottom variant="h5">
-                    Food Name Here!
+                    Chicken Porridge
                   </Typography>
                 </Box>
               </CardContent>
@@ -396,12 +400,12 @@ export default function Recipe() {
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
           <Card sx={{height: 300}}>
             <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
+              onClick={() => navigate("/YummiGo/recipes/avocadosmoothie")}
             >
               <CardMedia
                 component="img"
-                image={SpringRollImage}
-                alt="Food Name Here!"
+                image={AvocadoSmoothieImage}
+                alt="Avocado Smoothie"
                 sx={{
                   height: 300
                 }}
@@ -419,7 +423,7 @@ export default function Recipe() {
                   }}
                 >
                   <Typography gutterBottom variant="h5">
-                    Food Name Here!
+                    Avocado Smoothie
                   </Typography>
                 </Box>
               </CardContent>
