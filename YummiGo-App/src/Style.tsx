@@ -52,9 +52,9 @@ const pageStyle = {
 
 // H3 Font Size
 textTheme.typography.h3 = {
-  fontSize: '3rem',                                          // Extra Small Width: Screen Width < 600px
-  [textTheme.breakpoints.up('sm')]: { fontSize: '4rem', },   // Small width: Screen Width >= 600px
-  [textTheme.breakpoints.up('md')]: { fontSize: '5rem', },   // Medium width: Screen Width >= 900px
+  fontSize: '1.2rem',                                          // Extra Small Width: Screen Width < 600px
+  [textTheme.breakpoints.up('sm')]: { fontSize: '2rem', },   // Small width: Screen Width >= 600px
+  [textTheme.breakpoints.up('md')]: { fontSize: '2.5rem', },   // Medium width: Screen Width >= 900px
   fontFamily: "'Moul', sans-serif",
   textShadow: `
                   -1px -1px 0px #000,  
