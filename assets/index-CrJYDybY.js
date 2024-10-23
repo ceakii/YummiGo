@@ -226,7 +226,8 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
         Servings: 8
         Yield:  8 spring rolls
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients
 
         • 2 ounces rice vermicelli
@@ -247,7 +248,8 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
         • 3 tablespoons hoisin sauce
         • 1 teaspoon finely chopped peanuts
         
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Directions
 
         1. Gather all ingredients.
@@ -273,7 +275,8 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
         Total Time: 1 hr 40 mins
         Servings: 8
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients
 
         • cooking spray
@@ -284,7 +287,8 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
         • 1 teaspoon vanilla extract
         • ⅛ teaspoon salt
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Directions
 
         1. Gather all ingredients. Preheat the oven to 325 degrees F (165 degrees C). Grease a 9-inch square baking dish.
@@ -301,14 +305,12 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
 
       `})}function YE(){return S.jsx(Kn,{title:"Avocado Toast with Whole Grain Bread",imageSrc:Q0,children:`
         Prep Time:  40 minutes 
-
         Cook Time:  20 minutes 
-
         Cooling Time: 45 minutes 
-
         Total Time: 1 hour 45 minutes 
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients
 
         Roasted Tomatoes
@@ -326,7 +328,8 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
         • 1-1/2 teaspoons kosher salt
         • 4 slices rustic bread or sourdough bread sliced 1/2-inch thick
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Directions
 
         1. For roasting the tomatoes use a 2-quart baking dish. Preheat the oven to 375 degrees F.
@@ -352,13 +355,15 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
       `})}function KE(){return S.jsx(Kn,{title:"Greek Yogurt with Fresh Berries and Nuts",imageSrc:X0,children:`
         Servings: 1
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients 
         • Raspberries 1 cup (150 g)
         • Yogurt 1 cup (240 g)
         • Honey 1 teaspoon (5 g)
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Directions
         1. Place the yogurt as a base in a bowl and then top with the raspberries and then pour over some honey.
 
@@ -367,14 +372,16 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
         Prep time: 10 mins 
         Cooking time: 0 mins
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients 
         • 50g/3.5oz red capsicum/bell pepper (1/4 medium capsicum)
         • 50g/1.8oz celery
         • 100g/3.5oz carrot (about 1 small-med size)
         • 150g/5.3oz Homemade hummus or 75g store-bought* hummus
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Directions
         1. Use this easy recipe to make your own hummus. Takes less than 10 minutes.
 
@@ -388,7 +395,8 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
         Total: 30 minutes 
         Servings: 6 servings
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients 
 
         • 1 cup uncooked quinoa
@@ -407,7 +415,8 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
         • salt and pepper
         • 1/2 tsp dried oregano
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Directions
 
         1. Cook quinoa according to package instructions. You should end up with about 2 cups of cooked quinoa.
@@ -426,7 +435,8 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
         Total Time: 6 hours 5 minutes 
         Servings: 1
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients
 
         • 2 tablespoon chia seeds
@@ -434,7 +444,8 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
         • 1 tablespoon maple syrup *or more for a sweeter version
         • ⅓ teaspoon vanilla extract *optional
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Directions
 
         1. In a medium bowl or mason jar, whisk together chia seeds, almond milk and maple syrup.
@@ -451,7 +462,8 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
         Prep Time:  5 minutes 
         Total Time: 5 minutes 
 
-        -----------------------------------------------------------------------------------------------------
+
+        
         Ingredients
 
         • 2 hard boiled eggs, peeled, (Shortcut)
@@ -460,7 +472,8 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
         • fresh chives, minced
         • black pepper, as desired
 
-        -----------------------------------------------------------------------------------------------------
+
+
         Directions
 
         1. Slice the eggs with a slicer or knife.
@@ -473,7 +486,8 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
         Total Time: 45 minutes
         Yield: 4 servings 1x
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients
 
         • 2 pounds sweet potatoes (about 2 medium-large or 3 medium)
@@ -482,7 +496,8 @@ To suppress this warning, you need to explicitly provide the \`palette.${t}Chann
         • 2 tablespoons extra-virgin olive oil
         • Optional spices: freshly ground black pepper, cayenne pepper and/or garlic powder
 
-        -----------------------------------------------------------------------------------------------------
+        
+
         Directions
         
         1. Preheat the oven to 425 degrees Fahrenheit with racks in the lower and upper thirds of the oven (make sure the top rack is about 6″ from the heat source and no closer). Line two large, rimmed baking sheets with parchment paper so the fries don’t get stuck to the pans.
