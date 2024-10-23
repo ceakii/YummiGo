@@ -10,13 +10,15 @@ export default function greekyogurtwfban() {
       {`
         Servings: 1
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients 
         • Raspberries 1 cup (150 g)
         • Yogurt 1 cup (240 g)
         • Honey 1 teaspoon (5 g)
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Directions
         1. Place the yogurt as a base in a bowl and then top with the raspberries and then pour over some honey.
 

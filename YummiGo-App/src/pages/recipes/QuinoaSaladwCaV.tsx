@@ -13,7 +13,8 @@ export default function quinoasaladwcav() {
         Total: 30 minutes 
         Servings: 6 servings
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients 
 
         • 1 cup uncooked quinoa
@@ -32,7 +33,8 @@ export default function quinoasaladwcav() {
         • salt and pepper
         • 1/2 tsp dried oregano
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Directions
 
         1. Cook quinoa according to package instructions. You should end up with about 2 cups of cooked quinoa.

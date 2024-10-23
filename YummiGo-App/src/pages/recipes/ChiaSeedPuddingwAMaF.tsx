@@ -13,7 +13,8 @@ export default function chiaseedpuddingwamaf() {
         Total Time: 6 hours 5 minutes 
         Servings: 1
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients
 
         • 2 tablespoon chia seeds
@@ -21,7 +22,8 @@ export default function chiaseedpuddingwamaf() {
         • 1 tablespoon maple syrup *or more for a sweeter version
         • ⅓ teaspoon vanilla extract *optional
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Directions
 
         1. In a medium bowl or mason jar, whisk together chia seeds, almond milk and maple syrup.

@@ -11,7 +11,8 @@ export default function eggamustardcrackers() {
         Prep Time:  5 minutes 
         Total Time: 5 minutes 
 
-        -----------------------------------------------------------------------------------------------------
+
+        
         Ingredients
 
         • 2 hard boiled eggs, peeled, (Shortcut)
@@ -20,7 +21,8 @@ export default function eggamustardcrackers() {
         • fresh chives, minced
         • black pepper, as desired
 
-        -----------------------------------------------------------------------------------------------------
+
+
         Directions
 
         1. Slice the eggs with a slicer or knife.

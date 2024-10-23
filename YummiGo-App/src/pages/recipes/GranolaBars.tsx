@@ -14,7 +14,8 @@ export default function granolabar() {
         Total Time: 1 hr 40 mins
         Servings: 8
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients
 
         • cooking spray
@@ -25,7 +26,8 @@ export default function granolabar() {
         • 1 teaspoon vanilla extract
         • ⅛ teaspoon salt
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Directions
 
         1. Gather all ingredients. Preheat the oven to 325 degrees F (165 degrees C). Grease a 9-inch square baking dish.
