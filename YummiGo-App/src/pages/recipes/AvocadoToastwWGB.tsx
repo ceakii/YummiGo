@@ -9,14 +9,12 @@ export default function avocadotoastwwgb() {
     >
       {`
         Prep Time:  40 minutes 
-
         Cook Time:  20 minutes 
-
         Cooling Time: 45 minutes 
-
         Total Time: 1 hour 45 minutes 
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients
 
         Roasted Tomatoes
@@ -34,7 +32,8 @@ export default function avocadotoastwwgb() {
         • 1-1/2 teaspoons kosher salt
         • 4 slices rustic bread or sourdough bread sliced 1/2-inch thick
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Directions
 
         1. For roasting the tomatoes use a 2-quart baking dish. Preheat the oven to 375 degrees F.

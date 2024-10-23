@@ -14,7 +14,8 @@ export default function SpringRoll() {
         Servings: 8
         Yield:  8 spring rolls
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients
 
         • 2 ounces rice vermicelli
@@ -35,7 +36,8 @@ export default function SpringRoll() {
         • 3 tablespoons hoisin sauce
         • 1 teaspoon finely chopped peanuts
         
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Directions
 
         1. Gather all ingredients.

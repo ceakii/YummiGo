@@ -13,7 +13,8 @@ export default function bakedsweetpotatofries() {
         Total Time: 45 minutes
         Yield: 4 servings 1x
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients
 
         • 2 pounds sweet potatoes (about 2 medium-large or 3 medium)
@@ -22,7 +23,8 @@ export default function bakedsweetpotatofries() {
         • 2 tablespoons extra-virgin olive oil
         • Optional spices: freshly ground black pepper, cayenne pepper and/or garlic powder
 
-        -----------------------------------------------------------------------------------------------------
+        
+
         Directions
         
         1. Preheat the oven to 425 degrees Fahrenheit with racks in the lower and upper thirds of the oven (make sure the top rack is about 6″ from the heat source and no closer). Line two large, rimmed baking sheets with parchment paper so the fries don’t get stuck to the pans.

@@ -12,14 +12,16 @@ export default function hummusaveggiesticks() {
         Prep time: 10 mins 
         Cooking time: 0 mins
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Ingredients 
         • 50g/3.5oz red capsicum/bell pepper (1/4 medium capsicum)
         • 50g/1.8oz celery
         • 100g/3.5oz carrot (about 1 small-med size)
         • 150g/5.3oz Homemade hummus or 75g store-bought* hummus
 
-        -----------------------------------------------------------------------------------------------------
+        
+        
         Directions
         1. Use this easy recipe to make your own hummus. Takes less than 10 minutes.
 
