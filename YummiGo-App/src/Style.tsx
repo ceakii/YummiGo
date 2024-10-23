@@ -53,6 +53,7 @@ const pageStyle = {
 // H3 Font Size
 textTheme.typography.h3 = {
   fontSize: "1.2rem", // Extra Small Width: Screen Width < 600px
+  color: '#FFFFFF',
   [textTheme.breakpoints.up("sm")]: { fontSize: "2rem" }, // Small width: Screen Width >= 600px
   [textTheme.breakpoints.up("md")]: { fontSize: "2.5rem" }, // Medium width: Screen Width >= 900px
   fontFamily: "'Moul', sans-serif",
