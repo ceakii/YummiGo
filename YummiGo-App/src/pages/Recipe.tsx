@@ -1,30 +1,39 @@
 import { useNavigate } from "react-router-dom";
-import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2"
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { pageStyle } from "../Style";
 
 // Image Paths
-import SpringRollImage from "/images/SpringRoll.jpg"
-import AvocadoSmoothieImage from "/images/AvocadoSmoothie.jpg"
-import ChickenPorridgeImage from "/images/ChickenPorridge.jpg"
-import PastaSaladImage from "/images/PastaSalad.jpg"
-
+import SpringRollImage from "/images/SpringRoll.jpg";
+import AvocadoSmoothieImage from "/images/AvocadoSmoothie.jpg";
+import ChickenPorridgeImage from "/images/ChickenPorridge.jpg";
+import PastaSaladImage from "/images/PastaSalad.jpg";
+import GranolaBars from "/images/GranolaBars.png";
+import AvocadoToastwWGB from "/images/AvocadoToastwWGB.png";
+import GreekYogurtwFBaN from "/images/GreekYogurtwFBaN.png";
+import HummusaVeggieSticks from "/images/HummusaVeggieSticks.png";
+import QuinoaSaladwCaV from "/images/QuinoaSaladwCaV.png";
+import ChiaSeedPuddingwAMaF from "/images/ChiaSeedPuddingwAMaF.png";
+import EggaMustardCrackers from "/images/EggaMustardCrackers.png";
+import BakedSweetPotatoFries from "/images/BakedSweetPotatoFries.png";
 
 export default function Recipe() {
   const recipePageStyle = { ...pageStyle };
   const navigate = useNavigate();
-  
+
   return (
     <Box sx={recipePageStyle}>
-      <Grid
-        flexGrow={1}
-        flexWrap="wrap"
-        container
-        spacing={0.5}
-        display="flex"
-      >
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
+      <Grid flexGrow={1} flexWrap="wrap" container spacing={0.5} display="flex">
+        {/*Spring roll */}
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+          <Card sx={{ height: 300 }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/springroll")}
             >
@@ -33,19 +42,19 @@ export default function Recipe() {
                 image={SpringRollImage}
                 alt="Spring Roll"
                 sx={{
-                  height: 300
+                  height: 300,
                 }}
               />
               <CardContent>
                 <Box
                   sx={{
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 30,
                     left: 0,
-                    width: '100%',
-                    bgcolor: 'rgba(0, 0, 0, 0.54)',
-                    color: 'white',
-                    padding: '10px',
+                    width: "100%",
+                    bgcolor: "rgba(0, 0, 0, 0.54)",
+                    color: "white",
+                    padding: "10px",
                   }}
                 >
                   <Typography gutterBottom variant="h5">
@@ -57,33 +66,34 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
+        {/*Granola Bars */}
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+          <Card sx={{ height: 300 }}>
             <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
+              onClick={() => navigate("/YummiGo/recipes/granolabars")}
             >
               <CardMedia
                 component="img"
-                image={SpringRollImage}
-                alt="Food Name Here!"
+                image={GranolaBars}
+                alt="Granola Bars"
                 sx={{
-                  height: 300
+                  height: 300,
                 }}
               />
               <CardContent>
                 <Box
                   sx={{
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 30,
                     left: 0,
-                    width: '100%',
-                    bgcolor: 'rgba(0, 0, 0, 0.54)',
-                    color: 'white',
-                    padding: '10px',
+                    width: "100%",
+                    bgcolor: "rgba(0, 0, 0, 0.54)",
+                    color: "white",
+                    padding: "10px",
                   }}
                 >
                   <Typography gutterBottom variant="h5">
-                    Food Name Here!
+                    Granola Bars
                   </Typography>
                 </Box>
               </CardContent>
@@ -91,33 +101,34 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
+        {/*Avocado Toast with Whole Grain Bread*/}
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+          <Card sx={{ height: 300 }}>
             <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
+              onClick={() => navigate("/YummiGo/recipes/avocadotoastwwgb")}
             >
               <CardMedia
                 component="img"
-                image={SpringRollImage}
-                alt="Food Name Here!"
+                image={AvocadoToastwWGB}
+                alt="Avocado Toast with Whole Grain Bread"
                 sx={{
-                  height: 300
+                  height: 300,
                 }}
               />
               <CardContent>
                 <Box
                   sx={{
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 30,
                     left: 0,
-                    width: '100%',
-                    bgcolor: 'rgba(0, 0, 0, 0.54)',
-                    color: 'white',
-                    padding: '10px',
+                    width: "100%",
+                    bgcolor: "rgba(0, 0, 0, 0.54)",
+                    color: "white",
+                    padding: "10px",
                   }}
                 >
                   <Typography gutterBottom variant="h5">
-                    Food Name Here!
+                    Avocado Toast with Whole Grain Bread
                   </Typography>
                 </Box>
               </CardContent>
@@ -125,33 +136,34 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
+        {/*Greek Yogurt with Fresh Berries and Nuts*/}
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+          <Card sx={{ height: 300 }}>
             <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
+              onClick={() => navigate("/YummiGo/recipes/greekyogurtwfban")}
             >
               <CardMedia
                 component="img"
-                image={SpringRollImage}
-                alt="Food Name Here!"
+                image={GreekYogurtwFBaN}
+                alt="Greek Yogurt with Fresh Berries and Nuts"
                 sx={{
-                  height: 300
+                  height: 300,
                 }}
               />
               <CardContent>
                 <Box
                   sx={{
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 30,
                     left: 0,
-                    width: '100%',
-                    bgcolor: 'rgba(0, 0, 0, 0.54)',
-                    color: 'white',
-                    padding: '10px',
+                    width: "100%",
+                    bgcolor: "rgba(0, 0, 0, 0.54)",
+                    color: "white",
+                    padding: "10px",
                   }}
                 >
                   <Typography gutterBottom variant="h5">
-                    Food Name Here!
+                    Greek Yogurt with Fresh Berries and Nuts
                   </Typography>
                 </Box>
               </CardContent>
@@ -159,33 +171,34 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
+        {/*Hummus and Veggie Sticks*/}
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+          <Card sx={{ height: 300 }}>
             <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
+              onClick={() => navigate("/YummiGo/recipes/hummusaveggiesticks")}
             >
               <CardMedia
                 component="img"
-                image={SpringRollImage}
-                alt="Food Name Here!"
+                image={HummusaVeggieSticks}
+                alt="Hummus and Veggie Sticks"
                 sx={{
-                  height: 300
+                  height: 300,
                 }}
               />
               <CardContent>
                 <Box
                   sx={{
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 30,
                     left: 0,
-                    width: '100%',
-                    bgcolor: 'rgba(0, 0, 0, 0.54)',
-                    color: 'white',
-                    padding: '10px',
+                    width: "100%",
+                    bgcolor: "rgba(0, 0, 0, 0.54)",
+                    color: "white",
+                    padding: "10px",
                   }}
                 >
                   <Typography gutterBottom variant="h5">
-                    Food Name Here!
+                    Hummus and Veggie Sticks
                   </Typography>
                 </Box>
               </CardContent>
@@ -193,33 +206,34 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
+        {/*Quinoa Salad with Chickpeas and Vegetables*/}
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+          <Card sx={{ height: 300 }}>
             <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
+              onClick={() => navigate("/YummiGo/recipes/quinoasaladwcav")}
             >
               <CardMedia
                 component="img"
-                image={SpringRollImage}
-                alt="Food Name Here!"
+                image={QuinoaSaladwCaV}
+                alt="Quinoa Salad with Chickpeas and Vegetables"
                 sx={{
-                  height: 300
+                  height: 300,
                 }}
               />
               <CardContent>
                 <Box
                   sx={{
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 30,
                     left: 0,
-                    width: '100%',
-                    bgcolor: 'rgba(0, 0, 0, 0.54)',
-                    color: 'white',
-                    padding: '10px',
+                    width: "100%",
+                    bgcolor: "rgba(0, 0, 0, 0.54)",
+                    color: "white",
+                    padding: "10px",
                   }}
                 >
                   <Typography gutterBottom variant="h5">
-                    Food Name Here!
+                    Quinoa Salad with Chickpeas and Vegetables
                   </Typography>
                 </Box>
               </CardContent>
@@ -227,33 +241,34 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
+        {/*Chia Seed Pudding with Almond Milk and Fruit*/}
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+          <Card sx={{ height: 300 }}>
             <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
+              onClick={() => navigate("/YummiGo/recipes/chiaseedpuddingwamaf")}
             >
               <CardMedia
                 component="img"
-                image={SpringRollImage}
-                alt="Food Name Here!"
+                image={ChiaSeedPuddingwAMaF}
+                alt="Chia Seed Pudding with Almond Milk and Fruit"
                 sx={{
-                  height: 300
+                  height: 300,
                 }}
               />
               <CardContent>
                 <Box
                   sx={{
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 30,
                     left: 0,
-                    width: '100%',
-                    bgcolor: 'rgba(0, 0, 0, 0.54)',
-                    color: 'white',
-                    padding: '10px',
+                    width: "100%",
+                    bgcolor: "rgba(0, 0, 0, 0.54)",
+                    color: "white",
+                    padding: "10px",
                   }}
                 >
                   <Typography gutterBottom variant="h5">
-                    Food Name Here!
+                    Chia Seed Pudding with Almond Milk and Fruit
                   </Typography>
                 </Box>
               </CardContent>
@@ -261,33 +276,34 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
+        {/*Egg & Mustard Crackers*/}
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+          <Card sx={{ height: 300 }}>
             <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
+              onClick={() => navigate("/YummiGo/recipes/eggamustardcrackers")}
             >
               <CardMedia
                 component="img"
-                image={SpringRollImage}
-                alt="Food Name Here!"
+                image={EggaMustardCrackers}
+                alt="Egg & Mustard Crackers"
                 sx={{
-                  height: 300
+                  height: 300,
                 }}
               />
               <CardContent>
                 <Box
                   sx={{
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 30,
                     left: 0,
-                    width: '100%',
-                    bgcolor: 'rgba(0, 0, 0, 0.54)',
-                    color: 'white',
-                    padding: '10px',
+                    width: "100%",
+                    bgcolor: "rgba(0, 0, 0, 0.54)",
+                    color: "white",
+                    padding: "10px",
                   }}
                 >
                   <Typography gutterBottom variant="h5">
-                    Food Name Here!
+                    Egg & Mustard Crackers
                   </Typography>
                 </Box>
               </CardContent>
@@ -295,33 +311,34 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
+        {/*Baked Sweet Potato Fries*/}
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+          <Card sx={{ height: 300 }}>
             <CardActionArea
-              onClick={() => navigate("/YummiGo/recipes/springroll")}
+              onClick={() => navigate("/YummiGo/recipes/bakedsweetpotatofries")}
             >
               <CardMedia
                 component="img"
-                image={SpringRollImage}
-                alt="Food Name Here!"
+                image={BakedSweetPotatoFries}
+                alt="Baked Sweet Potato Fries"
                 sx={{
-                  height: 300
+                  height: 300,
                 }}
               />
               <CardContent>
                 <Box
                   sx={{
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 30,
                     left: 0,
-                    width: '100%',
-                    bgcolor: 'rgba(0, 0, 0, 0.54)',
-                    color: 'white',
-                    padding: '10px',
+                    width: "100%",
+                    bgcolor: "rgba(0, 0, 0, 0.54)",
+                    color: "white",
+                    padding: "10px",
                   }}
                 >
                   <Typography gutterBottom variant="h5">
-                    Food Name Here!
+                    Baked Sweet Potato Fries
                   </Typography>
                 </Box>
               </CardContent>
@@ -329,8 +346,9 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
+        {/*Spinach-Basil Pasta Salad*/}
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+          <Card sx={{ height: 300 }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/pastasalad")}
             >
@@ -339,19 +357,19 @@ export default function Recipe() {
                 image={PastaSaladImage}
                 alt="Spinach-Basil Pasta Salad"
                 sx={{
-                  height: 300
+                  height: 300,
                 }}
               />
               <CardContent>
                 <Box
                   sx={{
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 30,
                     left: 0,
-                    width: '100%',
-                    bgcolor: 'rgba(0, 0, 0, 0.54)',
-                    color: 'white',
-                    padding: '10px',
+                    width: "100%",
+                    bgcolor: "rgba(0, 0, 0, 0.54)",
+                    color: "white",
+                    padding: "10px",
                   }}
                 >
                   <Typography gutterBottom variant="h5">
@@ -363,8 +381,9 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
+        {/*Chicken Porridge*/}
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+          <Card sx={{ height: 300 }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/chickenporridge")}
             >
@@ -373,19 +392,19 @@ export default function Recipe() {
                 image={ChickenPorridgeImage}
                 alt="Chicken Porridge"
                 sx={{
-                  height: 300
+                  height: 300,
                 }}
               />
               <CardContent>
                 <Box
                   sx={{
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 30,
                     left: 0,
-                    width: '100%',
-                    bgcolor: 'rgba(0, 0, 0, 0.54)',
-                    color: 'white',
-                    padding: '10px',
+                    width: "100%",
+                    bgcolor: "rgba(0, 0, 0, 0.54)",
+                    color: "white",
+                    padding: "10px",
                   }}
                 >
                   <Typography gutterBottom variant="h5">
@@ -397,8 +416,9 @@ export default function Recipe() {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3}}>
-          <Card sx={{height: 300}}>
+        {/*Avocado Smoothie*/}
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+          <Card sx={{ height: 300 }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/avocadosmoothie")}
             >
@@ -407,19 +427,19 @@ export default function Recipe() {
                 image={AvocadoSmoothieImage}
                 alt="Avocado Smoothie"
                 sx={{
-                  height: 300
+                  height: 300,
                 }}
               />
               <CardContent>
                 <Box
                   sx={{
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 30,
                     left: 0,
-                    width: '100%',
-                    bgcolor: 'rgba(0, 0, 0, 0.54)',
-                    color: 'white',
-                    padding: '10px',
+                    width: "100%",
+                    bgcolor: "rgba(0, 0, 0, 0.54)",
+                    color: "white",
+                    padding: "10px",
                   }}
                 >
                   <Typography gutterBottom variant="h5">
