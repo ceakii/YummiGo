@@ -10,7 +10,7 @@ export default function TopBar() {
                 <AppBar sx={topBarStyle}>
                     <Toolbar>
                         <Typography
-                            variant="h1"
+                            variant="h6"
                             align="left"
                             sx={{ flexGrow: 1}}
                         >

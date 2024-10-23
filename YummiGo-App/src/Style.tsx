@@ -25,7 +25,7 @@ const barHeight: number = 60;
 
 // Top/Bottom Bar Size/Position/Color
 const barStyle = {
-    width: "vw",
+    width: "100%",
     height: barHeight,
     position: "fixed",
     left: 0,
@@ -37,23 +37,67 @@ const barStyle = {
 const pageStyle = {
     width: "vw",
     height: "vh",
+    maxWidth: "100%",
     maxHeight: "calc(100vh - 2*barHeight)",
     top: barHeight,
     bottom: barHeight,
     left: 0,
     right: 0,
     position: "fixed",
-    overflow: "auto"
+    overflow: "auto",
+    display: "flex",
+    flexDirection: "column",
+    bgcolor: "purple"
 }
 
-// H1 Font Size
-textTheme.typography.h1 = {
-  fontSize: '1.3rem'   
+// H3 Font Size
+textTheme.typography.h3 = {
+  fontFamily: "'Moul', sans-serif",
+  fontSize: '4rem',
+  textShadow: `
+                  -1px -1px 0px #000,  
+                  1px -1px 0px #000,
+                  -1px 1px 0px #000,
+                  1px 1px 0px #000
+                  `  
+}
+
+// H6 Font Size
+textTheme.typography.h6 = {
+  fontFamily: "'Moul', sans-serif",
+  fontSize: '1.3rem',
+  textShadow: `
+                  -1px -1px 0px #000,  
+                  1px -1px 0px #000,
+                  -1px 1px 0px #000,
+                  1px 1px 0px #000
+                  `  
+}
+
+// Body1 Font Size
+textTheme.typography.body1 = {
+  fontFamily: "'Moul', sans-serif",
+  fontSize: '1.5rem',
+  color: "#FFFFFF",
+  whiteSpace: "pre-line",
+  textShadow: `
+                  -1px -1px 0px #000,  
+                  1px -1px 0px #000,
+                  -1px 1px 0px #000,
+                  1px 1px 0px #000
+                  `  
 }
 
 // Button Font Size
 textTheme.typography.button = {
-  fontSize: '1.3rem'
+  fontFamily: "'Moul', sans-serif",
+  fontSize: '1.3rem',
+  textShadow: `
+                  -1px -1px 0px #000,  
+                  1px -1px 0px #000,
+                  -1px 1px 0px #000,
+                  1px 1px 0px #000
+                  `
 }
 
 export {
