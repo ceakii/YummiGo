@@ -9,12 +9,13 @@ interface RecipeContainer {
 }
 
 export default function SpringRoll({ children, title, imageSrc }: RecipeContainer) {
+  const recipePageStyle = { ...pageStyle, overflowX: "hidden"}
   const pictureFrameSize = "40vw";
   const pictureSize = "38vw";
 
   return (
     /* Page Container */
-    <Box sx={pageStyle}>
+    <Box sx={recipePageStyle}>
       {/* Picture, Button, Title Container */}
       <Box
         sx={{
@@ -83,7 +84,7 @@ export default function SpringRoll({ children, title, imageSrc }: RecipeContaine
             <Button
               variant="contained"
               sx={{
-                width: "30vw",
+                width: "50vw",
                 height: "10vh",
                 display: "flex",
                 justifyContent: "center",
@@ -109,7 +110,7 @@ export default function SpringRoll({ children, title, imageSrc }: RecipeContaine
         <Box
           sx={{
             width: "100vw",
-            height: "15vh",
+            height: "12vh",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -128,20 +129,16 @@ export default function SpringRoll({ children, title, imageSrc }: RecipeContaine
       {/* Food Description Container */}
       <Box
         sx={{
-          width: "100vw",
-          height: "100vh",
+          width: "100%",
+          height: "vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          padding: 5,
-          backgroundColor: "#FEAF2F"
+          bgcolor: "#FEAF2F"
         }}
       >
         <ThemeProvider theme={textTheme}>
-          <Typography
-            variant="body1"
-            display="block"
-          >
+          <Typography variant="body1" marginLeft={5} marginRight={5}>
             {children}
           </Typography>
         </ThemeProvider>
