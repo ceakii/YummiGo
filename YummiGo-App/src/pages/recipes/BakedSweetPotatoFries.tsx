@@ -1,7 +1,5 @@
 import RecipeContainer from "../../components/RecipeContainer"
 import BakedSweetPotatoFries from "/images/BakedSweetPotatoFries.png"
-import { Box, ThemeProvider, Typography } from "@mui/material";
-import { textTheme } from "../../Style"
 
 export default function bakedsweetpotatofries() {
   return (
@@ -9,82 +7,42 @@ export default function bakedsweetpotatofries() {
       title="Baked Sweet Potato Fries"
       imageSrc={BakedSweetPotatoFries}
     >
-      {/* Food Description Container */}
-      <Box
-        sx={{
-          width: "100vw",
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: 5,
-          backgroundColor: "#FEAF2F"
-        }}
-      >
-        <ThemeProvider theme={textTheme}>
-          <Typography
-            variant="body1"
-            display="block"
-          >
-            <div style={{ display: "block", whiteSpace: "" }}>
-              Prep Time:
-              45 mins
-              
-              Cook Time:
-              5 mins
+      {`
+        Prep Time: 10 mins
+        Cook Time: 35 mins
+        Total Time: 45 minutes
+        Yield: 4 servings 1x
 
-              Total Time:
-              50 mins
-                
-              Servings:
-              8
+        -----------------------------------------------------------------------------------------------------
+        Ingredients
 
-              Yield:
-              8 spring rolls
+        • 2 pounds sweet potatoes (about 2 medium-large or 3 medium)
+        • 1 tablespoon cornstarch
+        • ½ teaspoon fine sea salt
+        • 2 tablespoons extra-virgin olive oil
+        • Optional spices: freshly ground black pepper, cayenne pepper and/or garlic powder
+
+        -----------------------------------------------------------------------------------------------------
+        Directions
+        
+        1. Preheat the oven to 425 degrees Fahrenheit with racks in the lower and upper thirds of the oven (make sure the top rack is about 6″ from the heat source and no closer). Line two large, rimmed baking sheets with parchment paper so the fries don’t get stuck to the pans.
+        
+        2. Peel the sweet potatoes and cut them into fry-shaped pieces about ¼″ wide and ¼″ thick. Try to cut them into similarly sized pieces so the fries will bake evenly. Transfer half of the uncooked fries to one baking sheet, and the other half to the other baking sheet.
+        
+        3. Sprinkle the sweet potato fries with the cornstarch (use 1 ½ teaspoons per pan) and salt (¼ teaspoon per pan). Toss until the fries are lightly coated in powder. Drizzle the olive oil over the fries (1 tablespoon per pan) and toss until the fries are lightly and evenly coated in oil, and no powdery spots remain (use your fingers to rub visible cornstarch into the fries as necessary).
+        
+        4. Arrange your fries in a single layer and don’t overcrowd; otherwise they will never crisp up. Bake for 20 minutes, then flip the fries so they can cook on all sides. (The easiest way to flip them is with a metal spatula. Section by section, scoop up about ten fries and flip them with a quick turn of the wrist.)
+        
+        5. Arrange the fries in even layers across the pans again, moving any particularly browned fries more toward the middle of the pan so they don’t get overcooked. Return the pans to the oven, swapping their positions (former top pan goes to the lower rack and vice versa).
+        
+        6. Bake for 10 to 18 more minutes, or until the fries are crispy. You’ll know they’re almost done when the surface of the fries change from shiny orange to a more matte, puffed up texture. Keep an eye on them, as they can turn from crisp to burnt quickly. Sometimes the lower pan will be done a few minutes before the top pan. Don’t worry if the edges are a little bit brown; they will taste more caramelized than burnt.
+        
+        7. If desired, toss the baked fries with seasonings, to taste. I like to use lots of freshly ground black pepper, and a scant ¼ teaspoon each cayenne pepper and garlic powder. Serve warm!
 
 
-              Ingredients
 
-              • 2 ounces rice vermicelli
-              • 8 rice wrappers (8.5 inch diameter)
-              • 8 large cooked shrimp - peeled, deveined and cut in half
-              • 2 leaves lettuce, chopped
-              • 3 tablespoons chopped fresh mint leaves
-              • 3 tablespoons chopped fresh cilantro
-              • 1 ⅓ tablespoons chopped fresh Thai basil
 
-              Sauces:
-              • ¼ cup water
-              • 2 tablespoons fresh lime juice
-              • 2 tablespoons white sugar
-              • 4 teaspoons fish sauce
-              • 1 clove garlic, minced
-              • ½ teaspoon garlic chili sauce
-              • 3 tablespoons hoisin sauce
-              • 1 teaspoon finely chopped peanuts
-              
-              Directions
-
-              1. Gather all ingredients.
-
-              2. Fill a large pot with lightly salted water and bring to a rolling boil; stir in vermicelli pasta and return to a boil. Cook pasta uncovered, stirring occasionally, until the pasta is tender yet firm to the bite, 3 to 5 minutes.
-
-              3. Fill a large bowl with warm water. Dip one wrapper into the hot water for 1 second to soften.
-
-              4. Lay wrapper flat; place 2 shrimp halves in a row across the center, add some vermicelli, lettuce, mint, cilantro, and basil, leaving about 2 inches uncovered on each side.
-
-              5. Fold uncovered sides inward, then tightly roll the wrapper, beginning at the end with lettuce. Repeat with remaining ingredients.
-
-              6. For the sauces: Mix water, lime juice, sugar, fish sauce, garlic, and chili sauce in a small bowl until well combined.
-
-              7. Mix hoisin sauce and peanuts in a separate small bowl.
-
-              8. Serve rolled spring rolls with fish sauce and hoisin sauce mixtures.
-            </div>
-            
-          </Typography>
-        </ThemeProvider>
-      </Box>
+      `}
     </RecipeContainer>
   );
 }

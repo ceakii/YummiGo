@@ -8,22 +8,13 @@ export default function SpringRoll() {
       imageSrc={SpringRollImage}
     >
       {`
-        Prep Time:
-        45 mins
-        
-        Cook Time:
-        5 mins
+        Prep Time:   45 mins
+        Cook Time:  5 mins
+        Total Time: 50 mins
+        Servings: 8
+        Yield:  8 spring rolls
 
-        Total Time:
-        50 mins
-          
-        Servings:
-        8
-
-        Yield:
-        8 spring rolls
-
-
+        -----------------------------------------------------------------------------------------------------
         Ingredients
 
         • 2 ounces rice vermicelli
@@ -44,6 +35,7 @@ export default function SpringRoll() {
         • 3 tablespoons hoisin sauce
         • 1 teaspoon finely chopped peanuts
         
+        -----------------------------------------------------------------------------------------------------
         Directions
 
         1. Gather all ingredients.
@@ -61,6 +53,7 @@ export default function SpringRoll() {
         7. Mix hoisin sauce and peanuts in a separate small bowl.
 
         8. Serve rolled spring rolls with fish sauce and hoisin sauce mixtures.
+
       `}
     </RecipeContainer>
   );

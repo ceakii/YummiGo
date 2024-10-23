@@ -1,7 +1,5 @@
 import RecipeContainer from "../../components/RecipeContainer"
 import GranolaBars from "/images/GranolaBars.png";
-import { Box, ThemeProvider, Typography } from "@mui/material";
-import { textTheme } from "../../Style"
 
 export default function granolabar() {
   return (
@@ -9,82 +7,42 @@ export default function granolabar() {
       title="Granola Bars"
       imageSrc={GranolaBars}
     >
-      {/* Food Description Container */}
-      <Box
-        sx={{
-          width: "100vw",
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: 5,
-          backgroundColor: "#FEAF2F"
-        }}
-      >
-        <ThemeProvider theme={textTheme}>
-          <Typography
-            variant="body1"
-            display="block"
-          >
-            <div style={{ display: "block", whiteSpace: "" }}>
-              Prep Time:
-              45 mins
-              
-              Cook Time:
-              5 mins
+      {`
+        Prep Time:  15 mins
+        Cook Time:  25 mins
+        Additional Time:  1 hr
+        Total Time: 1 hr 40 mins
+        Servings: 8
 
-              Total Time:
-              50 mins
-                
-              Servings:
-              8
+        -----------------------------------------------------------------------------------------------------
+        Ingredients
 
-              Yield:
-              8 spring rolls
+        • cooking spray
+        • 2 cups rolled oats
+        • ½ cup shredded coconut
+        • ½ cup honey
+        • 2 tablespoons creamy peanut butter
+        • 1 teaspoon vanilla extract
+        • ⅛ teaspoon salt
 
+        -----------------------------------------------------------------------------------------------------
+        Directions
 
-              Ingredients
+        1. Gather all ingredients. Preheat the oven to 325 degrees F (165 degrees C). Grease a 9-inch square baking dish.
 
-              • 2 ounces rice vermicelli
-              • 8 rice wrappers (8.5 inch diameter)
-              • 8 large cooked shrimp - peeled, deveined and cut in half
-              • 2 leaves lettuce, chopped
-              • 3 tablespoons chopped fresh mint leaves
-              • 3 tablespoons chopped fresh cilantro
-              • 1 ⅓ tablespoons chopped fresh Thai basil
+        2. Spread oats and coconut evenly across a baking sheet. Toast oats and coconut in the preheated oven until browned, about 10 minutes; transfer to a large mixing bowl.
 
-              Sauces:
-              • ¼ cup water
-              • 2 tablespoons fresh lime juice
-              • 2 tablespoons white sugar
-              • 4 teaspoons fish sauce
-              • 1 clove garlic, minced
-              • ½ teaspoon garlic chili sauce
-              • 3 tablespoons hoisin sauce
-              • 1 teaspoon finely chopped peanuts
-              
-              Directions
+        3. Mix honey, peanut butter, vanilla, and salt in a saucepan over medium-low heat. Cook and stir until smooth.
 
-              1. Gather all ingredients.
+        4. Pour honey mixture over oats and coconut. Stir to coat. Spread mixture evenly into the prepared baking dish.
 
-              2. Fill a large pot with lightly salted water and bring to a rolling boil; stir in vermicelli pasta and return to a boil. Cook pasta uncovered, stirring occasionally, until the pasta is tender yet firm to the bite, 3 to 5 minutes.
+        5. Bake in the preheated oven until beginning to dry, about 15 minutes for crunchy granola bars, less if you like them chewy.
 
-              3. Fill a large bowl with warm water. Dip one wrapper into the hot water for 1 second to soften.
+        6. Cool completely before cutting.
 
-              4. Lay wrapper flat; place 2 shrimp halves in a row across the center, add some vermicelli, lettuce, mint, cilantro, and basil, leaving about 2 inches uncovered on each side.
-
-              5. Fold uncovered sides inward, then tightly roll the wrapper, beginning at the end with lettuce. Repeat with remaining ingredients.
-
-              6. For the sauces: Mix water, lime juice, sugar, fish sauce, garlic, and chili sauce in a small bowl until well combined.
-
-              7. Mix hoisin sauce and peanuts in a separate small bowl.
-
-              8. Serve rolled spring rolls with fish sauce and hoisin sauce mixtures.
-            </div>
-            
-          </Typography>
-        </ThemeProvider>
-      </Box>
+      `}
     </RecipeContainer>
   );
 }
+
+
