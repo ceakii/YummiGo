@@ -110,7 +110,7 @@ export default function SpringRoll({ children, title, imageSrc }: RecipeContaine
         <Box
           sx={{
             width: "100vw",
-            height: "12vh",
+            height: "vh",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -119,7 +119,7 @@ export default function SpringRoll({ children, title, imageSrc }: RecipeContaine
           }}
         >
           <ThemeProvider theme={textTheme}>
-            <Typography variant="h3">
+            <Typography variant="h3" align="center">
               {title}
             </Typography>
           </ThemeProvider>
