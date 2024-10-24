@@ -1,5 +1,6 @@
 import { Box, ThemeProvider, Typography } from "@mui/material";
 import { pageStyle, textTheme } from "../Style";
+//hamza
 
 export default function Settings() {
   const customPageStyle = {
