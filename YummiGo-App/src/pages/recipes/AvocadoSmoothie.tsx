@@ -1,5 +1,5 @@
 import RecipeContainer from "../../components/RecipeContainer"
-import AvocadoSmoothieImage from "/images/AvocadoSmoothie.png";
+import AvocadoSmoothieImage from "/images/AvocadoSmoothie.jpg";
 
 export default function AvocadoSmoothie() {
   return (

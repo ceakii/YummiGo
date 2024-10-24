@@ -1,5 +1,5 @@
 import RecipeContainer from "../../components/RecipeContainer"
-import ChickenPorridgeImage from "/images/ChickenPorridge.png";
+import ChickenPorridgeImage from "/images/ChickenPorridge.jpg";
 
 export default function ChickenPorridge() {
   return (

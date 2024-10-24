@@ -1,5 +1,5 @@
 import RecipeContainer from "../../components/RecipeContainer"
-import PastaSaladImage from "/images/PastaSalad.png";
+import PastaSaladImage from "/images/PastaSalad.jpg";
 
 export default function PastaSalad() {
   return (
