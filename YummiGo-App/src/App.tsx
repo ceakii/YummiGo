@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import TopBar from "./components/TopBar";
 import BottomNavigationBar from "./components/BottomNavigationBar";
 
-// Pages
+// Main Pages
 import Adventure from "./pages/Adventure";
 import Recipe from "./pages/Recipe";
 import Profile from "./pages/Profile";
@@ -26,6 +26,9 @@ import QuinoaSaladwCaV from "./pages/recipes/QuinoaSaladwCaV";
 import ChiaSeedPuddingwAMaF from "./pages/recipes/ChiaSeedPuddingwAMaF";
 import EggaMustardCrackers from "./pages/recipes/EggaMustardCrackers";
 import BakedSweetPotatoFries from "./pages/recipes/BakedSweetPotatoFries";
+
+// Quest Pages
+import Quest1 from "./pages/quests/Quest1";
 
 function App() {
   return (
@@ -77,6 +80,12 @@ function App() {
         <Route
           path="/YummiGo/recipes/bakedsweetpotatofries"
           element={<BakedSweetPotatoFries />}
+        />
+
+        {/* Quests Pages Routing */}
+        <Route
+          path="/YummiGo/quests/quest1"
+          element={<Quest1 />}
         />
       </Routes>
 

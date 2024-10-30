@@ -1,13 +1,14 @@
-//kaiden
-
 import {
   Box,
+  Button,
   CardMedia,
   ThemeProvider,
   Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { pageStyle, textTheme } from "../Style";
+import { buttonTheme, pageStyle, textTheme } from "../Style";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { useNavigate } from "react-router-dom";
 
 // Image Paths
 import Trophy from "/images/Trophy.png";
@@ -15,6 +16,7 @@ import QuestIcon from "/images/QuestIcon.png";
 
 export default function Quest() {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" }
+  const navigate = useNavigate();
 
   return (
     /* Page Container */
@@ -85,14 +87,14 @@ export default function Quest() {
           }}
         >
           <ThemeProvider theme={textTheme}>
-            <Typography variant="h3" align="center">
+            <Typography variant="h4" align="center">
               Available Quests
             </Typography>
           </ThemeProvider>
         </Box>
       </Box>
 
-      {/* Quests Container */}
+      {/* Quests List Container */}
       <Box
         sx={{
           width: "vw",
@@ -116,14 +118,15 @@ export default function Quest() {
             flexDirection={"row"}
             justifyContent={"space-between"}
           >
-            {/* Left of Quest Box */}
-            <Grid size={2}>
+            {/* Left of Quest Container (Scroll Icon) */}
+            <Grid size={{ xs: 3, sm: 2, md: 2, lg: 2 }}>
               {/* Image */}
               <CardMedia
                 component="img"
                 image={QuestIcon}
                 alt="Quest Icon"
                 sx={{
+                  //width: "80%",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
@@ -134,20 +137,53 @@ export default function Quest() {
               />
             </Grid>
 
-            {/* Right of Quest Box */}
-            <Grid
-              size={10}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                bgcolor: "#FEAF2F",
-                borderRadius: "10%",
-                boxShadow: 4
-              }}
-            >
-              Box Right
-            </Grid>
+            {/* Right of Quest Container (Title + Description) */}
+            <Grid size={{ xs: 9, sm: 10, md: 10, lg: 10 }}>
+              <ThemeProvider theme={buttonTheme}>
+                <Button
+                  onClick={() => navigate("/YummiGo/quests/quest1")}
+                  sx={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      bgcolor: "#FEAF2F",
+                      borderRadius: "10%",
+                      boxShadow: 4
+                  }}
+                >
+                  {/* Button Contents */}
+                  <Grid
+                    display="flex"
+                    flexDirection={"column"}
+                    padding={2}
+                  >
+                    {/* Quest Title */}
+                    <Grid size={"auto"}>
+                      <ThemeProvider theme={textTheme}>
+                        <Typography variant="h3">
+                          Quest 1
+                        </Typography>
+                      </ThemeProvider>
+                    </Grid>
+
+                    {/* Quest Description */}
+                    <Grid size={"auto"} flexWrap={"wrap"}>
+                      <ThemeProvider theme={textTheme}>
+                        <Typography variant="body1">
+                          Cook one recipe.
+                        </Typography>
+                      </ThemeProvider>
+                    </Grid>
+
+                    {/* Quest Bottom Right Arrow Icon */}
+                    <Grid padding={1}>
+                      {<ArrowForwardIcon />}
+                    </Grid>
+                  </Grid>
+                </Button>
+              </ThemeProvider>
+            </Grid>   
           </Grid>
           
           {/* Quest 2 */}
@@ -156,40 +192,72 @@ export default function Quest() {
             flexDirection={"row"}
             justifyContent={"space-between"}
           >
-            {/* Left of Quest Box */}
-            <Grid size={2}>
+            {/* Left of Quest Container (Scroll Icon) */}
+            <Grid size={{ xs: 3, sm: 2, md: 2, lg: 2 }}>
               {/* Image */}
               <CardMedia
                 component="img"
                 image={QuestIcon}
                 alt="Quest Icon"
                 sx={{
+                  //width: "80%",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  bgcolor: "#fae7b1",
+                  bgcolor: "#b0a996",
                   borderRadius: "10%",
                   boxShadow: 4
                 }}
               />
             </Grid>
 
-            {/* Right of Quest Box */}
-            <Grid
-              size={10}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                bgcolor: "#FEAF2F",
-                borderRadius: "10%",
-                boxShadow: 4
-              }}
-            >
-              Box Right
+            {/* Right of Quest Container (Title + Description) */}
+            <Grid size={{ xs: 9, sm: 10, md: 10, lg: 10 }}>
+              <ThemeProvider theme={buttonTheme}>
+                <Button
+                  sx={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      bgcolor: "#FEAF2F",
+                      borderRadius: "10%",
+                      boxShadow: 4
+                  }}
+                >
+                  {/* Button Contents */}
+                  <Grid
+                    display="flex"
+                    flexDirection={"column"}
+                    padding={2}
+                  >
+                    {/* Quest Title */}
+                    <Grid size={"auto"}>
+                      <ThemeProvider theme={textTheme}>
+                        <Typography variant="h3">
+                          Quest 2
+                        </Typography>
+                      </ThemeProvider>
+                    </Grid>
+
+                    {/* Quest Description */}
+                    <Grid size={"auto"} flexWrap={"wrap"}>
+                      <ThemeProvider theme={textTheme}>
+                        <Typography variant="body1">
+                          Locked.
+                        </Typography>
+                      </ThemeProvider>
+                    </Grid>
+
+                    {/* Quest Bottom Right Arrow Icon */}
+                    <Grid padding={1}>
+                      {<ArrowForwardIcon />}
+                    </Grid>
+                  </Grid>
+                </Button>
+              </ThemeProvider>
             </Grid>
           </Grid>
-
         </Grid>
       </Box>
     </Box>
