@@ -8,7 +8,7 @@ interface RecipeContainer {
   imageSrc: string;
 }
 
-export default function SpringRoll({ children, title, imageSrc }: RecipeContainer) {
+export default function RecipeContainer({ children, title, imageSrc }: RecipeContainer) {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden"}
   const pictureFrameSize = "40vw";
   const pictureSize = "38vw";

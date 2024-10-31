@@ -21,7 +21,7 @@ export default function Quest() {
   return (
     /* Page Container */
     <Box sx={recipePageStyle}>
-      {/* Picture, Button, Title Container */}
+      {/* Picture and Title Container */}
       <Box
         sx={{
           display: "flex",
@@ -86,6 +86,7 @@ export default function Quest() {
             bgcolor: "#FEAF2F"
           }}
         >
+          {/* Title */}
           <ThemeProvider theme={textTheme}>
             <Typography variant="h4" align="center">
               Available Quests
