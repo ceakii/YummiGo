@@ -1,17 +1,17 @@
 import { createTheme } from "@mui/material/styles";
 
-// Text Theme
-const textTheme = createTheme({
+// Button Theme
+const buttonTheme = createTheme({
   palette: {
     primary: {
-      main: "#F3F1F6",
-      contrastText: "#F3F1F6",
+      main: "#C67B58",
+      contrastText: "#C67B58",
     },
   },
 });
 
-// Button Theme
-const buttonTheme = createTheme({
+// Text Theme
+const textTheme = createTheme({
   palette: {
     primary: {
       main: "#F3F1F6",
@@ -33,6 +33,10 @@ const barStyle = {
   bgcolor: "#FEAF2F",
   boxShadow: 4,
 };
+
+const modalStyle = {
+  bgcolor: "#FEAF2F"
+}
 
 // Center Page Size/Position
 const pageStyle = {
@@ -113,7 +117,7 @@ textTheme.typography.body1 = {
 textTheme.typography.button = {
   fontSize: "1.4rem", // Extra Small Width: Screen Width < 600px
   [textTheme.breakpoints.up("sm")]: { fontSize: "1.9rem" }, // Small width: Screen Width >= 600px
-  [textTheme.breakpoints.up("md")]: { fontSize: "2.5rem" }, // Medium width: Screen Width >= 900px
+  [textTheme.breakpoints.up("md")]: { fontSize: "2.2rem" }, // Medium width: Screen Width >= 900px
   fontFamily: "'Moul', sans-serif",
   color: "white",
   textShadow: `
@@ -124,4 +128,4 @@ textTheme.typography.button = {
                   `,
 };
 
-export { textTheme, buttonTheme, barStyle, pageStyle };
+export { buttonTheme, barStyle, modalStyle, pageStyle, textTheme };
