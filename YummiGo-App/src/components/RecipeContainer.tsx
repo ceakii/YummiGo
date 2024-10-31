@@ -1,6 +1,8 @@
 import React from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle }
+  from "@mui/material";
 
 interface RecipeContainer {
   children: React.ReactNode;
@@ -8,10 +10,15 @@ interface RecipeContainer {
   imageSrc: string;
 }
 
-export default function SpringRoll({ children, title, imageSrc }: RecipeContainer) {
+export default function RecipeContainer({ children, title, imageSrc }: RecipeContainer) {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden"}
   const pictureFrameSize = "40vw";
   const pictureSize = "38vw";
+
+  // For Dialog Box
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => { setOpen(true); };
+  const handleClose = () => { setOpen(false); };
 
   return (
     /* Page Container */
@@ -80,30 +87,92 @@ export default function SpringRoll({ children, title, imageSrc }: RecipeContaine
             borderColor: "black"
           }}
         >
+          {/* Button */}
           <ThemeProvider theme={buttonTheme}>
             <Button
+              onClick={handleClickOpen}
               variant="contained"
               sx={{
-                width: "50vw",
+                width: "60vw",
                 height: "10vh",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: "#C67B58",
-                borderRadius: 4,
-                overflow: "hidden", // Hide overflow
+                borderRadius: 4
               }}
             >
-              {/*Upload Photo */}
+              {/* Upload Quest Photo */}
               <ThemeProvider theme={textTheme}>
-                <Typography
-                  variant="button"
-                >
-                  Upload Photo
+                <Typography variant="button">
+                  Upload Quest Photo
                 </Typography>
               </ThemeProvider>
             </Button>
           </ThemeProvider>
+
+          {/* Dialog Box */}
+          <Dialog
+            open={open}
+            onClose={handleClose}
+          >
+            {/* Dialog Title */}
+            <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
+              <Box bgcolor={"#FEAF2F"} border={2}>
+                <ThemeProvider theme={textTheme}>
+                  <Typography
+                    variant="button"
+                    display={"flex"}
+                    justifyContent={"center"}
+                  >
+                    Quest Complete!
+                  </Typography>
+                </ThemeProvider>
+              </Box>
+            </DialogTitle>
+
+            {/* Dialog Content */}
+            <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
+              <DialogContentText>
+                <ThemeProvider theme={textTheme}>
+                  <Typography
+                    variant="body1"
+                    display={"flex"}
+                    justifyContent={"center"}
+                  >
+                    You earned: 10 XP!
+                  </Typography>
+                </ThemeProvider>
+
+                <ThemeProvider theme={textTheme}>
+                  <Typography
+                    variant="body1"
+                    display={"flex"}
+                    justifyContent={"center"}
+                  >
+                    Got: 100 Coins
+                  </Typography>
+                </ThemeProvider>
+              </DialogContentText>
+            </DialogContent>
+
+            {/* Dialog Action */}
+            <DialogActions sx={{ bgcolor: "#FEAF2F" }}>
+              <ThemeProvider theme={buttonTheme}>
+                <Button onClick={handleClose} variant="contained">
+                  <ThemeProvider theme={textTheme}>
+                    <Typography
+                      variant="h6"
+                      display={"flex"}
+                      justifyContent={"center"}
+                    >
+                      Continue
+                    </Typography>
+                  </ThemeProvider>
+                </Button>
+              </ThemeProvider>
+            </DialogActions>
+
+          </Dialog>
         </Box>
 
         {/* Title Container */}
