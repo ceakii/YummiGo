@@ -141,7 +141,7 @@ export default function Level1() {
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="h3">
-                Rewards:
+                Reward(s):
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -151,7 +151,6 @@ export default function Level1() {
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
                 Recipe: Granola Bars
-                100 Coins
               </Typography>
             </ThemeProvider>
           </Grid>

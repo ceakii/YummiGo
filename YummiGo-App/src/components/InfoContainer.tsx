@@ -3,11 +3,13 @@ import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle }
   from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 interface InfoContainer {
   children: React.ReactNode;
   title: string;
   imageSrc: string;
+  recipeName: string;
 }
 
 export default function InfoContainer({ children, title, imageSrc }: InfoContainer) {
@@ -19,6 +21,14 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => { setOpen(true); };
   const handleClose = () => { setOpen(false); };
+
+  const navigate = useNavigate();
+
+  // Function to handle "Continue" click
+  const handleContinue = () => {
+    setOpen(false);
+    navigate("/YummiGo/");
+  };
 
   return (
     /* Page Container */
@@ -101,7 +111,7 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
                 borderRadius: 4
               }}
             >
-              {/* Upload Quest Photo */}
+              {/* Finish Reading */}
               <ThemeProvider theme={textTheme}>
                 <Typography variant="button">
                   Finish Reading
@@ -124,7 +134,7 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
                     display={"flex"}
                     justifyContent={"center"}
                   >
-                    Quest Complete!
+                    Level Complete!
                   </Typography>
                 </ThemeProvider>
               </Box>
@@ -139,7 +149,7 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
                     display={"flex"}
                     justifyContent={"center"}
                   >
-                    You earned: Recipe: Granola Bars
+                    You earned:
                   </Typography>
                 </ThemeProvider>
 
@@ -149,7 +159,17 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
                     display={"flex"}
                     justifyContent={"center"}
                   >
-                    Got: 100 Coins
+                    Recipe: {recipeName}
+                  </Typography>
+                </ThemeProvider>
+
+                <ThemeProvider theme={textTheme}>
+                  <Typography
+                    variant="body1"
+                    display={"flex"}
+                    justifyContent={"center"}
+                  >
+                    
                   </Typography>
                 </ThemeProvider>
               </DialogContentText>
@@ -158,7 +178,7 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
             {/* Dialog Action */}
             <DialogActions sx={{ bgcolor: "#FEAF2F" }}>
               <ThemeProvider theme={buttonTheme}>
-                <Button onClick={handleClose} variant="contained">
+                <Button onClick={handleContinue} variant="contained">
                   <ThemeProvider theme={textTheme}>
                     <Typography
                       variant="h6"
