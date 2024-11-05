@@ -10,7 +10,7 @@ import { buttonTheme, pageStyle, textTheme } from "../../Style";
 import { useNavigate } from "react-router-dom";
 
 // Image Paths
-import FruitBowl from "/images/FruitBowl.png";
+import GranolaBars from "/images/GranolaBars.png";
 
 export default function Level1() {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" }
@@ -55,7 +55,7 @@ export default function Level1() {
             {/* Image */}
             <CardMedia
               component="img"
-              image={FruitBowl}
+              image={GranolaBars}
               alt="Fruit Bowl"
               sx={{
                 width: "38vw",
@@ -87,13 +87,13 @@ export default function Level1() {
           {/* Title */}
           <ThemeProvider theme={textTheme}>
             <Typography variant="h4" align="center">
-              Quest 1
+              Level 1: A Healthy Snack
             </Typography>
           </ThemeProvider>
         </Box>
       </Box>
 
-      {/* Quests List Container */}
+      {/* Levels List Container */}
       <Box
         sx={{
           width: "vw",
@@ -104,7 +104,7 @@ export default function Level1() {
           padding: 5
         }}
       >
-        {/* Quest Container (Objective + Description + Browse Recipe Button) */}
+        {/* Level Container (Objective + Description + Browse Recipe Button) */}
         <Grid
           size={{ xs: 9, sm: 10, md: 10, lg: 10 }}
           sx={{
@@ -119,7 +119,7 @@ export default function Level1() {
             boxShadow: 4
           }}
         >
-          {/* Quest Objective Header */}
+          {/* Level Objective Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="h3">
@@ -128,34 +128,34 @@ export default function Level1() {
             </ThemeProvider>
           </Grid>
 
-          {/* Quest Objective */}
+          {/* Level Objective */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                Cook one recipe and Upload a picture of it!
+                Read about the health benefits of Granola Bars!
               </Typography>
             </ThemeProvider>
           </Grid>
 
-          {/* Quest Description Header */}
+          {/* Level Rewards Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="h3">
-                Description:
+                Rewards:
               </Typography>
             </ThemeProvider>
           </Grid>
 
-          {/* Quest Description */}
+          {/* Level Rewards Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                Your first quest to start your healthy adventure!
+                Recipe: Granola Bars
               </Typography>
             </ThemeProvider>
           </Grid>
 
-          {/* Quest Button Container */}
+          {/* Level Button Container */}
           <Box
             sx={{
               width: "100vw",
@@ -167,10 +167,10 @@ export default function Level1() {
               marginTop: 2
             }}
           >
-            {/* Quest Button */}
+            {/* Level Button */}
             <ThemeProvider theme={buttonTheme}>
               <Button
-                onClick={() => navigate("/YummiGo/recipe")}
+                onClick={() => navigate("/YummiGo/recipe/granolabars")}
                 variant="contained"
                 sx={{
                   width: "50vw",
@@ -185,7 +185,7 @@ export default function Level1() {
                 {/* Button Label */}
                 <ThemeProvider theme={textTheme}>
                   <Typography variant="button">
-                    Browse Recipes
+                    START
                   </Typography>
                 </ThemeProvider>
               </Button>

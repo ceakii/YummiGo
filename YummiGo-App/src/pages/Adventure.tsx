@@ -11,7 +11,7 @@ import Grid from "@mui/material/Grid2";
 import { pageStyle } from "../Style";
 
 // Image Paths
-import SpringRollImage from "/images/SpringRoll.jpg";
+import GranolaBars from "/images/GranolaBars.png";
 
 export default function Adventure() {
   const adventurePageStyle = { ...pageStyle };
@@ -28,7 +28,7 @@ export default function Adventure() {
             >
               <CardMedia
                 component="img"
-                image={SpringRollImage}
+                image={GranolaBars}
                 alt="Level 1"
                 sx={{
                   height: 300,
@@ -47,7 +47,7 @@ export default function Adventure() {
                   }}
                 >
                   <Typography gutterBottom variant="h5">
-                    Level 1
+                    Level 1: A Healthy Snack
                   </Typography>
                 </Box>
               </CardContent>
