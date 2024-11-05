@@ -170,7 +170,7 @@ export default function Level1() {
             {/* Level Button */}
             <ThemeProvider theme={buttonTheme}>
               <Button
-                onClick={() => navigate("/YummiGo/pages/recipes/granolabars")}
+                onClick={() => navigate("/YummiGo/recipes/granolabars")}
                 variant="contained"
                 sx={{
                   width: "50vw",
