@@ -151,6 +151,7 @@ export default function Level1() {
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
                 Recipe: Granola Bars
+                100 Coins
               </Typography>
             </ThemeProvider>
           </Grid>

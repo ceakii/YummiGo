@@ -1,9 +1,9 @@
-import RecipeContainer from "../../components/RecipeContainer"
+import InfoContainer from "../../components/InfoContainer"
 import GranolaBars from "/images/GranolaBars.png";
 
 export default function granolabar() {
   return (
-    <RecipeContainer
+    <InfoContainer
       title="Granola Bars"
       imageSrc={GranolaBars}
     >
@@ -43,7 +43,7 @@ export default function granolabar() {
         6. Cool completely before cutting.
 
       `}
-    </RecipeContainer>
+    </InfoContainer>
   );
 }
 

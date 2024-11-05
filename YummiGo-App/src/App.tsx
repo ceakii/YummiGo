@@ -99,6 +99,12 @@ function App() {
           path="/YummiGo/levels/level1"
           element={<Level1 />}
         />
+
+        {/* Food Info Pages Routing */}
+        <Route
+          path="/YummiGo/info/granolabarsinfo"
+          element={<GranolaBarsInfo />}
+        />
       </Routes>
 
       <TopBar />
