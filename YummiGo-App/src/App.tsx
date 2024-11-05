@@ -30,6 +30,9 @@ import BakedSweetPotatoFries from "./pages/recipes/BakedSweetPotatoFries";
 // Quest Pages
 import Quest1 from "./pages/quests/Quest1";
 
+// Adventure Pages
+import Level1 from "./pages/levels/Level1";
+
 function App() {
   return (
     <>
@@ -86,6 +89,12 @@ function App() {
         <Route
           path="/YummiGo/quests/quest1"
           element={<Quest1 />}
+        />
+
+        {/* Adventure Pages Routing */}
+        <Route
+          path="/YummiGo/levels/level1"
+          element={<Level1 />}
         />
       </Routes>
 
