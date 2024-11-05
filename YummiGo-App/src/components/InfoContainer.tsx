@@ -9,7 +9,6 @@ interface InfoContainer {
   children: React.ReactNode;
   title: string;
   imageSrc: string;
-  recipeName: string;
 }
 
 export default function InfoContainer({ children, title, imageSrc }: InfoContainer) {
@@ -159,7 +158,7 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
                     display={"flex"}
                     justifyContent={"center"}
                   >
-                    Recipe: {recipeName}
+                    Recipe: {title}
                   </Typography>
                 </ThemeProvider>
 

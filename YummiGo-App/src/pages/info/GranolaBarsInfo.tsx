@@ -6,7 +6,6 @@ export default function granolabar() {
     <InfoContainer
       title="Granola Bars"
       imageSrc={GranolaBars}
-      recipeName="Granola Bars"
     >
       {`
         Prep Time:  15 mins
