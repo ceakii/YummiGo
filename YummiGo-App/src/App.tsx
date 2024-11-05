@@ -33,6 +33,9 @@ import Quest1 from "./pages/quests/Quest1";
 // Adventure Pages
 import Level1 from "./pages/levels/Level1";
 
+// Food Info Pages
+import GranolaBarsInfo from "./pages/info/GranolaBarsInfo";
+
 function App() {
   return (
     <>
