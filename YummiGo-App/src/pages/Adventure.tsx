@@ -24,7 +24,7 @@ export default function Adventure() {
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
           <Card sx={{ height: 300 }}>
             <CardActionArea
-              onClick={() => navigate("/YummiGo/levels/level1")}
+              onClick={() => navigate("/YummiGo/levels/level1a")}
             >
               <CardMedia
                 component="img"
@@ -47,7 +47,7 @@ export default function Adventure() {
                   }}
                 >
                   <Typography gutterBottom variant="h5">
-                    Level 1: A Healthy Snack
+                    Level 1a: Meeting Carrotti
                   </Typography>
                 </Box>
               </CardContent>

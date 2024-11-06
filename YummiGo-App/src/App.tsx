@@ -36,6 +36,9 @@ import Level1 from "./pages/levels/Level1";
 // Food Info Pages
 import GranolaBarsInfo from "./pages/info/GranolaBarsInfo";
 
+// Yummigos Pages
+import Carrotti from "./pages/yummigo/Carrotti";
+
 function App() {
   return (
     <>
@@ -104,6 +107,12 @@ function App() {
         <Route
           path="/YummiGo/info/granolabarsinfo"
           element={<GranolaBarsInfo />}
+        />
+
+        {/* Yummigo Pages Routing */}
+        <Route
+          path="/YummiGo/yummigo/carrotti"
+          element={<Carrotti />}
         />
       </Routes>
 
