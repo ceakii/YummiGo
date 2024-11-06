@@ -32,6 +32,7 @@ import Quest1 from "./pages/quests/Quest1";
 
 // Adventure Pages
 import Level1a from "./pages/levels/Level1a";
+import Level1b from "./pages/levels/Level1b";
 
 // Food Info Pages
 import HummusaVeggieSticksInfo from "./pages/info/HummusaVeggieSticksInfo";
@@ -102,6 +103,10 @@ function App() {
         <Route
           path="/YummiGo/levels/level1a"
           element={<Level1a />}
+        />
+        <Route
+          path="/YummiGo/levels/level1a"
+          element={<Level1b />}
         />
 
         {/* Food Info Pages Routing */}
