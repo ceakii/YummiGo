@@ -158,7 +158,7 @@ export default function YummigoContainer({ children, title, imageSrc }: YummigoC
                     display={"flex"}
                     justifyContent={"center"}
                   >
-                    Recipe: {title}
+                    Yummigo File: {title}
                   </Typography>
                 </ThemeProvider>
 

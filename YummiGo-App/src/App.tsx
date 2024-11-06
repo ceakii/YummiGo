@@ -31,9 +31,10 @@ import BakedSweetPotatoFries from "./pages/recipes/BakedSweetPotatoFries";
 import Quest1 from "./pages/quests/Quest1";
 
 // Adventure Pages
-import Level1 from "./pages/levels/Level1";
+import Level1a from "./pages/levels/Level1a";
 
 // Food Info Pages
+import HummusaVeggieSticksInfo from "./pages/info/HummusaVeggieSticksInfo";
 import GranolaBarsInfo from "./pages/info/GranolaBarsInfo";
 
 // Yummigos Pages
@@ -99,11 +100,15 @@ function App() {
 
         {/* Adventure Pages Routing */}
         <Route
-          path="/YummiGo/levels/level1"
-          element={<Level1 />}
+          path="/YummiGo/levels/level1a"
+          element={<Level1a />}
         />
 
         {/* Food Info Pages Routing */}
+        <Route
+          path="/YummiGo/info/hummusaveggiesticksinfo"
+          element={<HummusaVeggieSticksInfo />}
+        />
         <Route
           path="/YummiGo/info/granolabarsinfo"
           element={<GranolaBarsInfo />}

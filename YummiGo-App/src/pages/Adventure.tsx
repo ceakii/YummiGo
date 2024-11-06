@@ -11,7 +11,7 @@ import Grid from "@mui/material/Grid2";
 import { pageStyle } from "../Style";
 
 // Image Paths
-import GranolaBars from "/images/GranolaBars.png";
+import CarrottiImage from "/images/Yummigos/001_Carrotti.png";
 
 export default function Adventure() {
   const adventurePageStyle = { ...pageStyle };
@@ -28,7 +28,7 @@ export default function Adventure() {
             >
               <CardMedia
                 component="img"
-                image={GranolaBars}
+                image={CarrottiImage}
                 alt="Level 1"
                 sx={{
                   height: 300,

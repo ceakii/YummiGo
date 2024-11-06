@@ -10,9 +10,9 @@ import { buttonTheme, pageStyle, textTheme } from "../../Style";
 import { useNavigate } from "react-router-dom";
 
 // Image Paths
-import CarrottiImage from "/images/Yummigos/001_Carrotti.png";
+import HummusaVeggieSticks from "/images/HummusaVeggieSticks.png";
 
-export default function Level1a() {
+export default function Level1b() {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" }
   const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ export default function Level1a() {
             {/* Image */}
             <CardMedia
               component="img"
-              image={CarrottiImage}
+              image={HummusaVeggieSticks}
               alt="Carrotti"
               sx={{
                 width: "38vw",
@@ -87,7 +87,7 @@ export default function Level1a() {
           {/* Title */}
           <ThemeProvider theme={textTheme}>
             <Typography variant="h4" align="center">
-              Level 1a: Meeting Carrotti
+              Level 1b: A Healthy Snack
             </Typography>
           </ThemeProvider>
         </Box>
@@ -132,7 +132,7 @@ export default function Level1a() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                Read about Carrotti.
+                Read about Hummus and Veggie Sticks.
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -150,7 +150,7 @@ export default function Level1a() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                Yummigo File: Carrotti
+                Recipe: Hummus and Veggie Sticks
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -170,7 +170,7 @@ export default function Level1a() {
             {/* Level Button */}
             <ThemeProvider theme={buttonTheme}>
               <Button
-                onClick={() => navigate("/YummiGo/yummigo/carrotti")}
+                onClick={() => navigate("/YummiGo/info/hummusaveggiesticksinfo")}
                 variant="contained"
                 sx={{
                   width: "50vw",
