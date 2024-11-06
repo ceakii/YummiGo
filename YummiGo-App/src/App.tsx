@@ -31,7 +31,7 @@ import BakedSweetPotatoFries from "./pages/recipes/BakedSweetPotatoFries";
 import Quest1 from "./pages/quests/Quest1";
 
 // Adventure 
-import Level1 from "./pages/levels/Level1a";
+import Level1 from "./pages/levels/Level1";
 import Level1a from "./pages/levels/Level1a";
 import Level1b from "./pages/levels/Level1b";
 
