@@ -39,7 +39,16 @@ export default function Adventure() {
   }, []);
 
   return (
-    <Box sx={adventurePageStyle}>
+    <Box
+      sx={{
+        ...adventurePageStyle,
+        backgroundImage: "url('/path/to/your/image.jpg')", // Set your background image path here
+        backgroundSize: "cover", // Make sure the background covers the whole page
+        backgroundPosition: "center", // Center the background image
+        backgroundRepeat: "no-repeat", // Prevent the image from repeating
+        height: "100vh", // Ensure the background image covers the full viewport height
+      }}
+    >
       <Box
         sx={{
           position: "absolute",
@@ -53,12 +62,7 @@ export default function Adventure() {
           left: "50%",
           transform: "translate(-50%, -50%)",
           p: 2,
-          gap: 2,
-          backgroundImage: "url('/path/to/your/image.jpg')", // Set your background image path here
-          backgroundSize: "cover", // Make sure the background covers the whole page
-          backgroundPosition: "center", // Center the background image
-          backgroundRepeat: "no-repeat", // Prevent the image from repeating
-          height: "100vh",
+          gap: 2
         }}
       >
         {buttons.map((button, index) => (
