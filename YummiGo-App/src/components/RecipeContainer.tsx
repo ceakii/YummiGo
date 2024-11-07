@@ -1,8 +1,8 @@
 import React from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle }
-  from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { useRecipeUpload } from "../../RecipeUploadContext"; // Adjusted import path
 
 interface RecipeContainer {
   children: React.ReactNode;
@@ -11,19 +11,23 @@ interface RecipeContainer {
 }
 
 export default function RecipeContainer({ children, title, imageSrc }: RecipeContainer) {
-  const recipePageStyle = { ...pageStyle, overflowX: "hidden"}
+  const recipePageStyle = { ...pageStyle, overflowX: "hidden"};
   const pictureFrameSize = "40vw";
   const pictureSize = "38vw";
 
   // For Dialog Box
   const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => { setOpen(true); };
+  const handleClickOpen = () => { 
+    setOpen(true); 
+    incrementRecipeUploadCount(); // Call context function when button is clicked
+  };
   const handleClose = () => { setOpen(false); };
 
+  // Use custom hook to get the increment function from context
+  const { incrementRecipeUploadCount } = useRecipeUpload();
+
   return (
-    /* Page Container */
     <Box sx={recipePageStyle}>
-      {/* Picture, Button, Title Container */}
       <Box
         sx={{
           display: "flex",
@@ -32,7 +36,6 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
           alignItems: "center",
           backgroundColor: "#38E2DF"
         }}>
-        {/* Image Container */}
         <Box
           sx={{
             width: "100vw",
@@ -43,7 +46,6 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
             padding: 2
           }}
         >
-          {/* Image Frame */}
           <Box
             sx={{
               width: pictureFrameSize,
@@ -56,7 +58,6 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
               boxShadow: 4
             }}
           >
-            {/* Image */}
             <CardMedia
               component="img"
               image={imageSrc}
@@ -74,7 +75,6 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
           </Box>
         </Box>
 
-        {/* Button Container */}
         <Box
           sx={{
             width: "100vw",
@@ -87,7 +87,6 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
             borderColor: "black"
           }}
         >
-          {/* Button */}
           <ThemeProvider theme={buttonTheme}>
             <Button
               onClick={handleClickOpen}
@@ -101,7 +100,6 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
                 borderRadius: 4
               }}
             >
-              {/* Upload Quest Photo */}
               <ThemeProvider theme={textTheme}>
                 <Typography variant="button">
                   Upload Quest Photo
@@ -110,12 +108,10 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
             </Button>
           </ThemeProvider>
 
-          {/* Dialog Box */}
           <Dialog
             open={open}
             onClose={handleClose}
           >
-            {/* Dialog Title */}
             <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
               <Box bgcolor={"#FEAF2F"} border={2}>
                 <ThemeProvider theme={textTheme}>
@@ -129,8 +125,6 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
                 </ThemeProvider>
               </Box>
             </DialogTitle>
-
-            {/* Dialog Content */}
             <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
               <DialogContentText>
                 <ThemeProvider theme={textTheme}>
@@ -142,7 +136,6 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
                     You earned: 10 XP!
                   </Typography>
                 </ThemeProvider>
-
                 <ThemeProvider theme={textTheme}>
                   <Typography
                     variant="body1"
@@ -154,8 +147,6 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
                 </ThemeProvider>
               </DialogContentText>
             </DialogContent>
-
-            {/* Dialog Action */}
             <DialogActions sx={{ bgcolor: "#FEAF2F" }}>
               <ThemeProvider theme={buttonTheme}>
                 <Button onClick={handleClose} variant="contained">
@@ -171,11 +162,9 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
                 </Button>
               </ThemeProvider>
             </DialogActions>
-
           </Dialog>
         </Box>
 
-        {/* Title Container */}
         <Box
           sx={{
             width: "100vw",
@@ -195,7 +184,6 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
         </Box>
       </Box>
 
-      {/* Food Description Container */}
       <Box
         sx={{
           width: "100%",
