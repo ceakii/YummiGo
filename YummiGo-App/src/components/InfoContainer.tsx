@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle }
   from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import LevelContainer from "./LevelContainer";
 
 interface InfoContainer {
   children: React.ReactNode;
@@ -19,14 +18,28 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
 
   // For Dialog Box
   const [open, setOpen] = React.useState(false);
+  const [buttons, setButtons] = useState<any[]>([]);
+
   const handleClickOpen = () => { setOpen(true); };
   const handleClose = () => { setOpen(false); };
 
   const navigate = useNavigate();
 
-  // Function to handle "Continue" click
   const handleContinue = () => {
     setOpen(false);
+
+    const storedButtons = JSON.parse(sessionStorage.getItem("buttons") || "[]");
+
+    const newButton = {
+      id: buttons.length + 1,
+      label: `Level ${storedButtons.length + 1}`,
+    };
+
+    const updatedButtons = [...storedButtons, newButton];
+    setButtons(updatedButtons);
+
+    sessionStorage.setItem("buttons", JSON.stringify(updatedButtons));
+
     navigate("/YummiGo/");
   };
 
@@ -231,8 +244,6 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
             {children}
           </Typography>
         </ThemeProvider>
-        {/* LevelContainer inside YummigoContainer */}
-      <LevelContainer level={title} />
       </Box>
     </Box>
   );

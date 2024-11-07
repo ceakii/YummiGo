@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle }
-  from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import LevelContainer from "./LevelContainer";
 
 interface YummigoContainer {
   children: React.ReactNode;
@@ -13,20 +11,34 @@ interface YummigoContainer {
 }
 
 export default function YummigoContainer({ children, title, imageSrc }: YummigoContainer) {
-  const recipePageStyle = { ...pageStyle, overflowX: "hidden"}
+  const recipePageStyle = { ...pageStyle, overflowX: "hidden" };
   const pictureFrameSize = "40vw";
   const pictureSize = "38vw";
 
   // For Dialog Box
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [buttons, setButtons] = useState<any[]>([]);
+
   const handleClickOpen = () => { setOpen(true); };
   const handleClose = () => { setOpen(false); };
 
   const navigate = useNavigate();
 
-  // Function to handle "Continue" click
   const handleContinue = () => {
     setOpen(false);
+
+    const storedButtons = JSON.parse(sessionStorage.getItem("buttons") || "[]");
+
+    const newButton = {
+      id: buttons.length + 1,
+      label: `Level ${storedButtons.length + 1}`,
+    };
+
+    const updatedButtons = [newButton, ...storedButtons];
+    setButtons(updatedButtons);
+
+    sessionStorage.setItem("buttons", JSON.stringify(updatedButtons));
+
     navigate("/YummiGo/");
   };
 
@@ -70,7 +82,7 @@ export default function YummigoContainer({ children, title, imageSrc }: YummigoC
             <CardMedia
               component="img"
               image={imageSrc}
-              alt="Spring Roll"
+              alt="Level Image"
               sx={{
                 height: pictureSize,
                 width: pictureSize,
@@ -162,16 +174,6 @@ export default function YummigoContainer({ children, title, imageSrc }: YummigoC
                     Yummigo File: {title}
                   </Typography>
                 </ThemeProvider>
-
-                <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="body1"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
-                    
-                  </Typography>
-                </ThemeProvider>
               </DialogContentText>
             </DialogContent>
 
@@ -232,8 +234,6 @@ export default function YummigoContainer({ children, title, imageSrc }: YummigoC
           </Typography>
         </ThemeProvider>
       </Box>
-      {/* LevelContainer */}
-      <LevelContainer level={title} />
     </Box>
   );
 }

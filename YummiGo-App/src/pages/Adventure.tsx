@@ -28,7 +28,7 @@ export default function Adventure() {
   useEffect(() => {
     const storedButtons: ButtonData[] = JSON.parse(sessionStorage.getItem("buttons") || "[]");
     if (storedButtons.length === 0) {
-      const initialButton = [{ id: 1, label: "level1" }];
+      const initialButton = [{ id: 1, label: "Level 1" }];
       setButtons(initialButton);
       sessionStorage.setItem("buttons", JSON.stringify(initialButton));
     } else {
@@ -59,7 +59,7 @@ export default function Adventure() {
             key={button.id}
             variant="contained"
             sx={{ margin: "8px", width: "200px" }}
-            onClick={() => navigate(`/YummiGo/levels/${button.label.toLowerCase()}`)}
+            onClick={() => navigate(`/YummiGo/levels/level${button.id}`)}
           >
             {button.label}
           </Button>
