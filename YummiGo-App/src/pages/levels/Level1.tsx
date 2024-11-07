@@ -1,96 +1,198 @@
-import { useNavigate } from "react-router-dom";
 import {
   Box,
-  Card,
-  CardActionArea,
-  CardContent,
+  Button,
   CardMedia,
+  ThemeProvider,
   Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { pageStyle } from "../../Style";
+import { buttonTheme, pageStyle, textTheme } from "../../Style";
+import { useNavigate } from "react-router-dom";
 
 // Image Paths
 import CarrottiImage from "/images/Yummigos/001_Carrotti.png";
 
-import HummusaVeggieSticks from "/images/HummusaVeggieSticks.png"
-
-export default function Adventure() {
-  const adventurePageStyle = { ...pageStyle };
+export default function Level1() {
+  const recipePageStyle = { ...pageStyle, overflowX: "hidden" }
   const navigate = useNavigate();
 
   return (
-    <Box sx={adventurePageStyle}>
-      <Grid flexGrow={1} flexWrap="wrap" container spacing={0.5} display="flex">
-        {/*Level 1a */}
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card sx={{ height: 300 }}>
-            <CardActionArea
-              onClick={() => navigate("/YummiGo/levels/level1a")}
-            >
-              <CardMedia
-                component="img"
-                image={CarrottiImage}
-                alt="Level 1a"
+    /* Page Container */
+    <Box sx={recipePageStyle}>
+      {/* Picture and Title Container */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#38E2DF"
+        }}>
+        {/* Image Container */}
+        <Box
+          sx={{
+            width: "100vw",
+            minHeight: "20vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 2
+          }}
+        >
+          {/* Image Frame */}
+          <Box
+            sx={{
+              width: "40vw",
+              height: "40vw",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              bgcolor: "white",
+              borderRadius: "10%",
+              boxShadow: 4
+            }}
+          >
+            {/* Image */}
+            <CardMedia
+              component="img"
+              image={CarrottiImage}
+              alt="Carrotti"
+              sx={{
+                width: "38vw",
+                height: "38vw",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                bgcolor: "#36424B",
+                borderRadius: "10%",
+                boxShadow: 4
+              }}
+            />
+          </Box>
+        </Box>
+
+        {/* Title Container */}
+        <Box
+          sx={{
+            width: "100vw",
+            height: "vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderBottom: 2,
+            borderColor: "black",
+            bgcolor: "#FEAF2F"
+          }}
+        >
+          {/* Title */}
+          <ThemeProvider theme={textTheme}>
+            <Typography variant="h4" align="center">
+              Level 1: Meeting Carrotti
+            </Typography>
+          </ThemeProvider>
+        </Box>
+      </Box>
+
+      {/* Levels List Container */}
+      <Box
+        sx={{
+          width: "vw",
+          height: "vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: 5
+        }}
+      >
+        {/* Level Container (Objective + Description + Browse Recipe Button) */}
+        <Grid
+          size={{ xs: 9, sm: 10, md: 10, lg: 10 }}
+          sx={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 2,
+            bgcolor: "#FEAF2F",
+            borderRadius: "10%",
+            boxShadow: 4
+          }}
+        >
+          {/* Level Objective Header */}
+          <Grid size={"auto"} flexWrap={"wrap"}>
+            <ThemeProvider theme={textTheme}>
+              <Typography variant="h3">
+                Objective:
+              </Typography>
+            </ThemeProvider>
+          </Grid>
+
+          {/* Level Objective */}
+          <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
+            <ThemeProvider theme={textTheme}>
+              <Typography variant="body1">
+                Read about Carrotti.
+              </Typography>
+            </ThemeProvider>
+          </Grid>
+
+          {/* Level Rewards Header */}
+          <Grid size={"auto"} flexWrap={"wrap"}>
+            <ThemeProvider theme={textTheme}>
+              <Typography variant="h3">
+                Reward(s):
+              </Typography>
+            </ThemeProvider>
+          </Grid>
+
+          {/* Level Rewards Description */}
+          <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
+            <ThemeProvider theme={textTheme}>
+              <Typography variant="body1">
+                Yummigo File: Carrotti
+              </Typography>
+            </ThemeProvider>
+          </Grid>
+
+          {/* Level Button Container */}
+          <Box
+            sx={{
+              width: "100vw",
+              height: "10vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderColor: "black",
+              marginTop: 2
+            }}
+          >
+            {/* Level Button */}
+            <ThemeProvider theme={buttonTheme}>
+              <Button
+                onClick={() => navigate("/YummiGo/yummigo/carrotti")}
+                variant="contained"
                 sx={{
-                  height: 300,
+                  width: "50vw",
+                  height: "10vh",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "#C67B58",
+                  borderRadius: 4
                 }}
-              />
-              <CardContent>
-                <Box
-                  sx={{
-                    position: "absolute",
-                    bottom: 30,
-                    left: 0,
-                    width: "100%",
-                    bgcolor: "rgba(0, 0, 0, 0.54)",
-                    color: "white",
-                    padding: "10px",
-                  }}
-                >
-                  <Typography gutterBottom variant="h5">
-                    Level 1a: Meeting Carrotti
+              >
+                {/* Button Label */}
+                <ThemeProvider theme={textTheme}>
+                  <Typography variant="button">
+                    START
                   </Typography>
-                </Box>
-              </CardContent>
-            </CardActionArea>
-          </Card>
+                </ThemeProvider>
+              </Button>
+            </ThemeProvider>
+          </Box>
         </Grid>
-        {/*Level 1b */}
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card sx={{ height: 300 }}>
-            <CardActionArea
-              onClick={() => navigate("/YummiGo/levels/level1b")}
-            >
-              <CardMedia
-                component="img"
-                image={HummusaVeggieSticks}
-                alt="Level 1b"
-                sx={{
-                  height: 300,
-                }}
-              />
-              <CardContent>
-                <Box
-                  sx={{
-                    position: "absolute",
-                    bottom: 30,
-                    left: 0,
-                    width: "100%",
-                    bgcolor: "rgba(0, 0, 0, 0.54)",
-                    color: "white",
-                    padding: "10px",
-                  }}
-                >
-                  <Typography gutterBottom variant="h5">
-                    Level 1b: A Healthy Snack
-                  </Typography>
-                </Box>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 }

@@ -31,7 +31,7 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
     const storedButtons = JSON.parse(sessionStorage.getItem("buttons") || "[]");
 
     const newButton = {
-      id: buttons.length + 1,
+      id: storedButtons.length + 1,
       label: `Level ${storedButtons.length + 1}`,
     };
 

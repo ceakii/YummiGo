@@ -54,12 +54,13 @@ export default function Adventure() {
           gap: 2,
         }}
       >
-        {buttons.map((button) => (
+        {buttons.map((button, index) => (
           <Button
             key={button.id}
             variant="contained"
             sx={{ margin: "8px", width: "200px" }}
             onClick={() => navigate(`/YummiGo/levels/level${button.id}`)}
+            disabled={index < buttons.length - 1}
           >
             {button.label}
           </Button>

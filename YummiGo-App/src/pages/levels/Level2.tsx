@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 // Image Paths
 import HummusaVeggieSticks from "/images/HummusaVeggieSticks.png";
 
-export default function Level1b() {
+export default function Level2() {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" }
   const navigate = useNavigate();
 
@@ -87,7 +87,7 @@ export default function Level1b() {
           {/* Title */}
           <ThemeProvider theme={textTheme}>
             <Typography variant="h4" align="center">
-              Level 1b: A Healthy Snack
+              Level 2: A Healthy Snack
             </Typography>
           </ThemeProvider>
         </Box>

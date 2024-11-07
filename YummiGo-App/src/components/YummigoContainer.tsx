@@ -30,11 +30,11 @@ export default function YummigoContainer({ children, title, imageSrc }: YummigoC
     const storedButtons = JSON.parse(sessionStorage.getItem("buttons") || "[]");
 
     const newButton = {
-      id: buttons.length + 1,
+      id: storedButtons.length + 1,
       label: `Level ${storedButtons.length + 1}`,
     };
 
-    const updatedButtons = [newButton, ...storedButtons];
+    const updatedButtons = [...storedButtons, newButton];
     setButtons(updatedButtons);
 
     sessionStorage.setItem("buttons", JSON.stringify(updatedButtons));
