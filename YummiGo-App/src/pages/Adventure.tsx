@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 
 // Image Paths
 import CarrottiImage from "/images/Yummigos/001_Carrotti.png";
-import AdventureBackground from "images/AdventureBackground.png";
+import AdventureBackground from "/images/AdventureBackground.png";
 
 interface ButtonData {
   id: number;
@@ -39,16 +39,16 @@ export default function Adventure() {
   }, []);
 
   return (
-    <Box
-      sx={{
-        ...adventurePageStyle,
-        backgroundImage: "url('/path/to/your/image.jpg')", // Set your background image path here
-        backgroundSize: "cover", // Make sure the background covers the whole page
-        backgroundPosition: "center", // Center the background image
-        backgroundRepeat: "no-repeat", // Prevent the image from repeating
-        height: "100vh", // Ensure the background image covers the full viewport height
-      }}
-    >
+      <Box
+        sx={{
+          ...adventurePageStyle,
+          backgroundImage: `url(${AdventureBackground})`,
+          backgroundSize: "cover", // Make sure the background covers the whole page
+          backgroundPosition: "center", // Center the background image
+          backgroundRepeat: "no-repeat", // Prevent the image from repeating
+          height: "100vh", // Ensure the background image covers the full viewport height
+        }}
+      >
       <Box
         sx={{
           position: "absolute",
