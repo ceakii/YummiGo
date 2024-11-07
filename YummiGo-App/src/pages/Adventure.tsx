@@ -6,14 +6,16 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
+  ThemeProvider,
   Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { pageStyle } from "../Style";
+import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { useEffect, useState } from "react";
 
 // Image Paths
 import CarrottiImage from "/images/Yummigos/001_Carrotti.png";
+import AdventureBackground from "images/AdventureBackground.png";
 
 interface ButtonData {
   id: number;
@@ -52,18 +54,33 @@ export default function Adventure() {
           transform: "translate(-50%, -50%)",
           p: 2,
           gap: 2,
+          backgroundImage: "url('/path/to/your/image.jpg')", // Set your background image path here
+          backgroundSize: "cover", // Make sure the background covers the whole page
+          backgroundPosition: "center", // Center the background image
+          backgroundRepeat: "no-repeat", // Prevent the image from repeating
+          height: "100vh",
         }}
       >
         {buttons.map((button, index) => (
-          <Button
-            key={button.id}
-            variant="contained"
-            sx={{ margin: "8px", width: "200px" }}
-            onClick={() => navigate(`/YummiGo/levels/level${button.id}`)}
-            disabled={index < buttons.length - 1}
-          >
-            {button.label}
-          </Button>
+          <ThemeProvider theme={buttonTheme} key={button.id}>
+            <Button
+              variant="contained"
+              sx={{
+                margin: "8px",
+                width: "200px",
+                borderRadius: 2,
+                boxShadow: 3,
+              }}
+              onClick={() => navigate(`/YummiGo/levels/level${button.id}`)}
+              disabled={index < buttons.length - 1}
+            >
+              <ThemeProvider theme={textTheme}>
+                <Typography variant="button">
+                  {button.label}
+                </Typography>
+              </ThemeProvider>
+            </Button>
+          </ThemeProvider>
         ))}
       </Box>
       <Grid flexGrow={1} flexWrap="wrap" container spacing={0.5} display="flex">

@@ -37,6 +37,9 @@ import Level2 from "./pages/levels/Level2";
 import HummusaVeggieSticksInfo from "./pages/info/HummusaVeggieSticksInfo";
 import GranolaBarsInfo from "./pages/info/GranolaBarsInfo";
 
+// Food Info Pages
+import Carrotti from "./pages/yummigo/Carrotti";
+
 function App() {
   return (
     <RecipeUploadProvider>
@@ -84,6 +87,12 @@ function App() {
         <Route
           path="/YummiGo/info/hummusaveggiesticksinfo"
           element={<HummusaVeggieSticksInfo />}
+        />
+
+        {/* Yummigo Pages Routing */}
+        <Route
+          path="/YummiGo/yummigo/carrotti"
+          element={<Carrotti />}
         />
       </Routes>
 
