@@ -12,8 +12,8 @@ interface YummigoContainer {
 
 export default function YummigoContainer({ children, title, imageSrc }: YummigoContainer) {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" };
-  const pictureFrameSize = "40vw";
-  const pictureSize = "38vw";
+  const pictureFrameSize = "20vw";
+  const pictureSize = "19vw";
 
   // For Dialog Box
   const [open, setOpen] = useState(false);

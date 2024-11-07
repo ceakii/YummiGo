@@ -1,9 +1,9 @@
-import YummigoContainer from "../../components/YummigoContainer"
+import QuizContainer from "../../components/QuizContainer"
 import CarrottiImage from "/images/Yummigos/001_Carrotti.png";
 
 export default function Carrotti() {
   return (
-    <YummigoContainer
+    <QuizContainer
       title="Carrotti"
       imageSrc={CarrottiImage}
     >
@@ -16,6 +16,6 @@ export default function Carrotti() {
         Likes: Vegetables
 
       `}
-    </YummigoContainer>
+    </QuizContainer>
   );
 }

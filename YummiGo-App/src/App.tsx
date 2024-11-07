@@ -32,13 +32,17 @@ import Quest1 from "./pages/quests/Quest1";
 // Adventure 
 import Level1 from "./pages/levels/Level1";
 import Level2 from "./pages/levels/Level2";
+import Level3 from "./pages/levels/Level3";
 
 // Food Info Pages
 import HummusaVeggieSticksInfo from "./pages/info/HummusaVeggieSticksInfo";
 import GranolaBarsInfo from "./pages/info/GranolaBarsInfo";
 
-// Food Info Pages
+// Yummigo Pages
 import Carrotti from "./pages/yummigo/Carrotti";
+
+// Quiz Pages
+import CarrottiQuiz from "./pages/quiz/Carrotti";
 
 function App() {
   return (
@@ -78,6 +82,10 @@ function App() {
           path="/YummiGo/levels/level2"
           element={<Level2 />}
         />
+        <Route
+          path="/YummiGo/levels/level3"
+          element={<Level3 />}
+        />
 
         {/* Food Info Pages Routing */}
         <Route
@@ -93,6 +101,12 @@ function App() {
         <Route
           path="/YummiGo/yummigo/carrotti"
           element={<Carrotti />}
+        />
+
+        {/* Quiz Pages Routing */}
+        <Route
+          path="/YummiGo/quiz/carrotti"
+          element={<CarrottiQuiz />}
         />
       </Routes>
 
