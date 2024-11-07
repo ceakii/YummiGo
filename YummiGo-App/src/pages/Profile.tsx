@@ -1,5 +1,5 @@
 import { Box, ThemeProvider, Typography, CardMedia, Button } from "@mui/material";
-import { pageStyle, textTheme, buttonTheme } from "../Style";
+import { pageStyle, textTheme } from "../Style";
 import { useRecipeUpload } from "../../RecipeUploadContext"; // Import the custom hook
 import HeroAvatarPfp from "/images/HeroAvatarPfp.png";
 
