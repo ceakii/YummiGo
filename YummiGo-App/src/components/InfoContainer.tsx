@@ -4,6 +4,7 @@ import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle }
   from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import LevelContainer from "./LevelContainer";
 
 interface InfoContainer {
   children: React.ReactNode;
@@ -230,6 +231,8 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
             {children}
           </Typography>
         </ThemeProvider>
+        {/* LevelContainer inside YummigoContainer */}
+      <LevelContainer level={title} />
       </Box>
     </Box>
   );
