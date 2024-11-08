@@ -8,7 +8,6 @@ import {
 import Grid from "@mui/material/Grid2";
 import { buttonTheme, pageStyle, textTheme } from "../../Style";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 // Image Paths
 import HeroImage from "/images/HeroAvatar.png";
