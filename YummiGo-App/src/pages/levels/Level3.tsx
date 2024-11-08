@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 // Image Paths
 import CarrottiImage from "/images/Yummigos/001_Carrotti.png";
 
-export default function Level1() {
+export default function Level3() {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" }
   const navigate = useNavigate();
 
@@ -87,7 +87,7 @@ export default function Level1() {
           {/* Title */}
           <ThemeProvider theme={textTheme}>
             <Typography variant="h4" align="center">
-              Level 1: Meeting Carrotti
+              Level 3: Helping Carrotti
             </Typography>
           </ThemeProvider>
         </Box>
@@ -133,10 +133,8 @@ export default function Level1() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                On your way to the castle, you spot something on the ground. 
-                At first glance, it looks like a stem, but this one looks different from the surrounding vegetation.
-                You decide to remove the stem, and find that you've disturbed a Carrotti! 
-                It looks at you with furrowed brows and squinted eyes, perhaps it is angry.
+                Now that you've found a possible source of nutrition for Carrotti, it's time to put your knowledge to the test.
+                If you can show that this dish will help Carrotti, then it will join you as your Yummigo!
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -154,7 +152,25 @@ export default function Level1() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                Learn about Carrotti.
+                Help Carrotti by answering 3 questions correctly.
+              </Typography>
+            </ThemeProvider>
+          </Grid>
+
+          {/* Level Fail Conditions Header */}
+          <Grid size={"auto"} flexWrap={"wrap"}>
+            <ThemeProvider theme={textTheme}>
+              <Typography variant="h3">
+                Failure Conditions:
+              </Typography>
+            </ThemeProvider>
+          </Grid>
+
+          {/* Level Fail Conditions */}
+          <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
+            <ThemeProvider theme={textTheme}>
+              <Typography variant="body1">
+                Make 3 Mistakes.
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -192,7 +208,7 @@ export default function Level1() {
             {/* Level Button */}
             <ThemeProvider theme={buttonTheme}>
               <Button
-                onClick={() => navigate("/YummiGo/yummigo/carrotti")}
+                onClick={() => navigate("/YummiGo/quiz/carrotti")}
                 variant="contained"
                 sx={{
                   width: "50vw",

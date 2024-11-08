@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 // Components
 import TopBar from "./components/TopBar";
 import BottomNavigationBar from "./components/BottomNavigationBar";
+import { RecipeUploadProvider } from "../RecipeUploadContext";
 
 // Main Pages
 import Adventure from "./pages/Adventure";
@@ -28,17 +29,23 @@ import BakedSweetPotatoFries from "./pages/recipes/BakedSweetPotatoFries";
 // Quest Pages
 import Quest1 from "./pages/quests/Quest1";
 
-// Adventure Pages
+// Adventure 
 import Level1 from "./pages/levels/Level1";
+import Level2 from "./pages/levels/Level2";
+import Level3 from "./pages/levels/Level3";
+import Level4 from "./pages/levels/Level4";
+import Level5 from "./pages/levels/Level5";
 
 // Food Info Pages
+import HummusaVeggieSticksInfo from "./pages/info/HummusaVeggieSticksInfo";
 import GranolaBarsInfo from "./pages/info/GranolaBarsInfo";
 
-//Avatar Customization Page
-import AvatarCustomization from "./pages/avatarcustom/avatarCustom";
+// Yummigo Pages
+import Carrotti from "./pages/yummigo/Carrotti";
 
-// Context Provider
-import { RecipeUploadProvider } from '../RecipeUploadContext';
+// Quiz Pages
+import CarrottiQuiz from "./pages/quiz/Carrotti";
+import DragonQuiz from "./pages/quiz/Dragon";
 
 function App() {
   return (
@@ -69,15 +76,54 @@ function App() {
           {/* Quests Pages Routing */}
           <Route path="/YummiGo/quests/quest1" element={<Quest1 />} />
 
-          {/* Adventure Pages Routing */}
-          <Route path="/YummiGo/levels/level1" element={<Level1 />} />
+        {/* Adventure Pages Routing */}
+        <Route
+          path="/YummiGo/levels/level1"
+          element={<Level1 />}
+        />
+        <Route
+          path="/YummiGo/levels/level2"
+          element={<Level2 />}
+        />
+        <Route
+          path="/YummiGo/levels/level3"
+          element={<Level3 />}
+        />
+        <Route
+          path="/YummiGo/levels/level4"
+          element={<Level4 />}
+        />
+        <Route
+          path="/YummiGo/levels/level5"
+          element={<Level5 />}
+        />
 
-          {/* Food Info Pages Routing */}
-          <Route path="/YummiGo/info/granolabarsinfo" element={<GranolaBarsInfo />} />
+        {/* Food Info Pages Routing */}
+        <Route
+          path="/YummiGo/info/granolabarsinfo"
+          element={<GranolaBarsInfo />}
+        />
+        <Route
+          path="/YummiGo/info/hummusaveggiesticksinfo"
+          element={<HummusaVeggieSticksInfo />}
+        />
 
-          {/* Avatar Customization */}
-          <Route path="/YummiGo/profile/avatarcustom" element={<AvatarCustomization/>} />
-        </Routes>
+        {/* Yummigo Pages Routing */}
+        <Route
+          path="/YummiGo/yummigo/carrotti"
+          element={<Carrotti />}
+        />
+
+        {/* Quiz Pages Routing */}
+        <Route
+          path="/YummiGo/quiz/carrotti"
+          element={<CarrottiQuiz />}
+        />
+        <Route
+          path="/YummiGo/quiz/dragon"
+          element={<DragonQuiz />}
+        />
+      </Routes>
 
         <TopBar />
         <BottomNavigationBar />

@@ -8,13 +8,20 @@ import {
 import Grid from "@mui/material/Grid2";
 import { buttonTheme, pageStyle, textTheme } from "../../Style";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 // Image Paths
-import CarrottiImage from "/images/Yummigos/001_Carrotti.png";
+import HeroImage from "/images/HeroAvatar.png";
 
-export default function Level1() {
+export default function Level5() {
+  const [isCloseClicked, setIsCloseClicked] = useState(false);
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" }
   const navigate = useNavigate();
+
+  const handleCloseButtonClick = () => {
+    setIsCloseClicked(true);
+    navigate("/YummiGo/");
+  };
 
   return (
     /* Page Container */
@@ -55,8 +62,8 @@ export default function Level1() {
             {/* Image */}
             <CardMedia
               component="img"
-              image={CarrottiImage}
-              alt="Carrotti"
+              image={HeroImage}
+              alt="Dragon"
               sx={{
                 width: "19vw",
                 height: "19vw",
@@ -87,7 +94,7 @@ export default function Level1() {
           {/* Title */}
           <ThemeProvider theme={textTheme}>
             <Typography variant="h4" align="center">
-              Level 1: Meeting Carrotti
+              Level 5: Thank You!
             </Typography>
           </ThemeProvider>
         </Box>
@@ -133,10 +140,7 @@ export default function Level1() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                On your way to the castle, you spot something on the ground. 
-                At first glance, it looks like a stem, but this one looks different from the surrounding vegetation.
-                You decide to remove the stem, and find that you've disturbed a Carrotti! 
-                It looks at you with furrowed brows and squinted eyes, perhaps it is angry.
+                The path to a healthy future starts with you. Where will you go? What will you do?
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -154,25 +158,7 @@ export default function Level1() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                Learn about Carrotti.
-              </Typography>
-            </ThemeProvider>
-          </Grid>
-
-          {/* Level Rewards Header */}
-          <Grid size={"auto"} flexWrap={"wrap"}>
-            <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
-                Reward(s):
-              </Typography>
-            </ThemeProvider>
-          </Grid>
-
-          {/* Level Rewards Description */}
-          <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
-            <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
-                Yummigo File: Carrotti
+                Explore the other parts of YummiGo!
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -191,23 +177,26 @@ export default function Level1() {
           >
             {/* Level Button */}
             <ThemeProvider theme={buttonTheme}>
-              <Button
-                onClick={() => navigate("/YummiGo/yummigo/carrotti")}
-                variant="contained"
-                sx={{
-                  width: "50vw",
-                  height: "10vh",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  backgroundColor: "#C67B58",
-                  borderRadius: 4
-                }}
+            <Button
+              onClick={() => {
+                sessionStorage.setItem("level5Completed", "true");
+                navigate("/YummiGo/");
+              }}
+              variant="contained"
+              sx={{
+                width: "50vw",
+                height: "10vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#C67B58",
+                borderRadius: 4,
+              }}
               >
                 {/* Button Label */}
                 <ThemeProvider theme={textTheme}>
                   <Typography variant="button">
-                    START
+                    CLOSE
                   </Typography>
                 </ThemeProvider>
               </Button>

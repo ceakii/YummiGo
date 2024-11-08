@@ -10,9 +10,9 @@ import { buttonTheme, pageStyle, textTheme } from "../../Style";
 import { useNavigate } from "react-router-dom";
 
 // Image Paths
-import CarrottiImage from "/images/Yummigos/001_Carrotti.png";
+import DragonImage from "/images/Yummigos/040_Dragon.png";
 
-export default function Level1() {
+export default function Level4() {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" }
   const navigate = useNavigate();
 
@@ -55,8 +55,8 @@ export default function Level1() {
             {/* Image */}
             <CardMedia
               component="img"
-              image={CarrottiImage}
-              alt="Carrotti"
+              image={DragonImage}
+              alt="Dragon"
               sx={{
                 width: "19vw",
                 height: "19vw",
@@ -87,7 +87,7 @@ export default function Level1() {
           {/* Title */}
           <ThemeProvider theme={textTheme}>
             <Typography variant="h4" align="center">
-              Level 1: Meeting Carrotti
+              Level 4: The Hungry Dragon
             </Typography>
           </ThemeProvider>
         </Box>
@@ -133,10 +133,7 @@ export default function Level1() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                On your way to the castle, you spot something on the ground. 
-                At first glance, it looks like a stem, but this one looks different from the surrounding vegetation.
-                You decide to remove the stem, and find that you've disturbed a Carrotti! 
-                It looks at you with furrowed brows and squinted eyes, perhaps it is angry.
+                You have been spotted by a carnivorous Dragon! It stares at you with the intent of making you its next meal. Fighting is not an option, but fortunately you have... vegetables?
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -154,7 +151,25 @@ export default function Level1() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                Learn about Carrotti.
+                Drive away the Dragon by answering 5 questions correctly.
+              </Typography>
+            </ThemeProvider>
+          </Grid>
+
+          {/* Level Fail Conditions Header */}
+          <Grid size={"auto"} flexWrap={"wrap"}>
+            <ThemeProvider theme={textTheme}>
+              <Typography variant="h3">
+                Failure Conditions:
+              </Typography>
+            </ThemeProvider>
+          </Grid>
+
+          {/* Level Fail Conditions */}
+          <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
+            <ThemeProvider theme={textTheme}>
+              <Typography variant="body1">
+                Make 3 Mistakes.
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -172,7 +187,7 @@ export default function Level1() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                Yummigo File: Carrotti
+                Yummigo File: Dragon
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -192,7 +207,7 @@ export default function Level1() {
             {/* Level Button */}
             <ThemeProvider theme={buttonTheme}>
               <Button
-                onClick={() => navigate("/YummiGo/yummigo/carrotti")}
+                onClick={() => navigate("/YummiGo/quiz/Dragon")}
                 variant="contained"
                 sx={{
                   width: "50vw",

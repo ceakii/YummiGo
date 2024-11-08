@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle }
-  from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-interface InfoContainer {
+interface YummigoContainer {
   children: React.ReactNode;
   title: string;
   imageSrc: string;
 }
 
-export default function InfoContainer({ children, title, imageSrc }: InfoContainer) {
-  const recipePageStyle = { ...pageStyle, overflowX: "hidden"}
+export default function YummigoContainer({ children, title, imageSrc }: YummigoContainer) {
+  const recipePageStyle = { ...pageStyle, overflowX: "hidden" };
   const pictureFrameSize = "20vw";
   const pictureSize = "19vw";
 
   // For Dialog Box
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [buttons, setButtons] = useState<any[]>([]);
 
   const handleClickOpen = () => { setOpen(true); };
@@ -83,7 +82,7 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
             <CardMedia
               component="img"
               image={imageSrc}
-              alt="Spring Roll"
+              alt="Level Image"
               sx={{
                 height: pictureSize,
                 width: pictureSize,
@@ -173,16 +172,6 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
                     justifyContent={"center"}
                   >
                     {title}
-                  </Typography>
-                </ThemeProvider>
-
-                <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="body1"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
-                    
                   </Typography>
                 </ThemeProvider>
               </DialogContentText>
