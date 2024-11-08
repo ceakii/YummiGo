@@ -14,14 +14,8 @@ import { useState } from "react";
 import HeroImage from "/images/HeroAvatar.png";
 
 export default function Level5() {
-  const [isCloseClicked, setIsCloseClicked] = useState(false);
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" }
   const navigate = useNavigate();
-
-  const handleCloseButtonClick = () => {
-    setIsCloseClicked(true);
-    navigate("/YummiGo/");
-  };
 
   return (
     /* Page Container */

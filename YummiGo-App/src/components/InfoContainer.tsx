@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle }
@@ -18,7 +18,6 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
 
   // For Dialog Box
   const [open, setOpen] = React.useState(false);
-  const [buttons, setButtons] = useState<any[]>([]);
 
   const handleClickOpen = () => { setOpen(true); };
   const handleClose = () => { setOpen(false); };
@@ -36,7 +35,6 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
     };
 
     const updatedButtons = [...storedButtons, newButton];
-    setButtons(updatedButtons);
 
     sessionStorage.setItem("buttons", JSON.stringify(updatedButtons));
 

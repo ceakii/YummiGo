@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, ThemeProvider, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -18,9 +18,9 @@ export default function QuizContainer({ children, title, imageSrc, questions }: 
   const navigate = useNavigate();
 
   const [isButtonFlashing, setIsButtonFlashing] = useState(false);
-  const [wrongAnswerCount, setWrongAnswerCount] = useState(0);
   const [levelComplete, setLevelComplete] = useState(false);
   const [levelFailed, setLevelFailed] = useState(false);
+  const wrongAnswerCount = useRef(0);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(0);
@@ -44,13 +44,10 @@ export default function QuizContainer({ children, title, imageSrc, questions }: 
       }
     } else {
       setIsButtonFlashing(true);
-      setWrongAnswerCount(prevCount => {
-        const newCount = prevCount + 1;
-        if (newCount === 3) {
-          setLevelFailed(true);
-        }
-        return newCount;
-      });
+      wrongAnswerCount.current += 1;
+      if (wrongAnswerCount.current === 3) {
+        setLevelFailed(true);
+      }
 
       setTimeout(() => setIsButtonFlashing(false), 500);
     }
@@ -58,7 +55,7 @@ export default function QuizContainer({ children, title, imageSrc, questions }: 
 
   const handleLevelFailedClose = () => {
     setSelectedAnswer(0);
-    setWrongAnswerCount(0);
+    wrongAnswerCount.current = 0;
     setLevelFailed(false);
     navigate("/YummiGo/");
   };

@@ -17,7 +17,6 @@ export default function YummigoContainer({ children, title, imageSrc }: YummigoC
 
   // For Dialog Box
   const [open, setOpen] = useState(false);
-  const [buttons, setButtons] = useState<any[]>([]);
 
   const handleClickOpen = () => { setOpen(true); };
   const handleClose = () => { setOpen(false); };
@@ -35,7 +34,6 @@ export default function YummigoContainer({ children, title, imageSrc }: YummigoC
     };
 
     const updatedButtons = [...storedButtons, newButton];
-    setButtons(updatedButtons);
 
     sessionStorage.setItem("buttons", JSON.stringify(updatedButtons));
 
