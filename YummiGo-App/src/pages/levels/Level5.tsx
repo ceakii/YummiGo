@@ -163,24 +163,6 @@ export default function Level5() {
             </ThemeProvider>
           </Grid>
 
-          {/* Level Rewards Header */}
-          <Grid size={"auto"} flexWrap={"wrap"}>
-            <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
-                Reward(s):
-              </Typography>
-            </ThemeProvider>
-          </Grid>
-
-          {/* Level Rewards Description */}
-          <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
-            <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
-                Yummigo File: Dragon
-              </Typography>
-            </ThemeProvider>
-          </Grid>
-
           {/* Level Button Container */}
           <Box
             sx={{

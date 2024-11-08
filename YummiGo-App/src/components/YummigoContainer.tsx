@@ -171,7 +171,7 @@ export default function YummigoContainer({ children, title, imageSrc }: YummigoC
                     display={"flex"}
                     justifyContent={"center"}
                   >
-                    Yummigo File: {title}
+                    {title}
                   </Typography>
                 </ThemeProvider>
               </DialogContentText>

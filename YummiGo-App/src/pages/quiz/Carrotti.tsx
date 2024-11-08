@@ -25,7 +25,7 @@ const carrottiQuestions = [
 export default function CarrottiQuiz() {
   return (
     <QuizContainer
-      title="Carrotti"
+      title="Yummigo: Carrotti"
       imageSrc={CarrottiImage}
       questions={carrottiQuestions}
     >

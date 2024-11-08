@@ -172,7 +172,7 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
                     display={"flex"}
                     justifyContent={"center"}
                   >
-                    Recipe: {title}
+                    {title}
                   </Typography>
                 </ThemeProvider>
 

@@ -5,7 +5,7 @@ import { Box, Typography } from "@mui/material";
 export default function Carrotti() {
   return (
     <YummigoContainer
-      title="Carrotti"
+      title="Yummigo: Carrotti"
       imageSrc={CarrottiImage}
     >
       <Box sx={{ width: '100%', textAlign: 'center' }}>

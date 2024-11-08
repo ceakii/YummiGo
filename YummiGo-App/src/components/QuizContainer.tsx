@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
-import { Box, Button, CardMedia, Dialog, DialogActions, DialogTitle, ThemeProvider, Typography } from "@mui/material";
+import { Box, Button, CardMedia, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, ThemeProvider, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 interface QuizContainerProps {
@@ -200,6 +200,30 @@ export default function QuizContainer({ children, title, imageSrc, questions }: 
                 </ThemeProvider>
               </Box>
             </DialogTitle>
+            {/* Dialog Content */}
+            <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
+              <DialogContentText>
+                <ThemeProvider theme={textTheme}>
+                  <Typography
+                    variant="body1"
+                    display={"flex"}
+                    justifyContent={"center"}
+                  >
+                    You earned:
+                  </Typography>
+                </ThemeProvider>
+
+                <ThemeProvider theme={textTheme}>
+                  <Typography
+                    variant="body1"
+                    display={"flex"}
+                    justifyContent={"center"}
+                  >
+                    {title}
+                  </Typography>
+                </ThemeProvider>
+              </DialogContentText>
+            </DialogContent>
             <DialogActions sx={{ bgcolor: "#FEAF2F", display: 'flex', justifyContent: 'center' }}>
               <ThemeProvider theme={buttonTheme}>
                 <Button onClick={handleLevelCompleteClose} variant="contained">

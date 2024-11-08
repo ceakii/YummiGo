@@ -42,7 +42,7 @@ const dragonQuestions = [
 export default function DragonQuiz() {
   return (
     <QuizContainer
-      title="Dragon"
+      title="Yummigo: Dragon"
       imageSrc={DragonImage}
       questions={dragonQuestions}
     >

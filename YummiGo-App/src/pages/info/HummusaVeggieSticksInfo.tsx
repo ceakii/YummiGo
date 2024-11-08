@@ -4,7 +4,7 @@ import HummusaVeggieSticks from "/images/HummusaVeggieSticks.png"
 export default function hummusaveggiesticks() {
   return (
     <InfoContainer
-      title="Hummus and Veggie Sticks"
+      title="Recipe: Hummus and Veggie Sticks"
       imageSrc={HummusaVeggieSticks}
     >
       {`
