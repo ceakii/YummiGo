@@ -178,7 +178,7 @@ export default function YummigoContainer({ children, title, imageSrc }: YummigoC
             </DialogContent>
 
             {/* Dialog Action */}
-            <DialogActions sx={{ bgcolor: "#FEAF2F" }}>
+            <DialogActions sx={{ bgcolor: "#FEAF2F", display: 'flex', justifyContent: 'center' }}>
               <ThemeProvider theme={buttonTheme}>
                 <Button onClick={handleContinue} variant="contained">
                   <ThemeProvider theme={textTheme}>

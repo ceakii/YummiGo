@@ -20,6 +20,7 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
   const [thirdOpen, setThirdOpen] = useState(false);
   const [isButtonFlashing, setIsFlashing] = useState(false);
   const [wrongAnswerCount, setWrongAnswerCount] = useState(0);
+  const [levelSuccessOpen, setLevelSuccessOpen] = useState(false);
   const [levelFailedOpen, setLevelFailedOpen] = useState(false);
 
 
@@ -45,6 +46,17 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
     });
   };
 
+  const handleLevelSuccess = () => {
+    setLevelSuccessOpen(true);
+    setThirdOpen(false);
+  };
+
+  const handleLevelSuccessClose = () => {
+    setWrongAnswerCount(0);
+    setLevelSuccessOpen(false);
+    navigate("/YummiGo/");
+  };
+  
   const handleLevelFailedClose = () => {
     setWrongAnswerCount(0);
     setLevelFailedOpen(false);
@@ -52,6 +64,36 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
   };
 
   const navigate = useNavigate();
+
+  const questions = [
+    {
+      question: "What is 2 + 2?",
+      answer1: "4",
+      answer2: "5"
+    },
+    {
+      question: "What is the capital of France?",
+      answer1: "Paris",
+      answer2: "London"
+    },
+    {
+      question: "Which planet is known as the Red Planet?",
+      answer1: "Mars",
+      answer2: "Earth"
+    }
+  ];
+
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+  const { question, answer1, answer2 } = questions[currentQuestionIndex];
+
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      handleLevelSuccess(); // If it's the last question, show level success
+    }
+  };
 
   return (
     <Box sx={recipePageStyle}>
@@ -87,7 +129,7 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
             <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
               <Box bgcolor={"#FEAF2F"} border={2}>
                 <ThemeProvider theme={textTheme}>
-                  <Typography variant="button" display={"flex"} justifyContent={"center"}>Are You Ready?</Typography>
+                  <Typography variant="button" display={"flex"} justifyContent={"center"}>{question}</Typography>
                 </ThemeProvider>
               </Box>
             </DialogTitle>
@@ -98,11 +140,11 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
                 </ThemeProvider>
               </DialogContentText>
             </DialogContent>
-            <DialogActions sx={{ bgcolor: "#FEAF2F" }}>
+            <DialogActions sx={{ bgcolor: "#FEAF2F", display: 'flex', justifyContent: 'center' }}>
               <ThemeProvider theme={buttonTheme}>
                 <Button onClick={handleSecondOpen} variant="contained">
                   <ThemeProvider theme={textTheme}>
-                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>Proceed</Typography>
+                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>{answer1}</Typography>
                   </ThemeProvider>
                 </Button>
                 <Button
@@ -113,7 +155,7 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
                   }}
                 >
                   <ThemeProvider theme={textTheme}>
-                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>Wrong Choice</Typography>
+                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>{answer2}</Typography>
                   </ThemeProvider>
                 </Button>
               </ThemeProvider>
@@ -125,7 +167,7 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
             <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
               <Box bgcolor={"#FEAF2F"} border={2}>
                 <ThemeProvider theme={textTheme}>
-                  <Typography variant="button" display={"flex"} justifyContent={"center"}>Quiz Ready</Typography>
+                  <Typography variant="button" display={"flex"} justifyContent={"center"}>{question}</Typography>
                 </ThemeProvider>
               </Box>
             </DialogTitle>
@@ -136,11 +178,11 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
                 </ThemeProvider>
               </DialogContentText>
             </DialogContent>
-            <DialogActions sx={{ bgcolor: "#FEAF2F" }}>
+            <DialogActions sx={{ bgcolor: "#FEAF2F", display: 'flex', justifyContent: 'center' }}>
               <ThemeProvider theme={buttonTheme}>
                 <Button onClick={handleThirdOpen} variant="contained"> {/* Correct Button */}
                   <ThemeProvider theme={textTheme}>
-                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>Begin</Typography>
+                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>{answer1}</Typography>
                   </ThemeProvider>
                 </Button>
                 <Button
@@ -152,7 +194,7 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
                   }}
                 >
                   <ThemeProvider theme={textTheme}>
-                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>Close</Typography>
+                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>{answer2}</Typography>
                   </ThemeProvider>
                 </Button>
               </ThemeProvider>
@@ -164,7 +206,7 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
             <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
               <Box bgcolor={"#FEAF2F"} border={2}>
                 <ThemeProvider theme={textTheme}>
-                  <Typography variant="button" display={"flex"} justifyContent={"center"}>Quiz Ready</Typography>
+                  <Typography variant="button" display={"flex"} justifyContent={"center"}>{question}</Typography>
                 </ThemeProvider>
               </Box>
             </DialogTitle>
@@ -175,11 +217,11 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
                 </ThemeProvider>
               </DialogContentText>
             </DialogContent>
-            <DialogActions sx={{ bgcolor: "#FEAF2F" }}>
+            <DialogActions sx={{ bgcolor: "#FEAF2F", display: 'flex', justifyContent: 'center' }}>
               <ThemeProvider theme={buttonTheme}>
-                <Button onClick={() => navigate("/YummiGo/")} variant="contained">
+              <Button onClick={handleLevelSuccess} variant="contained">
                   <ThemeProvider theme={textTheme}>
-                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>Begin</Typography>
+                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>{answer1}</Typography>
                   </ThemeProvider>
                 </Button>
                 <Button
@@ -191,7 +233,7 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
                   }}
                 >
                   <ThemeProvider theme={textTheme}>
-                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>Close</Typography>
+                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>{answer2}</Typography>
                   </ThemeProvider>
                 </Button>
               </ThemeProvider>
@@ -199,34 +241,63 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
           </Dialog>
         </Box>
 
+        {/* Level Success Dialog */}
+        <Dialog open={levelSuccessOpen} onClose={handleLevelSuccessClose}>
+          <DialogTitle bgcolor={"#38E2DF"}>
+            <Box bgcolor={"#FEAF2F"}>
+              <ThemeProvider theme={textTheme}>
+                <Typography variant="button" display={"flex"} justifyContent={"center"}>Level Success</Typography>
+              </ThemeProvider>
+            </Box>
+          </DialogTitle>
+          <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
+            <DialogContentText>
+              <ThemeProvider theme={textTheme}>
+                <Typography variant="body1" display={"flex"} justifyContent={"center"}>
+                  Congratulations! You have successfully completed the level.
+                </Typography>
+              </ThemeProvider>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions sx={{ bgcolor: "#FEAF2F", display: 'flex', justifyContent: 'center' }}>
+            <ThemeProvider theme={buttonTheme}>
+            <Button onClick={handleLevelSuccessClose} variant="contained">
+              <ThemeProvider theme={textTheme}>
+                <Typography variant="h6" display={"flex"} justifyContent={"center"}>Close</Typography>
+              </ThemeProvider>
+            </Button>
+            </ThemeProvider>
+          </DialogActions>
+        </Dialog>
+
         {/* Level Failed Dialog */}
-      <Dialog open={levelFailedOpen} onClose={handleLevelFailedClose}>
-        <DialogTitle bgcolor={"#38E2DF"}>
-          <Box bgcolor={"#FEAF2F"}>
-            <ThemeProvider theme={textTheme}>
-              <Typography variant="button" display={"flex"} justifyContent={"center"}>Level Failed</Typography>
+        <Dialog open={levelFailedOpen} onClose={handleLevelFailedClose}>
+          <DialogTitle bgcolor={"#38E2DF"}>
+            <Box bgcolor={"#FEAF2F"}>
+              <ThemeProvider theme={textTheme}>
+                <Typography variant="button" display={"flex"} justifyContent={"center"}>Level Failed</Typography>
+              </ThemeProvider>
+            </Box>
+          </DialogTitle>
+          <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
+            <DialogContentText>
+              <ThemeProvider theme={textTheme}>
+                <Typography variant="body1" display={"flex"} justifyContent={"center"}>
+                  You clicked the wrong answer 3 times. The level has failed.
+                </Typography>
+              </ThemeProvider>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions sx={{ bgcolor: "#FEAF2F" }}>
+            <ThemeProvider theme={buttonTheme}>
+            <Button onClick={handleLevelFailedClose} variant="contained">
+              <ThemeProvider theme={textTheme}>
+                <Typography variant="h6" display={"flex"} justifyContent={"center"}>Close</Typography>
+              </ThemeProvider>
+            </Button>
             </ThemeProvider>
-          </Box>
-        </DialogTitle>
-        <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
-          <DialogContentText>
-            <ThemeProvider theme={textTheme}>
-              <Typography variant="body1" display={"flex"} justifyContent={"center"}>
-                You clicked the wrong answer 3 times. The level has failed.
-              </Typography>
-            </ThemeProvider>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions sx={{ bgcolor: "#FEAF2F" }}>
-          <ThemeProvider theme={buttonTheme}>
-          <Button onClick={handleLevelFailedClose} variant="contained">
-            <ThemeProvider theme={textTheme}>
-              <Typography variant="h6" display={"flex"} justifyContent={"center"}>Close</Typography>
-            </ThemeProvider>
-          </Button>
-          </ThemeProvider>
-        </DialogActions>
-      </Dialog>
+          </DialogActions>
+        </Dialog>
 
         {/* Title Container */}
         <Box sx={{ width: "100vw", display: "flex", justifyContent: "center", alignItems: "center", borderBottom: 2, borderColor: "black" }}>
