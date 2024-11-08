@@ -44,6 +44,7 @@ import Carrotti from "./pages/yummigo/Carrotti";
 
 // Quiz Pages
 import CarrottiQuiz from "./pages/quiz/Carrotti";
+import DragonQuiz from "./pages/quiz/Dragon";
 
 function App() {
   return (
@@ -112,6 +113,10 @@ function App() {
         <Route
           path="/YummiGo/quiz/carrotti"
           element={<CarrottiQuiz />}
+        />
+        <Route
+          path="/YummiGo/quiz/dragon"
+          element={<DragonQuiz />}
         />
       </Routes>
 

@@ -8,11 +8,15 @@ export default function hummusaveggiesticks() {
       imageSrc={HummusaVeggieSticks}
     >
       {`
-        • Hummus, made from chickpeas and tahini, provide a plant-based protein source, beneficial for muscle maintenance and energy.
-
         • Carrots are high in beta-carotene (vitamin A), which is essential for eye health, skin health, and immune function.
+        
+        • Hummus, made from chickpeas, is rich in fiber, which aids in digestion and helps keep you full longer.
 
-        • Celery contains potassium, magnesium, and other electrolytes, which aid in hydration and muscle function.
+        • Bell peppers are high in antioxidants that help fight inflammation.
+
+        • The combination of hummus and veggies has a low GI, meaning it helps regulate blood sugar, providing a steady energy source without spikes.
+
+        • Incorporating hummus and veggie sticks into your diet regularly can support weight management, improve digestion, and provide sustained energy for an overall balanced diet.
 
       `}
     </InfoContainer>

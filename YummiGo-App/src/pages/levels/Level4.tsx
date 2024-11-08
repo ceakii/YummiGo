@@ -133,8 +133,7 @@ export default function Level4() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                Now that you've found a possible source of nutrition for Carrotti, it's time to put your knowledge to the test.
-                If you can show that this dish will help Carrotti, then it will join you as your Yummigo!
+                You have been spotted by a carnivorous Dragon! It stares at you with the intent of making you its next meal. Fighting is not an option, but fortunately you have... vegetables?
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -152,7 +151,7 @@ export default function Level4() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                Help Carrotti by answering 3 questions correctly.
+                Drive away the Dragon by answering 5 questions correctly.
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -188,7 +187,7 @@ export default function Level4() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                Yummigo File: Carrotti
+                Yummigo File: Dragon
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -208,7 +207,7 @@ export default function Level4() {
             {/* Level Button */}
             <ThemeProvider theme={buttonTheme}>
               <Button
-                onClick={() => navigate("/YummiGo/quiz/carrotti")}
+                onClick={() => navigate("/YummiGo/quiz/Dragon")}
                 variant="contained"
                 sx={{
                   width: "50vw",

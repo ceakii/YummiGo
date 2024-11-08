@@ -3,13 +3,14 @@ import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, Dialog, DialogActions, DialogTitle, ThemeProvider, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-interface QuizContainer {
+interface QuizContainerProps {
   children: React.ReactNode;
   title: string;
   imageSrc: string;
+  questions: Array<{ question: string, answer1: string, answer2: string, answer3?: string, correctAnswer: string }>;
 }
 
-export default function QuizContainer({ children, title, imageSrc }: QuizContainer) {
+export default function QuizContainer({ children, title, imageSrc, questions }: QuizContainerProps) {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" };
   const pictureFrameSize = "20vw";
   const pictureSize = "19vw";
@@ -21,31 +22,20 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
   const [levelComplete, setLevelComplete] = useState(false);
   const [levelFailed, setLevelFailed] = useState(false);
 
-  const questions = [
-    {
-      question: "What does Carrotti like to eat?",
-      answer1: "Vegetables",
-      answer2: "Fruit",
-      correctAnswer: "Vegetables",
-    },
-    {
-      question: "Where does Carrotti get nutrients?",
-      answer1: "Through its leaves",
-      answer2: "Through its stem",
-      correctAnswer: "Through its stem",
-    },
-    {
-      question: "What nutrient in carrots is good for eye health?",
-      answer1: "Vitamin A",
-      answer2: "Vitamin C",
-      correctAnswer: "Vitamin A",
-    },
-  ];
-
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const { question, answer1, answer2, correctAnswer } = questions[currentQuestionIndex];
+  const [selectedAnswer, setSelectedAnswer] = useState(0);
+  const { question, answer1, answer2, answer3, correctAnswer } = questions[currentQuestionIndex];
 
   const handleAnswerClick = (answer: string) => {
+    if (answer === answer1) {
+      setSelectedAnswer(1);
+    }
+    else if (answer === answer2) {
+      setSelectedAnswer(2);
+    }
+    else {
+      setSelectedAnswer(3);
+    }
     if (answer === correctAnswer) {
       if (currentQuestionIndex < questions.length - 1) {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -67,6 +57,7 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
   };
 
   const handleLevelFailedClose = () => {
+    setSelectedAnswer(0);
     setWrongAnswerCount(0);
     setLevelFailed(false);
     navigate("/YummiGo/");
@@ -77,7 +68,7 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
     const newButton = { id: storedButtons.length + 1, label: `Level ${storedButtons.length + 1}` };
     const updatedButtons = [...storedButtons, newButton];
     sessionStorage.setItem("buttons", JSON.stringify(updatedButtons));
-
+    setSelectedAnswer(0);
     setLevelComplete(false);
     navigate("/YummiGo/");
   };
@@ -143,7 +134,7 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
         </Box>
 
         {/* Answer Buttons */}
-        <Box sx={{ mt: 2, mb: 5, display: "flex", gap: 2 }}>
+        <Box sx={{ mt: 2, mb: 5, display: "flex", gap: 2, px: 3 }}>
           <ThemeProvider theme={buttonTheme}>
             <Button
               onClick={() => handleAnswerClick(answer1)}
@@ -151,7 +142,7 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
               sx={{
                 minWidth: "150px",
                 width: "auto",
-                backgroundColor: isButtonFlashing && answer1 !== correctAnswer ? "red" : undefined,
+                backgroundColor: isButtonFlashing && selectedAnswer === 1 && answer1 !== correctAnswer ? "red" : undefined,
                 transition: "background-color 0.3s ease-in-out",
               }}
             >
@@ -165,7 +156,7 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
               sx={{
                 minWidth: "150px",
                 width: "auto",
-                backgroundColor: isButtonFlashing && answer2 !== correctAnswer ? "red" : undefined,
+                backgroundColor: isButtonFlashing && selectedAnswer === 2 && answer2 !== correctAnswer ? "red" : undefined,
                 transition: "background-color 0.3s ease-in-out",
               }}
             >
@@ -173,6 +164,23 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
                 <Typography variant="button" display={"flex"} justifyContent={"center"}>{answer2}</Typography>
               </ThemeProvider>
             </Button>
+
+            {answer3 && (
+              <Button
+                onClick={() => handleAnswerClick(answer3)}
+                variant="contained"
+                sx={{
+                  minWidth: "150px",
+                  width: "auto",
+                  backgroundColor: isButtonFlashing && selectedAnswer === 3 && answer3 !== correctAnswer ? "red" : undefined,
+                  transition: "background-color 0.3s ease-in-out",
+                }}
+              >
+                <ThemeProvider theme={textTheme}>
+                  <Typography variant="button" display={"flex"} justifyContent={"center"}>{answer3}</Typography>
+                </ThemeProvider>
+              </Button>
+            )}
           </ThemeProvider>
         </Box>
 

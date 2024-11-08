@@ -51,11 +51,13 @@ export default function Adventure() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          top: "50%",
+          top: "43%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           p: 2,
-          gap: 2
+          gap: 1,
+          maxHeight: "80vh",
+          overflowY: "auto",
         }}
       >
         {buttons.map((button, index) => (
