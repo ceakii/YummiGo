@@ -142,7 +142,7 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
             </DialogContent>
             <DialogActions sx={{ bgcolor: "#FEAF2F", display: 'flex', justifyContent: 'center' }}>
               <ThemeProvider theme={buttonTheme}>
-                <Button onClick={handleSecondOpen} variant="contained">
+                <Button onClick={handleNextQuestion} variant="contained">
                   <ThemeProvider theme={textTheme}>
                     <Typography variant="h6" display={"flex"} justifyContent={"center"}>{answer1}</Typography>
                   </ThemeProvider>
@@ -180,7 +180,7 @@ export default function QuizContainer({ children, title, imageSrc }: QuizContain
             </DialogContent>
             <DialogActions sx={{ bgcolor: "#FEAF2F", display: 'flex', justifyContent: 'center' }}>
               <ThemeProvider theme={buttonTheme}>
-                <Button onClick={handleThirdOpen} variant="contained"> {/* Correct Button */}
+                <Button onClick={handleNextQuestion} variant="contained">
                   <ThemeProvider theme={textTheme}>
                     <Typography variant="h6" display={"flex"} justifyContent={"center"}>{answer1}</Typography>
                   </ThemeProvider>
