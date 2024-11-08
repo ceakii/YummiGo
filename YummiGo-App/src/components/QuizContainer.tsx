@@ -112,7 +112,7 @@ export default function QuizContainer({ children, title, imageSrc, questions }: 
             <CardMedia
               component="img"
               image={imageSrc}
-              alt="Spring Roll"
+              alt="Image"
               sx={{
                 height: pictureSize,
                 width: pictureSize,
