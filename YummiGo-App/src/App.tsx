@@ -34,6 +34,9 @@ import Level1 from "./pages/levels/Level1";
 // Food Info Pages
 import GranolaBarsInfo from "./pages/info/GranolaBarsInfo";
 
+//Avatar Customization Page
+import AvatarCustomization from "./pages/avatarcustom/avatarCustom";
+
 // Context Provider
 import { RecipeUploadProvider } from '../RecipeUploadContext';
 
@@ -71,6 +74,9 @@ function App() {
 
           {/* Food Info Pages Routing */}
           <Route path="/YummiGo/info/granolabarsinfo" element={<GranolaBarsInfo />} />
+
+          {/* Avatar Customization */}
+          <Route path="/YummiGo/profile/avatarcustom" element={<AvatarCustomization/>} />
         </Routes>
 
         <TopBar />
