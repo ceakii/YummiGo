@@ -1,9 +1,17 @@
-import { Box, ThemeProvider, Typography, CardMedia, Button } from "@mui/material";
+import {
+  Box,
+  ThemeProvider,
+  Typography,
+  CardMedia,
+  Button,
+} from "@mui/material";
 import { pageStyle, textTheme } from "../Style";
 import { useRecipeUpload } from "../../RecipeUploadContext"; // Import the custom hook
 import HeroAvatarPfp from "/images/HeroAvatarPfp.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
+  const navigate = useNavigate();
   const { recipeUploadCount } = useRecipeUpload(); // Get recipe upload count from context
 
   const customPageStyle = {
@@ -49,21 +57,21 @@ export default function Profile() {
         }}
       />
 
-      <ThemeProvider theme={textTheme}> 
+      <ThemeProvider theme={textTheme}>
         <Typography variant="h3">Benjamin F.</Typography>
       </ThemeProvider>
 
       <Button sx={{ ...orangeBox, textTransform: "none" }}>
-        <ThemeProvider theme={textTheme}> 
+        <ThemeProvider theme={textTheme}>
           <Box sx={textSpacing}>
             <Typography variant="h4">Recipes</Typography>
-            <Typography variant="h4">{recipeUploadCount}/10</Typography> {/* Display the dynamic count */}
+            <Typography variant="h4">{recipeUploadCount}/10</Typography>{" "}
           </Box>
         </ThemeProvider>
       </Button>
 
       <Button sx={{ ...orangeBox, textTransform: "none" }}>
-        <ThemeProvider theme={textTheme}> 
+        <ThemeProvider theme={textTheme}>
           <Box sx={textSpacing}>
             <Typography variant="h4">Quests</Typography>
             <Typography variant="h4">4/10</Typography>
@@ -72,17 +80,19 @@ export default function Profile() {
       </Button>
 
       <Button sx={{ ...orangeBox, textTransform: "none" }}>
-        <ThemeProvider theme={textTheme}> 
+        <ThemeProvider theme={textTheme}>
           <Box sx={textSpacing}>
             <Typography variant="h4">Uploads</Typography>
-            <Typography variant="h4">{recipeUploadCount}/10</Typography> {/* Display the dynamic count */}
-
+            <Typography variant="h4">{recipeUploadCount}/10</Typography>{" "}
           </Box>
         </ThemeProvider>
       </Button>
 
-      <Button sx={{ ...orangeBox, textTransform: "none" }}>
-        <ThemeProvider theme={textTheme}> 
+      <Button
+        sx={{ ...orangeBox, textTransform: "none" }}
+        onClick={() => navigate("/YummiGo/profile/avatarcustom")}
+      >
+        <ThemeProvider theme={textTheme}>
           <Typography variant="h4">Edit Avatar</Typography>
         </ThemeProvider>
       </Button>

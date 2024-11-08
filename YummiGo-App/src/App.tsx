@@ -35,7 +35,7 @@ import Level1 from "./pages/levels/Level1";
 import GranolaBarsInfo from "./pages/info/GranolaBarsInfo";
 
 //Avatar Customization Page
-import AvatarCustomization from "./pages/Edit Profile/AvatarCustomization";
+import AvatarCustomization from "./pages/avatarcustom/avatarCustom";
 
 // Context Provider
 import { RecipeUploadProvider } from '../RecipeUploadContext';

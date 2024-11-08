@@ -1,5 +1,5 @@
-import { Box, IconButton, Stack } from "@mui/material";
-import { useState } from "react";
+import { Box, IconButton, Stack, Popper } from "@mui/material";
+import { useState, MouseEvent } from "react";
 
 import { pageStyle } from "../../Style";
 import avatarimg from "/images/avatar_customization_screen.png";
@@ -10,10 +10,15 @@ import shoesIcon from "/images/ShoeIcon.png";
 import wizardHatIcon from "/images/WizardHat.png";
 import crownIcon from "/images/Crown.png";
 
-
-
 export default function AvatarCustom() {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
+    setAnchorEl(anchorEl ? null : event.currentTarget);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popper" : undefined;
 
   const customPageStyle = {
     ...pageStyle,
@@ -46,19 +51,48 @@ export default function AvatarCustom() {
         alt="Avatar customization screen"
         src={avatarimg}
       />
+
       <Stack
-        sx={{ position: "absolute", marginRight: "-90%", marginTop: "15%" }}
+        spacing={{ xs: 1, sm: 2 }}
+        useFlexGap
+        sx={{
+          position: "absolute",
+          alignItems: "flex-end",
+          justifyContent: "center",
+          marginTop: "5vh",
+          height: "80vh",
+          pl: { xs: "80vw", sm: "90vw" },
+        }}
       >
-        <IconButton
-          sx={{ ...iconButtonStyle, pr: "10vh" }}
-          onClick={() => setIsExpanded((prev) => !prev)}
-        >
+        <IconButton sx={{ ...iconButtonStyle }} onClick={handleClick}>
           <Box
             component="img"
             src={hatIcon}
             alt="Hat icon"
             sx={{ ...iconImageStyle }}
           />
+          <Popper
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            placement="left-end"
+            sx={{ pr: "1vw" }}
+          >
+            <IconButton sx={{ ...iconButtonStyle }}>
+              <Box
+                component="img"
+                src={crownIcon}
+                alt="Crown icon"
+                sx={{ ...iconImageStyle }}
+              />
+              <Box
+                component="img"
+                src={wizardHatIcon}
+                alt="wizard hat icon"
+                sx={{ ...iconImageStyle, marginLeft: "1vw" }}
+              />
+            </IconButton>
+          </Popper>
         </IconButton>
 
         <IconButton sx={iconButtonStyle}>
