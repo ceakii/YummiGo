@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 // Image Paths
 import AdventureBackground from "/images/AdventureBackground.png";
+import HeroImage from "/images/HeroAvatar.png";
 
 interface ButtonData {
   id: number;
@@ -20,6 +21,8 @@ export default function Adventure() {
   const adventurePageStyle = { ...pageStyle };
   const navigate = useNavigate();
   const [buttons, setButtons] = useState<ButtonData[]>([]);
+  const [level5Completed, setLevel5Completed] = useState(false);
+  const [hoveredButtonId, setHoveredButtonId] = useState<number | null>(null);
 
   useEffect(() => {
     const storedButtons: ButtonData[] = JSON.parse(sessionStorage.getItem("buttons") || "[]");
@@ -30,6 +33,7 @@ export default function Adventure() {
     } else {
       setButtons(storedButtons);
     }
+    setLevel5Completed(sessionStorage.getItem("level5Completed") === "true");
   }, []);
 
   return (
@@ -61,25 +65,48 @@ export default function Adventure() {
         }}
       >
         {buttons.map((button, index) => (
-          <ThemeProvider theme={buttonTheme} key={button.id}>
-            <Button
-              variant="contained"
-              sx={{
-                margin: "8px",
-                width: "200px",
-                borderRadius: 2,
-                boxShadow: 3,
-              }}
-              onClick={() => navigate(`/YummiGo/levels/level${button.id}`)}
-              disabled={index < buttons.length - 1}
-            >
-              <ThemeProvider theme={textTheme}>
-                <Typography variant="button">
-                  {button.label}
-                </Typography>
-              </ThemeProvider>
-            </Button>
-          </ThemeProvider>
+          <Box
+            key={button.id}
+            onMouseEnter={() => setHoveredButtonId(button.id)}
+            onMouseLeave={() => setHoveredButtonId(null)}
+            sx={{ position: "relative", display: "flex", alignItems: "center" }}
+          >
+            {/* Show Hover Image */}
+            {hoveredButtonId === button.id && (
+              <Box
+                component="img"
+                src={HeroImage}
+                alt="Hero Image"
+                sx={{
+                  position: "absolute",
+                  left: "-120px",
+                  width: "80%",
+                  opacity: 1,
+                  transition: "opacity 0.3s ease-in-out",
+                }}
+              />
+            )}
+
+            <ThemeProvider theme={buttonTheme}>
+              <Button
+                variant="contained"
+                sx={{
+                  margin: "8px",
+                  width: "200px",
+                  borderRadius: 2,
+                  boxShadow: 3,
+                }}
+                onClick={() => navigate(`/YummiGo/levels/level${button.id}`)}
+                disabled={index < buttons.length - 1 || (button.id === 5 && level5Completed)}
+              >
+                <ThemeProvider theme={textTheme}>
+                  <Typography variant="button">
+                    {button.label}
+                  </Typography>
+                </ThemeProvider>
+              </Button>
+            </ThemeProvider>
+          </Box>
         ))}
       </Box>
     </Box>

@@ -87,7 +87,7 @@ export default function Level4() {
           {/* Title */}
           <ThemeProvider theme={textTheme}>
             <Typography variant="h4" align="center">
-              Level 4: The Legendary Dragon
+              Level 4: The Hungry Dragon
             </Typography>
           </ThemeProvider>
         </Box>

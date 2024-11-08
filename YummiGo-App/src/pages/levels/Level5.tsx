@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 // Image Paths
-import DragonImage from "/images/Yummigos/040_Dragon.png";
+import HeroImage from "/images/HeroAvatar.png";
 
 export default function Level5() {
   const [isCloseClicked, setIsCloseClicked] = useState(false);
@@ -19,8 +19,8 @@ export default function Level5() {
   const navigate = useNavigate();
 
   const handleCloseButtonClick = () => {
-    setIsCloseClicked(true); // Set to true when the Close button is clicked
-    navigate("/YummiGo/"); // Navigate to the desired route after closing
+    setIsCloseClicked(true);
+    navigate("/YummiGo/");
   };
 
   return (
@@ -62,7 +62,7 @@ export default function Level5() {
             {/* Image */}
             <CardMedia
               component="img"
-              image={DragonImage}
+              image={HeroImage}
               alt="Dragon"
               sx={{
                 width: "19vw",
@@ -195,19 +195,21 @@ export default function Level5() {
           >
             {/* Level Button */}
             <ThemeProvider theme={buttonTheme}>
-              <Button
-                onClick={handleCloseButtonClick}
-                variant="contained"
-                disabled= {isCloseClicked}
-                sx={{
-                  width: "50vw",
-                  height: "10vh",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  backgroundColor: "#C67B58",
-                  borderRadius: 4,
-                }}
+            <Button
+              onClick={() => {
+                sessionStorage.setItem("level5Completed", "true");
+                navigate("/YummiGo/");
+              }}
+              variant="contained"
+              sx={{
+                width: "50vw",
+                height: "10vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#C67B58",
+                borderRadius: 4,
+              }}
               >
                 {/* Button Label */}
                 <ThemeProvider theme={textTheme}>
