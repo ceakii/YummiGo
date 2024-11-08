@@ -45,14 +45,17 @@ export default function Adventure() {
       >
       <Box
         sx={{
+          position: "absolute",
+          width: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
           justifyContent: "center",
-          gap: 2,
-          width: "100%",
-          maxWidth: 300,
-          textAlign: "center",
+          alignItems: "center",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          p: 2,
+          gap: 2
         }}
       >
         {buttons.map((button, index) => (
