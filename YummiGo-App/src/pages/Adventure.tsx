@@ -2,10 +2,6 @@ import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
   ThemeProvider,
   Typography,
 } from "@mui/material";
@@ -13,7 +9,6 @@ import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { useEffect, useState } from "react";
 
 // Image Paths
-import CarrottiImage from "/images/Yummigos/001_Carrotti.png";
 import AdventureBackground from "/images/AdventureBackground.png";
 
 interface ButtonData {
@@ -42,26 +37,22 @@ export default function Adventure() {
         sx={{
           ...adventurePageStyle,
           backgroundImage: `url(${AdventureBackground})`,
-          backgroundSize: "cover", // Make sure the background covers the whole page
-          backgroundPosition: "center", // Center the background image
-          backgroundRepeat: "no-repeat", // Prevent the image from repeating
-          height: "100vh", // Ensure the background image covers the full viewport height
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          height: "100vh",
         }}
       >
       <Box
         sx={{
-          position: "absolute",
-          width: "100%",
-          maxWidth: 400,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
           alignItems: "center",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          p: 2,
-          gap: 2
+          justifyContent: "center",
+          gap: 2,
+          width: "100%",
+          maxWidth: 300,
+          textAlign: "center",
         }}
       >
         {buttons.map((button, index) => (
