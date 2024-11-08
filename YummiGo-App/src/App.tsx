@@ -34,6 +34,7 @@ import Level1 from "./pages/levels/Level1";
 import Level2 from "./pages/levels/Level2";
 import Level3 from "./pages/levels/Level3";
 import Level4 from "./pages/levels/Level4";
+import Level5 from "./pages/levels/Level5";
 
 // Food Info Pages
 import HummusaVeggieSticksInfo from "./pages/info/HummusaVeggieSticksInfo";
@@ -91,6 +92,10 @@ function App() {
         <Route
           path="/YummiGo/levels/level4"
           element={<Level4 />}
+        />
+        <Route
+          path="/YummiGo/levels/level5"
+          element={<Level5 />}
         />
 
         {/* Food Info Pages Routing */}
