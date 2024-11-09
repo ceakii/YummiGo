@@ -10,7 +10,6 @@ import Adventure from "./pages/Adventure";
 import Recipe from "./pages/Recipe";
 import Profile from "./pages/Profile";
 import Quest from "./pages/Quest";
-import Settings from "./pages/Settings";
 import Login from "./components/Login";
 
 // Recipe Pages
@@ -60,7 +59,6 @@ function App() {
           <Route path="/YummiGo/recipe" element={<Recipe />} />
           <Route path="/YummiGo/profile" element={<Profile />} />
           <Route path="/YummiGo/quest" element={<Quest />} />
-          <Route path="/YummiGo/settings" element={<Settings />} />
           <Route path="/YummiGo/login" element={<Login />} />
 
           {/* Recipes Pages Routing */}

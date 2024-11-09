@@ -11,12 +11,8 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (username === 'benjamin' && password === 'button') {
-      login(username);
-      navigate('/YummiGo/');
-    } else {
-      alert('Incorrect username or password');
-    }
+    login(username);
+    navigate('/YummiGo/');
   };
 
   return (

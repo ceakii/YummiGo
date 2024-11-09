@@ -23,6 +23,7 @@ export default function TopBar() {
             <Box sx={topBarStyle}>
                 <AppBar sx={topBarStyle}>
                     <Toolbar>
+                        {/* YummiGo App Name */}
                         <Typography
                             variant="h6"
                             align="left"
@@ -30,6 +31,8 @@ export default function TopBar() {
                         >
                             YummiGo
                         </Typography>
+
+                        {/* Display User Name and Logout Button */}
                         {user ? (
                             <>
                                 <Typography
@@ -37,7 +40,7 @@ export default function TopBar() {
                                     align="center"
                                     sx={{ flexGrow: 0, marginRight: 2 }}
                                 >
-                                    Benjamin F.
+                                    {user}
                                 </Typography>
                                 <Button color="inherit" onClick={handleLogoutClick}>
                                     <Typography

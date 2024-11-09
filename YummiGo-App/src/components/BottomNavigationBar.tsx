@@ -6,7 +6,6 @@ import Person2Icon from "@mui/icons-material/Person2";
 import OutdoorGrillIcon from "@mui/icons-material/OutdoorGrill";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import SettingsIcon from "@mui/icons-material/Settings";
 
 export default function BottomNavigationBar() {
     const bottomBarStyle = { ...barStyle, bottom: 0};
@@ -43,11 +42,6 @@ export default function BottomNavigationBar() {
                         label="Quest"
                         icon={<AssignmentIcon />}
                         onClick={() => navigate("/YummiGo/quest")}
-                    />
-                    <BottomNavigationAction
-                        label="Settings"
-                        icon={<SettingsIcon />}
-                        onClick={() => navigate("/YummiGo/settings")}
                     />
                 </BottomNavigation>
             </Box>
