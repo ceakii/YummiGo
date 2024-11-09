@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { AppBar, Box, Button, ThemeProvider, Toolbar, Typography } from "@mui/material";
 import { barStyle, textTheme } from "../Style";
 import { AuthContext } from '../context/AuthContext';
