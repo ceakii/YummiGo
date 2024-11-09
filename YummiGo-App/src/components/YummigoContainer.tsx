@@ -174,31 +174,6 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
               </Box>
             </DialogTitle>
 
-            {/* Dialog Content */}
-            <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
-              <DialogContentText>
-                <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="body1"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
-                    You earned:
-                  </Typography>
-                </ThemeProvider>
-
-                <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="body1"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
-                    Yummigo: {title}
-                  </Typography>
-                </ThemeProvider>
-              </DialogContentText>
-            </DialogContent>
-
             {/* Dialog Action */}
             <DialogActions sx={{ bgcolor: "#FEAF2F", display: 'flex', justifyContent: 'center' }}>
               <ThemeProvider theme={buttonTheme}>

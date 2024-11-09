@@ -142,12 +142,12 @@ export default function Level1() {
               </Typography>
             </ThemeProvider>
           </Grid>
-
+          
           {/* Level Rewards Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="h3">
-                Reward(s):
+
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -156,11 +156,10 @@ export default function Level1() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                Yummigo File: Carrotti
+
               </Typography>
             </ThemeProvider>
           </Grid>
-
           {/* Level Button Container */}
           <Box
             sx={{

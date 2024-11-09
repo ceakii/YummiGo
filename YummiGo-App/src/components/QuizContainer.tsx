@@ -303,7 +303,7 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
                     display={"flex"}
                     justifyContent={"center"}
                   >
-                    Reward Obtained
+                    {sessionStorage.level3Completed ? "Reward Obtained" : "Surprise Encounter!"}
                   </Typography>
                 </ThemeProvider>
               </Box>
@@ -317,7 +317,7 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
                     display={"flex"}
                     justifyContent={"center"}
                   >
-                    {sessionStorage.level3Completed ? "11 Recipes" : "Yummigo: Carrotti"}
+                    {sessionStorage.level3Completed ? "11 Recipes" : "You hear a thunderous roar coming from above you. The sun is eclipsed not by storm clouds, but a Dragon!"}
                   </Typography>
                 </ThemeProvider>
               </DialogContentText>
