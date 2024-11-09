@@ -11,6 +11,7 @@ import Recipe from "./pages/Recipe";
 import Profile from "./pages/Profile";
 import Quest from "./pages/Quest";
 import Settings from "./pages/Settings";
+import Login from "./components/Login";
 
 // Recipe Pages
 import SpringRoll from "./pages/recipes/Springroll";
@@ -51,6 +52,8 @@ function App() {
   return (
     <RecipeUploadProvider>
       <>
+        {/* Always Render TopBar */}
+        <TopBar />
         <Routes>
           {/* Main Pages Routing */}
           <Route path="/YummiGo/" element={<Adventure />} />
@@ -58,6 +61,7 @@ function App() {
           <Route path="/YummiGo/profile" element={<Profile />} />
           <Route path="/YummiGo/quest" element={<Quest />} />
           <Route path="/YummiGo/settings" element={<Settings />} />
+          <Route path="/YummiGo/login" element={<Login />} />
 
           {/* Recipes Pages Routing */}
           <Route path="/YummiGo/recipes/springroll" element={<SpringRoll />} />
@@ -77,56 +81,25 @@ function App() {
           <Route path="/YummiGo/quests/quest1" element={<Quest1 />} />
 
           {/* Adventure Pages Routing */}
-          <Route
-            path="/YummiGo/levels/level1"
-            element={<Level1 />}
-          />
-          <Route
-            path="/YummiGo/levels/level2"
-            element={<Level2 />}
-          />
-          <Route
-            path="/YummiGo/levels/level3"
-            element={<Level3 />}
-          />
-          <Route
-            path="/YummiGo/levels/level4"
-            element={<Level4 />}
-          />
-          <Route
-            path="/YummiGo/levels/level5"
-            element={<Level5 />}
-          />
+          <Route path="/YummiGo/levels/level1" element={<Level1 />} />
+          <Route path="/YummiGo/levels/level2" element={<Level2 />} />
+          <Route path="/YummiGo/levels/level3" element={<Level3 />} />
+          <Route path="/YummiGo/levels/level4" element={<Level4 />} />
+          <Route path="/YummiGo/levels/level5" element={<Level5 />} />
 
           {/* Food Info Pages Routing */}
-          <Route
-            path="/YummiGo/info/granolabarsinfo"
-            element={<GranolaBarsInfo />}
-          />
-          <Route
-            path="/YummiGo/info/hummusaveggiesticksinfo"
-            element={<HummusaVeggieSticksInfo />}
-          />
+          <Route path="/YummiGo/info/granolabarsinfo" element={<GranolaBarsInfo />} />
+          <Route path="/YummiGo/info/hummusaveggiesticksinfo" element={<HummusaVeggieSticksInfo />} />
 
           {/* Yummigo Pages Routing */}
-          <Route
-            path="/YummiGo/yummigo/carrotti"
-            element={<Carrotti />}
-          />
+          <Route path="/YummiGo/yummigo/carrotti" element={<Carrotti />} />
 
           {/* Quiz Pages Routing */}
-          <Route
-            path="/YummiGo/quiz/carrotti"
-            element={<CarrottiQuiz />}
-          />
-          <Route
-            path="/YummiGo/quiz/dragon"
-            element={<DragonQuiz />}
-          />
+          <Route path="/YummiGo/quiz/carrotti" element={<CarrottiQuiz />} />
+          <Route path="/YummiGo/quiz/dragon" element={<DragonQuiz />} />
         </Routes>
 
-        {/* Always Render */}
-        <TopBar />
+        {/* Always Render BottomNavigationBar */}
         <BottomNavigationBar />
       </>
     </RecipeUploadProvider>
