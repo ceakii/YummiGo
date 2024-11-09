@@ -15,6 +15,7 @@ export default function TopBar() {
 
     const handleLogoutClick = () => {
         logout();
+        navigate('/YummiGo/login');
     };
 
     return (
@@ -36,7 +37,7 @@ export default function TopBar() {
                                     align="center"
                                     sx={{ flexGrow: 0, marginRight: 2 }}
                                 >
-                                    Welcome, Benjamin F.
+                                    Benjamin F.
                                 </Typography>
                                 <Button color="inherit" onClick={handleLogoutClick}>
                                     <Typography
