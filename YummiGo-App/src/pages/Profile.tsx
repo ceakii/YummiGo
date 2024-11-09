@@ -65,7 +65,7 @@ export default function Profile() {
         <ThemeProvider theme={textTheme}>
           <Box sx={textSpacing}>
             <Typography variant="h4">Recipes</Typography>
-            <Typography variant="h4">{recipeUploadCount}/10</Typography>{" "}
+            <Typography variant="h4">{recipeUploadCount}/12</Typography>{" "}
           </Box>
         </ThemeProvider>
       </Button>
@@ -83,7 +83,7 @@ export default function Profile() {
         <ThemeProvider theme={textTheme}>
           <Box sx={textSpacing}>
             <Typography variant="h4">Uploads</Typography>
-            <Typography variant="h4">{recipeUploadCount}/10</Typography>{" "}
+            <Typography variant="h4">{recipeUploadCount}/12</Typography>{" "}
           </Box>
         </ThemeProvider>
       </Button>

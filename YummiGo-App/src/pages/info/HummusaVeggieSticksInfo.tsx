@@ -2,10 +2,12 @@ import InfoContainer from "../../components/InfoContainer"
 import HummusaVeggieSticks from "/images/HummusaVeggieSticks.png"
 
 export default function hummusaveggiesticks() {
+  const level = 2;
   return (
     <InfoContainer
-      title="Recipe: Hummus and Veggie Sticks"
+      title="Hummus and Veggie Sticks"
       imageSrc={HummusaVeggieSticks}
+      level={level}
     >
       {`
         • Carrots are high in beta-carotene (vitamin A), which is essential for eye health, skin health, and immune function.

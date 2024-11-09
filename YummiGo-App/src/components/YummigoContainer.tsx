@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
@@ -8,9 +8,10 @@ interface YummigoContainer {
   children: React.ReactNode;
   title: string;
   imageSrc: string;
+  level: number; // Added level prop to identify the current level
 }
 
-export default function YummigoContainer({ children, title, imageSrc }: YummigoContainer) {
+export default function YummigoContainer({ children, title, imageSrc, level }: YummigoContainer) {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" };
   const pictureFrameSize = "20vw";
   const pictureSize = "19vw";
@@ -18,25 +19,46 @@ export default function YummigoContainer({ children, title, imageSrc }: YummigoC
   // For Dialog Box
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => { setOpen(true); };
+  const handleClickOpen = () => { 
+    if (!isLevelCompleted()) {
+      setOpen(true);
+    }
+  };
   const handleClose = () => { setOpen(false); };
 
   const navigate = useNavigate();
 
+  // Track the current level completion status
+  const [completedLevels, setCompletedLevels] = useState<number[]>([]);
+
+  useEffect(() => {
+    // Retrieve completed levels from sessionStorage
+    const storedLevels = sessionStorage.getItem("completedLevels");
+    if (storedLevels) {
+      setCompletedLevels(JSON.parse(storedLevels));
+    }
+  }, []);
+
+  const isLevelCompleted = () => {
+    return completedLevels.includes(level);
+  };
+
+  const handleLevelCompletion = (level: number) => {
+    // Save level completion status in sessionStorage
+    sessionStorage.setItem(`level${level}Completed`, "true");
+  }
+
   const handleContinue = () => {
     setOpen(false);
 
-    const storedButtons = JSON.parse(sessionStorage.getItem("buttons") || "[]");
+    // Update completed levels in sessionStorage
+    const newCompletedLevels = [...completedLevels, level];
+    sessionStorage.setItem("completedLevels", JSON.stringify(newCompletedLevels));
+    setCompletedLevels(newCompletedLevels);
 
-    const newButton = {
-      id: storedButtons.length + 1,
-      label: `Level ${storedButtons.length + 1}`,
-    };
+    handleLevelCompletion(level);
 
-    const updatedButtons = [...storedButtons, newButton];
-
-    sessionStorage.setItem("buttons", JSON.stringify(updatedButtons));
-
+    // Navigate to next page
     navigate("/YummiGo/");
   };
 
@@ -51,7 +73,8 @@ export default function YummigoContainer({ children, title, imageSrc }: YummigoC
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: "#38E2DF"
-        }}>
+        }}
+      >
         {/* Image Container */}
         <Box
           sx={{
@@ -88,6 +111,7 @@ export default function YummigoContainer({ children, title, imageSrc }: YummigoC
                 justifyContent: "center",
                 alignItems: "center",
                 borderRadius: "10%",
+                backgroundColor: "#36424B",
                 boxShadow: 4
               }}
             />
@@ -150,31 +174,6 @@ export default function YummigoContainer({ children, title, imageSrc }: YummigoC
               </Box>
             </DialogTitle>
 
-            {/* Dialog Content */}
-            <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
-              <DialogContentText>
-                <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="body1"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
-                    You earned:
-                  </Typography>
-                </ThemeProvider>
-
-                <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="body1"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
-                    {title}
-                  </Typography>
-                </ThemeProvider>
-              </DialogContentText>
-            </DialogContent>
-
             {/* Dialog Action */}
             <DialogActions sx={{ bgcolor: "#FEAF2F", display: 'flex', justifyContent: 'center' }}>
               <ThemeProvider theme={buttonTheme}>
@@ -191,7 +190,6 @@ export default function YummigoContainer({ children, title, imageSrc }: YummigoC
                 </Button>
               </ThemeProvider>
             </DialogActions>
-
           </Dialog>
         </Box>
 
