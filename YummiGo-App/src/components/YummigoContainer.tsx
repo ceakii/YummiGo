@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { Dialog, DialogActions, DialogTitle } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 interface YummigoContainer {
