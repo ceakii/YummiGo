@@ -36,15 +36,23 @@ const dragonQuestions = [
     answer2: "To increase calorie intake",
     answer3: "To improve digestion and support weight management",
     correctAnswer: "To improve digestion and support weight management",
+  },
+  {
+    question: "Level Complete!",
+    answer1: "Continue",
+    correctAnswer: "Continue",
   }
 ];
+
+const level = 4;
 
 export default function DragonQuiz() {
   return (
     <QuizContainer
-      title="Yummigo: Dragon"
+      title="Dragon"
       imageSrc={DragonImage}
       questions={dragonQuestions}
+      level={level}
     >
       {''}
     </QuizContainer>

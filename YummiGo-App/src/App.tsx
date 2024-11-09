@@ -12,6 +12,9 @@ import Profile from "./pages/Profile";
 import Quest from "./pages/Quest";
 import Settings from "./pages/Settings";
 
+// Profile Pages
+import EditAvatar from "./pages/avatarcustom/avatarCustom";
+
 // Recipe Pages
 import SpringRoll from "./pages/recipes/Springroll";
 import AvocadoSmoothie from "./pages/recipes/AvocadoSmoothie";
@@ -38,7 +41,6 @@ import Level5 from "./pages/levels/Level5";
 
 // Food Info Pages
 import HummusaVeggieSticksInfo from "./pages/info/HummusaVeggieSticksInfo";
-import GranolaBarsInfo from "./pages/info/GranolaBarsInfo";
 
 // Yummigo Pages
 import Carrotti from "./pages/yummigo/Carrotti";
@@ -58,6 +60,9 @@ function App() {
           <Route path="/YummiGo/profile" element={<Profile />} />
           <Route path="/YummiGo/quest" element={<Quest />} />
           <Route path="/YummiGo/settings" element={<Settings />} />
+
+          {/* Profile Pages Routing */}
+          <Route path="/YummiGo/profile/avatarcustom" element={<EditAvatar />} />
 
           {/* Recipes Pages Routing */}
           <Route path="/YummiGo/recipes/springroll" element={<SpringRoll />} />
@@ -99,10 +104,6 @@ function App() {
         />
 
         {/* Food Info Pages Routing */}
-        <Route
-          path="/YummiGo/info/granolabarsinfo"
-          element={<GranolaBarsInfo />}
-        />
         <Route
           path="/YummiGo/info/hummusaveggiesticksinfo"
           element={<HummusaVeggieSticksInfo />}

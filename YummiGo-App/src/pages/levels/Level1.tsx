@@ -39,36 +39,20 @@ export default function Level1() {
             padding: 2
           }}
         >
-          {/* Image Frame */}
-          <Box
+          {/* Image */}
+          <CardMedia
+            component="img"
+            image={CarrottiImage}
+            alt="Carrotti"
             sx={{
-              width: "20vw",
-              height: "20vw",
+              width: "19vw",
+              height: "19vw",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              bgcolor: "white",
               borderRadius: "10%",
-              boxShadow: 4
             }}
-          >
-            {/* Image */}
-            <CardMedia
-              component="img"
-              image={CarrottiImage}
-              alt="Carrotti"
-              sx={{
-                width: "19vw",
-                height: "19vw",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                bgcolor: "#36424B",
-                borderRadius: "10%",
-                boxShadow: 4
-              }}
-            />
-          </Box>
+          />
         </Box>
 
         {/* Title Container */}
