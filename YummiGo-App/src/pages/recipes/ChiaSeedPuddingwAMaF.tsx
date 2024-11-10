@@ -4,6 +4,7 @@ import ChiaSeedPuddingwAMaF from "/images/ChiaSeedPuddingwAMaF.png"
 export default function chiaseedpuddingwamaf() {
   return (
     <RecipeContainer
+      recipeId="Chia-Seed-Pudding-with-Almond-Milk-and-Fruit"
       title="Chia Seed Pudding with Almond Milk and Fruit"
       imageSrc={ChiaSeedPuddingwAMaF}
     >

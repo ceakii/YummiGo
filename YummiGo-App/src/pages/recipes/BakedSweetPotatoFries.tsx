@@ -4,6 +4,7 @@ import BakedSweetPotatoFries from "/images/BakedSweetPotatoFries.png"
 export default function bakedsweetpotatofries() {
   return (
     <RecipeContainer
+      recipeId="Baked-Sweet-Potato-Fries"
       title="Baked Sweet Potato Fries"
       imageSrc={BakedSweetPotatoFries}
     >

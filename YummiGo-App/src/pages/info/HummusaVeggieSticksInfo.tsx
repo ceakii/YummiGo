@@ -8,6 +8,7 @@ export default function hummusaveggiesticks() {
       title="Hummus and Veggie Sticks"
       imageSrc={HummusaVeggieSticks}
       level={level}
+      recipeId="Hummus-and-Veggie-Sticks"
     >
       {`
         • Carrots are high in beta-carotene (vitamin A), which is essential for eye health, skin health, and immune function.

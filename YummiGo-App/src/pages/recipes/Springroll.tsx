@@ -4,6 +4,7 @@ import SpringRollImage from "/images/SpringRoll.jpg"
 export default function SpringRoll() {
   return (
     <RecipeContainer
+      recipeId="Spring-Roll"
       title="Spring Roll"
       imageSrc={SpringRollImage}
     >

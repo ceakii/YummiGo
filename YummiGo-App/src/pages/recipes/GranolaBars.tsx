@@ -4,6 +4,7 @@ import GranolaBars from "/images/GranolaBars.png";
 export default function granolabar() {
   return (
     <RecipeContainer
+      recipeId="Granola-Bars"
       title="Granola Bars"
       imageSrc={GranolaBars}
     >
