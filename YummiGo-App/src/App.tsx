@@ -10,7 +10,6 @@ import Adventure from "./pages/Adventure";
 import Recipe from "./pages/Recipe";
 import Profile from "./pages/Profile";
 import Quest from "./pages/Quest";
-import Settings from "./pages/Settings";
 
 // Profile Pages
 import EditAvatar from "./pages/avatarcustom/avatarCustom";
