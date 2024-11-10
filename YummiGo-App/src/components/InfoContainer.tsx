@@ -11,9 +11,10 @@ interface InfoContainer {
   title: string;
   imageSrc: string;
   level: number;
+  recipeId: string;
 }
 
-export default function InfoContainer({ children, title, imageSrc, level }: InfoContainer) {
+export default function InfoContainer({ children, title, imageSrc, level, recipeId }: InfoContainer) {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden"}
   const pictureFrameSize = "20vw";
   const pictureSize = "19vw";
@@ -52,7 +53,9 @@ export default function InfoContainer({ children, title, imageSrc, level }: Info
     sessionStorage.setItem("completedLevels", JSON.stringify(newCompletedLevels));
     setCompletedLevels(newCompletedLevels);
 
-    incrementRecipeUploadCount();
+     // Or some other unique identifier for the recipe
+    incrementRecipeUploadCount(recipeId);
+
 
     handleLevelCompletion(level);
 

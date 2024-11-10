@@ -4,6 +4,7 @@ import GreekYogurtwFBaN from "/images/GreekYogurtwFBaN.png";
 export default function greekyogurtwfban() {
   return (
     <RecipeContainer
+      recipeId= "Greek-Yogurt-with-Fresh-Berries-and-Nuts"
       title="Greek Yogurt with Fresh Berries and Nuts"
       imageSrc={GreekYogurtwFBaN}
     >

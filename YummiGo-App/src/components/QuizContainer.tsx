@@ -84,20 +84,28 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
   const handleLevelCompleteClose = () => {
     setSelectedAnswer(0);
     setLevelComplete(false);
+  
     // Update completed levels in sessionStorage
     const newCompletedLevels = [...completedLevels, level];
     sessionStorage.setItem("completedLevels", JSON.stringify(newCompletedLevels));
     setCompletedLevels(newCompletedLevels);
+    
     handleLevelCompletion(level);
+  
+    // Assuming `level` or another variable can be used as the `recipeId`
+    const recipeId = `recipe-${level}`; // You can adjust this to your needs.
+  
     if (sessionStorage.level4Completed) {
       let count = 0;
       while (count < 10) {
-        incrementRecipeUploadCount();
+        incrementRecipeUploadCount(recipeId);  // Pass recipeId here
         count++;
       }
     }
+    
     navigate("/YummiGo/");
   };
+  
 
   return (
     <Box sx={recipePageStyle}>
