@@ -1,3 +1,4 @@
+import { useContext } from 'react'; // Import useContext here
 import {
   Box,
   ThemeProvider,
@@ -6,15 +7,25 @@ import {
   Button,
 } from "@mui/material";
 import { pageStyle, textTheme } from "../Style";
-import { useRecipeUpload } from "../../RecipeUploadContext"; // Import the custom hook
-import { useQuestUpload } from "../../QuestUploadContext"; // Import the custom hook
+import { useRecipeUpload } from "../../RecipeUploadContext";
+import { useQuestUpload } from "../../QuestUploadContext";
+import { useUpload } from "../../UploadContext";
 import HeroAvatarPfp from "/images/HeroAvatarPfp.png";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { Navigate } from 'react-router-dom'; // Import Navigate here
 
 export default function Profile() {
   const navigate = useNavigate();
   const { recipeUploadCount } = useRecipeUpload(); // Get recipe upload count from context
-  const {questUploadCount} = useQuestUpload();
+  const { questUploadCount } = useQuestUpload();
+  const { UploadCount } = useUpload();
+  const { user, logout } = useContext(AuthContext); // Access user and logout function from AuthContext
+
+  // If the user is not logged in, redirect to the login page
+  if (!user) {
+    return <Navigate to="/YummiGo/login" />;
+  }
 
   const customPageStyle = {
     ...pageStyle,
@@ -60,14 +71,14 @@ export default function Profile() {
       />
 
       <ThemeProvider theme={textTheme}>
-        <Typography variant="h3">Benjamin F.</Typography>
+        <Typography variant="h3">{user}</Typography> {/* Display the logged-in username */}
       </ThemeProvider>
 
       <Button sx={{ ...orangeBox, textTransform: "none" }}>
         <ThemeProvider theme={textTheme}>
           <Box sx={textSpacing}>
             <Typography variant="h4">Recipes</Typography>
-            <Typography variant="h4">{recipeUploadCount}/12</Typography>{" "}
+            <Typography variant="h4">{recipeUploadCount}/12</Typography>
           </Box>
         </ThemeProvider>
       </Button>
@@ -85,7 +96,7 @@ export default function Profile() {
         <ThemeProvider theme={textTheme}>
           <Box sx={textSpacing}>
             <Typography variant="h4">Uploads</Typography>
-            <Typography variant="h4">{recipeUploadCount}</Typography>{" "}
+            <Typography variant="h4">{UploadCount}</Typography>
           </Box>
         </ThemeProvider>
       </Button>
@@ -96,6 +107,15 @@ export default function Profile() {
       >
         <ThemeProvider theme={textTheme}>
           <Typography variant="h4">Edit Avatar</Typography>
+        </ThemeProvider>
+      </Button>
+
+      <Button
+        sx={{ ...orangeBox, textTransform: "none" }}
+        onClick={logout} // Logout button
+      >
+        <ThemeProvider theme={textTheme}>
+          <Typography variant="h4">Logout</Typography>
         </ThemeProvider>
       </Button>
     </Box>
