@@ -21,32 +21,47 @@ export default function Adventure() {
   const adventurePageStyle = { ...pageStyle };
   const navigate = useNavigate();
   const [buttons, setButtons] = useState<ButtonData[]>([]);
-  const [level5Completed, setLevel5Completed] = useState(false);
+  const [levelCompletion, setLevelCompletion] = useState<boolean[]>([]); // Track completion of each level
   const [hoveredButtonId, setHoveredButtonId] = useState<number | null>(null);
 
   useEffect(() => {
     const storedButtons: ButtonData[] = JSON.parse(sessionStorage.getItem("buttons") || "[]");
     if (storedButtons.length === 0) {
-      const initialButton = [{ id: 1, label: "Level 1" }];
-      setButtons(initialButton);
-      sessionStorage.setItem("buttons", JSON.stringify(initialButton));
+      const initialButtons = [
+        { id: 1, label: "Level 1" },
+        { id: 2, label: "Level 2" },
+        { id: 3, label: "Level 3" },
+        { id: 4, label: "Level 4" },
+        { id: 5, label: "Level 5" }
+      ];
+      setButtons(initialButtons);
+      sessionStorage.setItem("buttons", JSON.stringify(initialButtons));
     } else {
       setButtons(storedButtons);
     }
-    setLevel5Completed(sessionStorage.getItem("level5Completed") === "true");
+
+    // Retrieve level completion statuses from sessionStorage
+    const completionStatuses = [
+      sessionStorage.getItem("level1Completed") === "true",
+      sessionStorage.getItem("level2Completed") === "true",
+      sessionStorage.getItem("level3Completed") === "true",
+      sessionStorage.getItem("level4Completed") === "true",
+      sessionStorage.getItem("level5Completed") === "true",
+    ];
+    setLevelCompletion(completionStatuses);
   }, []);
 
   return (
-      <Box
-        sx={{
-          ...adventurePageStyle,
-          backgroundImage: `url(${AdventureBackground})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          height: "100vh",
-        }}
-      >
+    <Box
+      sx={{
+        ...adventurePageStyle,
+        backgroundImage: `url(${AdventureBackground})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        height: "100vh",
+      }}
+    >
       <Box
         sx={{
           position: "absolute",
@@ -96,8 +111,10 @@ export default function Adventure() {
                   borderRadius: 2,
                   boxShadow: 3,
                 }}
-                onClick={() => navigate(`/YummiGo/levels/level${button.id}`)}
-                disabled={index < buttons.length - 1 || (button.id === 5 && level5Completed)}
+                onClick={() => {
+                  navigate(`/YummiGo/levels/level${button.id}`);
+                }}
+                disabled={(index == 0 && levelCompletion[index]) || (index > 0 && (!levelCompletion[index - 1] || levelCompletion[button.id - 1]))}
               >
                 <ThemeProvider theme={textTheme}>
                   <Typography variant="button">

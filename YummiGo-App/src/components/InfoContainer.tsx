@@ -1,43 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle }
   from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useRecipeUpload } from "../../RecipeUploadContext";
 
 interface InfoContainer {
   children: React.ReactNode;
   title: string;
   imageSrc: string;
+  level: number;
 }
 
-export default function InfoContainer({ children, title, imageSrc }: InfoContainer) {
+export default function InfoContainer({ children, title, imageSrc, level }: InfoContainer) {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden"}
   const pictureFrameSize = "20vw";
   const pictureSize = "19vw";
 
   // For Dialog Box
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => { setOpen(true); };
   const handleClose = () => { setOpen(false); };
 
   const navigate = useNavigate();
 
+  // Track the current level completion status
+  const [completedLevels, setCompletedLevels] = useState<number[]>([]);
+
+  useEffect(() => {
+    // Retrieve completed levels from sessionStorage
+    const storedLevels = sessionStorage.getItem("completedLevels");
+    if (storedLevels) {
+      setCompletedLevels(JSON.parse(storedLevels));
+    }
+  }, []);
+
+  const { incrementRecipeUploadCount } = useRecipeUpload();
+
+  const handleLevelCompletion = (levelId: number) => {
+    // Save level completion status in sessionStorage
+    sessionStorage.setItem(`level${levelId}Completed`, "true");
+  }
+
   const handleContinue = () => {
     setOpen(false);
 
-    const storedButtons = JSON.parse(sessionStorage.getItem("buttons") || "[]");
+    // Update completed levels in sessionStorage
+    const newCompletedLevels = [...completedLevels, level];
+    sessionStorage.setItem("completedLevels", JSON.stringify(newCompletedLevels));
+    setCompletedLevels(newCompletedLevels);
 
-    const newButton = {
-      id: storedButtons.length + 1,
-      label: `Level ${storedButtons.length + 1}`,
-    };
+    incrementRecipeUploadCount();
 
-    const updatedButtons = [...storedButtons, newButton];
+    handleLevelCompletion(level);
 
-    sessionStorage.setItem("buttons", JSON.stringify(updatedButtons));
-
+    // Navigate to next page
     navigate("/YummiGo/");
   };
 
@@ -170,7 +189,7 @@ export default function InfoContainer({ children, title, imageSrc }: InfoContain
                     display={"flex"}
                     justifyContent={"center"}
                   >
-                    {title}
+                    Recipe: {title}
                   </Typography>
                 </ThemeProvider>
 
