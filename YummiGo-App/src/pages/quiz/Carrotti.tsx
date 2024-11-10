@@ -20,14 +20,22 @@ const carrottiQuestions = [
     answer2: "Vitamin C",
     correctAnswer: "Vitamin A",
   },
+  {
+    question: "Level Complete!",
+    answer1: "Continue",
+    correctAnswer: "Continue",
+  },
 ];
+
+const level = 3;
 
 export default function CarrottiQuiz() {
   return (
     <QuizContainer
-      title="Yummigo: Carrotti"
+      title="Carrotti"
       imageSrc={CarrottiImage}
       questions={carrottiQuestions}
+      level={level}
     >
       {''}
     </QuizContainer>

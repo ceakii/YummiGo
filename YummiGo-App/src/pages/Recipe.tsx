@@ -28,12 +28,17 @@ export default function Recipe() {
   const recipePageStyle = { ...pageStyle };
   const navigate = useNavigate();
 
+  const level2Completed = sessionStorage.getItem("level2Completed");
+  const level4Completed = sessionStorage.getItem("level4Completed");
+
   return (
     <Box sx={recipePageStyle}>
       <Grid flexGrow={1} flexWrap="wrap" container spacing={0.5} display="flex">
         {/*Spring roll */}
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card sx={{ height: 300 }}>
+          <Card sx={{
+              height: 300,
+            }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/springroll")}
             >
@@ -68,9 +73,15 @@ export default function Recipe() {
 
         {/*Granola Bars */}
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card sx={{ height: 300 }}>
+          <Card sx={{
+            height: 300,
+            opacity: level4Completed ? 1 : 0.5, // Decrease opacity when locked
+            pointerEvents: level4Completed ? 'auto' : 'none', // Disable click events
+            filter: level4Completed ? 'none' : 'grayscale(100%)', // Apply grayscale effect when locked
+          }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/granolabars")}
+              disabled={!level4Completed}
             >
               <CardMedia
                 component="img"
@@ -103,9 +114,15 @@ export default function Recipe() {
 
         {/*Avocado Toast with Whole Grain Bread*/}
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card sx={{ height: 300 }}>
+          <Card sx={{
+            height: 300,
+            opacity: level4Completed ? 1 : 0.5, // Decrease opacity when locked
+            pointerEvents: level4Completed ? 'auto' : 'none', // Disable click events
+            filter: level4Completed ? 'none' : 'grayscale(100%)', // Apply grayscale effect when locked
+          }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/avocadotoastwwgb")}
+              disabled={!level4Completed}
             >
               <CardMedia
                 component="img"
@@ -138,9 +155,15 @@ export default function Recipe() {
 
         {/*Greek Yogurt with Fresh Berries and Nuts*/}
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card sx={{ height: 300 }}>
+          <Card sx={{
+            height: 300,
+            opacity: level4Completed ? 1 : 0.5, // Decrease opacity when locked
+            pointerEvents: level4Completed ? 'auto' : 'none', // Disable click events
+            filter: level4Completed ? 'none' : 'grayscale(100%)', // Apply grayscale effect when locked
+          }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/greekyogurtwfban")}
+              disabled={!level4Completed}
             >
               <CardMedia
                 component="img"
@@ -173,9 +196,15 @@ export default function Recipe() {
 
         {/*Hummus and Veggie Sticks*/}
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card sx={{ height: 300 }}>
+          <Card sx={{
+            height: 300,
+            opacity: level2Completed ? 1 : 0.5, // Decrease opacity when locked
+            pointerEvents: level2Completed ? 'auto' : 'none', // Disable click events
+            filter: level2Completed ? 'none' : 'grayscale(100%)', // Apply grayscale effect when locked
+          }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/hummusaveggiesticks")}
+              disabled={!level2Completed}
             >
               <CardMedia
                 component="img"
@@ -208,9 +237,15 @@ export default function Recipe() {
 
         {/*Quinoa Salad with Chickpeas and Vegetables*/}
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card sx={{ height: 300 }}>
+          <Card sx={{
+            height: 300,
+            opacity: level4Completed ? 1 : 0.5, // Decrease opacity when locked
+            pointerEvents: level4Completed ? 'auto' : 'none', // Disable click events
+            filter: level4Completed ? 'none' : 'grayscale(100%)', // Apply grayscale effect when locked
+          }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/quinoasaladwcav")}
+              disabled={!level4Completed}
             >
               <CardMedia
                 component="img"
@@ -243,9 +278,15 @@ export default function Recipe() {
 
         {/*Chia Seed Pudding with Almond Milk and Fruit*/}
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card sx={{ height: 300 }}>
+          <Card sx={{
+            height: 300,
+            opacity: level4Completed ? 1 : 0.5, // Decrease opacity when locked
+            pointerEvents: level4Completed ? 'auto' : 'none', // Disable click events
+            filter: level4Completed ? 'none' : 'grayscale(100%)', // Apply grayscale effect when locked
+          }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/chiaseedpuddingwamaf")}
+              disabled={!level4Completed}
             >
               <CardMedia
                 component="img"
@@ -278,9 +319,15 @@ export default function Recipe() {
 
         {/*Egg & Mustard Crackers*/}
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card sx={{ height: 300 }}>
+          <Card sx={{
+            height: 300,
+            opacity: level4Completed ? 1 : 0.5, // Decrease opacity when locked
+            pointerEvents: level4Completed ? 'auto' : 'none', // Disable click events
+            filter: level4Completed ? 'none' : 'grayscale(100%)', // Apply grayscale effect when locked
+          }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/eggamustardcrackers")}
+              disabled={!level4Completed}
             >
               <CardMedia
                 component="img"
@@ -313,9 +360,15 @@ export default function Recipe() {
 
         {/*Baked Sweet Potato Fries*/}
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card sx={{ height: 300 }}>
+          <Card sx={{
+            height: 300,
+            opacity: level4Completed ? 1 : 0.5, // Decrease opacity when locked
+            pointerEvents: level4Completed ? 'auto' : 'none', // Disable click events
+            filter: level4Completed ? 'none' : 'grayscale(100%)', // Apply grayscale effect when locked
+          }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/bakedsweetpotatofries")}
+              disabled={!level4Completed}
             >
               <CardMedia
                 component="img"
@@ -348,9 +401,15 @@ export default function Recipe() {
 
         {/*Spinach-Basil Pasta Salad*/}
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card sx={{ height: 300 }}>
+          <Card sx={{
+            height: 300,
+            opacity: level4Completed ? 1 : 0.5, // Decrease opacity when locked
+            pointerEvents: level4Completed ? 'auto' : 'none', // Disable click events
+            filter: level4Completed ? 'none' : 'grayscale(100%)', // Apply grayscale effect when locked
+          }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/pastasalad")}
+              disabled={!level4Completed}
             >
               <CardMedia
                 component="img"
@@ -383,9 +442,15 @@ export default function Recipe() {
 
         {/*Chicken Porridge*/}
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card sx={{ height: 300 }}>
+          <Card sx={{
+            height: 300,
+            opacity: level4Completed ? 1 : 0.5, // Decrease opacity when locked
+            pointerEvents: level4Completed ? 'auto' : 'none', // Disable click events
+            filter: level4Completed ? 'none' : 'grayscale(100%)', // Apply grayscale effect when locked
+          }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/chickenporridge")}
+              disabled={!level4Completed}
             >
               <CardMedia
                 component="img"
@@ -418,9 +483,15 @@ export default function Recipe() {
 
         {/*Avocado Smoothie*/}
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card sx={{ height: 300 }}>
+          <Card sx={{
+            height: 300,
+            opacity: level4Completed ? 1 : 0.5, // Decrease opacity when locked
+            pointerEvents: level4Completed ? 'auto' : 'none', // Disable click events
+            filter: level4Completed ? 'none' : 'grayscale(100%)', // Apply grayscale effect when locked
+          }}>
             <CardActionArea
               onClick={() => navigate("/YummiGo/recipes/avocadosmoothie")}
+              disabled={!level4Completed}
             >
               <CardMedia
                 component="img"

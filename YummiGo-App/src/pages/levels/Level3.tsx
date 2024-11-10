@@ -39,19 +39,6 @@ export default function Level3() {
             padding: 2
           }}
         >
-          {/* Image Frame */}
-          <Box
-            sx={{
-              width: "20vw",
-              height: "20vw",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              bgcolor: "white",
-              borderRadius: "10%",
-              boxShadow: 4
-            }}
-          >
             {/* Image */}
             <CardMedia
               component="img"
@@ -63,12 +50,9 @@ export default function Level3() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                bgcolor: "#36424B",
                 borderRadius: "10%",
-                boxShadow: 4
               }}
             />
-          </Box>
         </Box>
 
         {/* Title Container */}
@@ -171,24 +155,6 @@ export default function Level3() {
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
                 Make 3 Mistakes.
-              </Typography>
-            </ThemeProvider>
-          </Grid>
-
-          {/* Level Rewards Header */}
-          <Grid size={"auto"} flexWrap={"wrap"}>
-            <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
-                Reward(s):
-              </Typography>
-            </ThemeProvider>
-          </Grid>
-
-          {/* Level Rewards Description */}
-          <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
-            <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
-                Yummigo File: Carrotti
               </Typography>
             </ThemeProvider>
           </Grid>
