@@ -187,7 +187,7 @@ export default function Level4() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                11 Recipes
+                10 Recipes
               </Typography>
             </ThemeProvider>
           </Grid>

@@ -91,7 +91,7 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
     handleLevelCompletion(level);
     if (sessionStorage.level4Completed) {
       let count = 0;
-      while (count < 11) {
+      while (count < 10) {
         incrementRecipeUploadCount();
         count++;
       }
@@ -317,7 +317,7 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
                     display={"flex"}
                     justifyContent={"center"}
                   >
-                    {sessionStorage.level3Completed ? "11 Recipes" : "You hear a thunderous roar coming from above you. The sun is eclipsed not by storm clouds, but a Dragon!"}
+                    {sessionStorage.level3Completed ? "10 Recipes" : "You hear a thunderous roar coming from above you. The sun is eclipsed not by storm clouds, but a Dragon!"}
                   </Typography>
                 </ThemeProvider>
               </DialogContentText>
