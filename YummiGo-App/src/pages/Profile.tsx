@@ -7,12 +7,14 @@ import {
 } from "@mui/material";
 import { pageStyle, textTheme } from "../Style";
 import { useRecipeUpload } from "../../RecipeUploadContext"; // Import the custom hook
+import { useQuestUpload } from "../../QuestUploadContext"; // Import the custom hook
 import HeroAvatarPfp from "/images/HeroAvatarPfp.png";
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const navigate = useNavigate();
   const { recipeUploadCount } = useRecipeUpload(); // Get recipe upload count from context
+  const {questUploadCount} = useQuestUpload();
 
   const customPageStyle = {
     ...pageStyle,
@@ -65,7 +67,7 @@ export default function Profile() {
         <ThemeProvider theme={textTheme}>
           <Box sx={textSpacing}>
             <Typography variant="h4">Recipes</Typography>
-            <Typography variant="h4">{recipeUploadCount}/10</Typography>{" "}
+            <Typography variant="h4">{recipeUploadCount}/12</Typography>{" "}
           </Box>
         </ThemeProvider>
       </Button>
@@ -74,7 +76,7 @@ export default function Profile() {
         <ThemeProvider theme={textTheme}>
           <Box sx={textSpacing}>
             <Typography variant="h4">Quests</Typography>
-            <Typography variant="h4">4/10</Typography>
+            <Typography variant="h4">{questUploadCount}</Typography>
           </Box>
         </ThemeProvider>
       </Button>
@@ -83,14 +85,14 @@ export default function Profile() {
         <ThemeProvider theme={textTheme}>
           <Box sx={textSpacing}>
             <Typography variant="h4">Uploads</Typography>
-            <Typography variant="h4">{recipeUploadCount}/10</Typography>{" "}
+            <Typography variant="h4">{recipeUploadCount}</Typography>{" "}
           </Box>
         </ThemeProvider>
       </Button>
 
       <Button
         sx={{ ...orangeBox, textTransform: "none" }}
-        onClick={() => navigate("/YummiGo/profile/avatarcustom")}
+        onClick={() => navigate("/YummiGo/avatarcustom/avatarcustom")}
       >
         <ThemeProvider theme={textTheme}>
           <Typography variant="h4">Edit Avatar</Typography>
