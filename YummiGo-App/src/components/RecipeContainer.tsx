@@ -2,29 +2,35 @@ import React from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
-import { useRecipeUpload } from "../../RecipeUploadContext"; // Adjusted import path
+import { useRecipeUpload } from "../../RecipeUploadContext"; 
+import { useUpload } from "../../UploadContext"; // Import the UploadContext
 
 interface RecipeContainer {
   children: React.ReactNode;
   title: string;
   imageSrc: string;
+  recipeId: string; // Add recipeId as a prop
 }
 
-export default function RecipeContainer({ children, title, imageSrc }: RecipeContainer) {
+export default function RecipeContainer({ children, title, imageSrc, recipeId }: RecipeContainer) {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden"};
   const pictureFrameSize = "40vw";
   const pictureSize = "38vw";
 
   // For Dialog Box
   const [open, setOpen] = React.useState(false);
+
+  // Use custom hooks to get functions from contexts
+  const { incrementRecipeUploadCount } = useRecipeUpload(); // From RecipeUploadContext
+  const { incrementUploadCount } = useUpload(); // From UploadContext
+
   const handleClickOpen = () => { 
     setOpen(true); 
-    incrementRecipeUploadCount(); // Call context function when button is clicked
+    incrementRecipeUploadCount(recipeId); // Call the recipe upload count
+    incrementUploadCount(); // Call the upload count
   };
-  const handleClose = () => { setOpen(false); };
 
-  // Use custom hook to get the increment function from context
-  const { incrementRecipeUploadCount } = useRecipeUpload();
+  const handleClose = () => { setOpen(false); };
 
   return (
     <Box sx={recipePageStyle}>
@@ -44,8 +50,7 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
             justifyContent: "center",
             alignItems: "center",
             padding: 2
-          }}
-        >
+          }}>
           <Box
             sx={{
               width: pictureFrameSize,
@@ -56,12 +61,11 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
               bgcolor: "white",
               borderRadius: "10%",
               boxShadow: 4
-            }}
-          >
+            }}>
             <CardMedia
               component="img"
               image={imageSrc}
-              alt="Spring Roll"
+              alt={title} // Use the title as the alt text for better accessibility
               sx={{
                 height: pictureSize,
                 width: pictureSize,
@@ -85,8 +89,7 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
             padding: 2,
             borderBottom: 2,
             borderColor: "black"
-          }}
-        >
+          }}>
           <ThemeProvider theme={buttonTheme}>
             <Button
               onClick={handleClickOpen}
@@ -98,8 +101,7 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
                 justifyContent: "center",
                 alignItems: "center",
                 borderRadius: 4
-              }}
-            >
+              }}>
               <ThemeProvider theme={textTheme}>
                 <Typography variant="button">
                   Upload Quest Photo
@@ -108,18 +110,11 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
             </Button>
           </ThemeProvider>
 
-          <Dialog
-            open={open}
-            onClose={handleClose}
-          >
+          <Dialog open={open} onClose={handleClose}>
             <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
               <Box bgcolor={"#FEAF2F"} border={2}>
                 <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="button"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
+                  <Typography variant="button" display={"flex"} justifyContent={"center"}>
                     Quest Complete!
                   </Typography>
                 </ThemeProvider>
@@ -128,20 +123,12 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
             <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
               <DialogContentText>
                 <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="body1"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
+                  <Typography variant="body1" display={"flex"} justifyContent={"center"}>
                     You earned: 10 XP!
                   </Typography>
                 </ThemeProvider>
                 <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="body1"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
+                  <Typography variant="body1" display={"flex"} justifyContent={"center"}>
                     Got: 100 Coins
                   </Typography>
                 </ThemeProvider>
@@ -151,11 +138,7 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
               <ThemeProvider theme={buttonTheme}>
                 <Button onClick={handleClose} variant="contained">
                   <ThemeProvider theme={textTheme}>
-                    <Typography
-                      variant="h6"
-                      display={"flex"}
-                      justifyContent={"center"}
-                    >
+                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>
                       Continue
                     </Typography>
                   </ThemeProvider>
@@ -174,8 +157,7 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
             alignItems: "center",
             borderBottom: 2,
             borderColor: "black"
-          }}
-        >
+          }}>
           <ThemeProvider theme={textTheme}>
             <Typography variant="h3" align="center">
               {title}
@@ -192,8 +174,7 @@ export default function RecipeContainer({ children, title, imageSrc }: RecipeCon
           justifyContent: "center",
           alignItems: "center",
           bgcolor: "#FEAF2F"
-        }}
-      >
+        }}>
         <ThemeProvider theme={textTheme}>
           <Typography variant="body1" marginLeft={5} marginRight={5}>
             {children}
