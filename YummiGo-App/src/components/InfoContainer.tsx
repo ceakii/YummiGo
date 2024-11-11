@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle }
   from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useRecipeUpload } from "../../RecipeUploadContext";
+import { useRecipe } from "../../RecipeContext";
+import { AuthContext } from "../context/AuthContext";
 
 interface InfoContainer {
   children: React.ReactNode;
@@ -28,38 +29,29 @@ export default function InfoContainer({ children, title, imageSrc, level, recipe
   const navigate = useNavigate();
 
   // Track the current level completion status
-  const [completedLevels, setCompletedLevels] = useState<number[]>([]);
+  const { completionStatuses, setCompletionStatuses } = useContext(AuthContext);
 
-  useEffect(() => {
-    // Retrieve completed levels from sessionStorage
-    const storedLevels = sessionStorage.getItem("completedLevels");
-    if (storedLevels) {
-      setCompletedLevels(JSON.parse(storedLevels));
-    }
-  }, []);
-
-  const { incrementRecipeUploadCount } = useRecipeUpload();
+  const { incrementRecipeCount } = useRecipe();
 
   const handleLevelCompletion = (levelId: number) => {
-    // Save level completion status in sessionStorage
-    sessionStorage.setItem(`level${levelId}Completed`, "true");
-  }
+    if (setCompletionStatuses) {
+      const updatedCompletionStatuses = [...completionStatuses];
+      updatedCompletionStatuses[levelId - 1] = true;
+      setCompletionStatuses(updatedCompletionStatuses);
+    }
+  };
 
   const handleContinue = () => {
     setOpen(false);
 
-    // Update completed levels in sessionStorage
-    const newCompletedLevels = [...completedLevels, level];
-    sessionStorage.setItem("completedLevels", JSON.stringify(newCompletedLevels));
-    setCompletedLevels(newCompletedLevels);
-
-     // Or some other unique identifier for the recipe
-    incrementRecipeUploadCount(recipeId);
-
-
+    // Update the level as completed in AuthContext
     handleLevelCompletion(level);
 
-    // Navigate to next page
+     // Or some other unique identifier for the recipe
+    incrementRecipeCount();
+
+
+    // Navigate to the main adventure page or another appropriate page
     navigate("/YummiGo/");
   };
 

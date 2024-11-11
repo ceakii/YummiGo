@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Box, Button, TextField, Typography, ThemeProvider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,11 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
+    localStorage.setItem('username', username);
+    const initialCompletionStatuses = [false, false, false, false, false];
+    initialCompletionStatuses.forEach((status, index) => {
+      localStorage.setItem(`level${index + 1}Completed`, status.toString());
+    });
     login(username);
     navigate('/YummiGo/');
   };

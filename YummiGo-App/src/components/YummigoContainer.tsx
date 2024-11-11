@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
 import { Dialog, DialogActions, DialogTitle } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 interface YummigoContainer {
   children: React.ReactNode;
@@ -19,7 +20,9 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
   // For Dialog Box
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => { 
+  const { completionStatuses, setCompletionStatuses } = useContext(AuthContext);
+
+  const handleClickOpen = () => {
     if (!isLevelCompleted()) {
       setOpen(true);
     }
@@ -32,7 +35,6 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
   const [completedLevels, setCompletedLevels] = useState<number[]>([]);
 
   useEffect(() => {
-    // Retrieve completed levels from sessionStorage
     const storedLevels = sessionStorage.getItem("completedLevels");
     if (storedLevels) {
       setCompletedLevels(JSON.parse(storedLevels));
@@ -43,23 +45,16 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
     return completedLevels.includes(level);
   };
 
-  const handleLevelCompletion = (level: number) => {
-    // Save level completion status in sessionStorage
-    sessionStorage.setItem(`level${level}Completed`, "true");
-  }
+  const handleLevelCompletion = (levelId: number) => {
+    const updatedStatuses = [...completionStatuses];
+    updatedStatuses[levelId - 1] = true; // Mark level as completed
+    setCompletionStatuses(updatedStatuses); // Update the context and localStorage
+  };
 
   const handleContinue = () => {
     setOpen(false);
-
-    // Update completed levels in sessionStorage
-    const newCompletedLevels = [...completedLevels, level];
-    sessionStorage.setItem("completedLevels", JSON.stringify(newCompletedLevels));
-    setCompletedLevels(newCompletedLevels);
-
     handleLevelCompletion(level);
-
-    // Navigate to next page
-    navigate("/YummiGo/");
+    navigate("/YummiGo/"); // Navigate to the main page or next page
   };
 
   return (

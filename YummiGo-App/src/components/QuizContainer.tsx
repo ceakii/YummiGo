@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress, ThemeProvider, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useRecipeUpload } from "../../RecipeUploadContext";
+import { useRecipe } from "../../RecipeContext";
+import { AuthContext } from "../context/AuthContext";
 
 interface QuizContainerProps {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
 
   const navigate = useNavigate();
 
+  const { completionStatuses, setCompletionStatuses } = React.useContext(AuthContext);
   const [isButtonFlashing, setIsButtonFlashing] = useState(false);
   const [levelComplete, setLevelComplete] = useState(false);
   const [levelFailed, setLevelFailed] = useState(false);
@@ -44,6 +46,10 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
         setCurrentQuestionIndex(currentQuestionIndex + 1);
       } else {
         setLevelComplete(true);
+        // Mark this level as completed
+        const updatedStatuses = [...completionStatuses];
+        updatedStatuses[level - 1] = true;  // Update the completion status for the current level
+        setCompletionStatuses(updatedStatuses);
       }
     } else {
       setIsButtonFlashing(true);
@@ -67,7 +73,7 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
     }
   }, []);
 
-  const { incrementRecipeUploadCount } = useRecipeUpload();
+  const { incrementRecipeCount } = useRecipe();
 
   const handleLevelCompletion = (levelId: number) => {
     // Save level completion status in sessionStorage
@@ -92,13 +98,10 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
     
     handleLevelCompletion(level);
   
-    // Assuming `level` or another variable can be used as the `recipeId`
-    const recipeId = `recipe-${level}`; // You can adjust this to your needs.
-  
     if (sessionStorage.level4Completed) {
       let count = 0;
       while (count < 10) {
-        incrementRecipeUploadCount(recipeId);  // Pass recipeId here
+        incrementRecipeCount();
         count++;
       }
     }
