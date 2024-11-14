@@ -1,6 +1,5 @@
 // src/QuestUploadContext.tsx
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { AuthContext } from "./src/context/AuthContext";
+import { createContext, useContext, useState, ReactNode } from "react";
 
 // Define types for the context state
 interface QuestUploadContextType {
@@ -19,65 +18,25 @@ interface QuestUploadProviderProps {
 
 // Context provider component
 export const QuestUploadProvider = ({ children }: QuestUploadProviderProps) => {
-  const { user } = useContext(AuthContext); // Access user from AuthContext
-  const storage = user ? localStorage : sessionStorage; // Use localStorage for logged-in users, sessionStorage for guests
-
-  const countKey = user ? `${user}_questUploadCount` : "questUploadCount";
-  const questsKey = user ? `${user}_completedQuests` : "completedQuests";
-
   const [questUploadCount, setQuestUploadCount] = useState<number>(0);
-  const [completedQuestsList, setCompletedQuestsList] = useState<Set<string>>(new Set());
+  const [completedQuests, setCompletedQuests] = useState<Set<string>>(new Set());  // Initialize the Set
 
-  useEffect(() => {
-    if (user) {
-      const initialCount = storage.getItem(countKey);
-      const completedQuests = storage.getItem(questsKey);
-      
-      setQuestUploadCount(initialCount ? parseInt(initialCount) : 0);
-      setCompletedQuestsList(completedQuests ? new Set(JSON.parse(completedQuests)) : new Set());
-    } else {
-      setQuestUploadCount(0);
-      setCompletedQuestsList(new Set());
-    }
-  }, [user, storage, countKey, questsKey]);
-
-
+  // Increment quest count only if the quest hasn't been completed before
   const incrementQuestCount = (questId: string) => {
-    if (!completedQuestsList.has(questId)) {
-      setCompletedQuestsList((prev) => {
-        const updated = new Set(prev);
-        updated.add(questId);
-        return updated;
-      });
-
-      setQuestUploadCount((prev) => {
-        const newCount = prev + 1;
-        storage.setItem(countKey, newCount.toString());
-        return newCount;
-      });
+    if (!completedQuests.has(questId)) {
+      setCompletedQuests((prev) => new Set(prev).add(questId));  // Mark the quest as completed
+      setQuestUploadCount((prev) => prev + 1);  // Increment the count
     }
   };
 
   // Reset the quest upload count
   const resetQuestUploadCount = () => {
-    setQuestUploadCount(0);
-    setCompletedQuestsList(new Set());
-    storage.setItem(countKey, "0");
-    storage.setItem(questsKey, JSON.stringify([]));
+    setQuestUploadCount(0); // Reset the count to 0
+    setCompletedQuests(new Set());  // Clear the completed quests
   };
 
-  useEffect(() => {
-    // Sync state with storage when values change
-    if (questUploadCount > 0) {
-      storage.setItem(countKey, questUploadCount.toString());
-    }
-    if (completedQuestsList.size > 0) {
-      storage.setItem(questsKey, JSON.stringify([...completedQuestsList]));
-    }
-  }, [questUploadCount, completedQuestsList, storage, countKey, questsKey]);
-
   return (
-    <QuestUploadContext.Provider value={{ questUploadCount, completedQuests: completedQuestsList, incrementQuestCount, resetQuestUploadCount }}>
+    <QuestUploadContext.Provider value={{ questUploadCount, completedQuests, incrementQuestCount, resetQuestUploadCount }}>
       {children}
     </QuestUploadContext.Provider>
   );
