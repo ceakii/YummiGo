@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress, ThemeProvider, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useRecipeUpload } from "../../RecipeUploadContext";
+import { useRecipe } from "../../RecipeContext";
+import { AuthContext } from "../context/AuthContext";
 
 interface QuizContainerProps {
   children: React.ReactNode;
@@ -18,6 +19,8 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
 
   const navigate = useNavigate();
 
+  const { completionStatuses, setCompletionStatuses, user } = React.useContext(AuthContext);
+  const { incrementRecipeCount } = useRecipe();
   const [isButtonFlashing, setIsButtonFlashing] = useState(false);
   const [levelComplete, setLevelComplete] = useState(false);
   const [levelFailed, setLevelFailed] = useState(false);
@@ -25,54 +28,76 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(0);
+  const [isCorrect, setIsCorrect] = useState(false);
   const { question, answer1, answer2, answer3, correctAnswer } = questions[currentQuestionIndex];
 
   const progress = ((currentQuestionIndex) / (questions.length - 1)) * 100;
 
-  const handleAnswerClick = (answer: string) => {
-    if (answer === answer1) {
-      setSelectedAnswer(1);
-    }
-    else if (answer === answer2) {
-      setSelectedAnswer(2);
-    }
-    else {
-      setSelectedAnswer(3);
-    }
-    if (answer === correctAnswer) {
-      if (currentQuestionIndex < questions.length - 1) {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
-      } else {
-        setLevelComplete(true);
+  const [hideDialog, setHideDialog] = useState(false);
+
+  useEffect(() => {
+    if (!user) {
+      // Guest user: retrieve from sessionStorage
+      const guestProgress = sessionStorage.getItem("completionStatuses");
+      if (guestProgress) {
+        setCompletionStatuses(JSON.parse(guestProgress));
       }
+    }
+  }, [user, setCompletionStatuses]);
+
+  const handleAnswerClick = (answer: string, buttonIndex: number) => {
+    setSelectedAnswer(buttonIndex);
+
+    if (answer === correctAnswer) {
+      setIsCorrect(true);
+      setIsButtonFlashing(true);
+
+      setTimeout(() => {
+        setIsButtonFlashing(false);
+        setIsCorrect(false);
+
+        if (currentQuestionIndex < questions.length - 1) {
+          setCurrentQuestionIndex(currentQuestionIndex + 1);
+          setSelectedAnswer(0);
+        } else {
+          // Check if this is the first time completing the level
+          if (!completionStatuses[level - 1]) {
+            setHideDialog(false);
+          }
+          else {
+            setHideDialog(true);
+          }
+          if (level === 4 && !completionStatuses[level - 1]) {
+            for (let i = 0; i < 10; i++) {
+              incrementRecipeCount();
+            }
+          }
+          setLevelComplete(true); // Show dialog only for first-time completion
+          const updatedStatuses = [...completionStatuses];
+          updatedStatuses[level - 1] = true;  // Update the completion status for the current level
+          setCompletionStatuses(updatedStatuses);
+
+          if (user) {
+            localStorage.setItem(`${user}_completionStatuses`, JSON.stringify(updatedStatuses));
+          } else {
+            sessionStorage.setItem("completionStatuses", JSON.stringify(updatedStatuses));
+          }
+        }
+      }, 1000); 
     } else {
+      setIsCorrect(false);
       setIsButtonFlashing(true);
       wrongAnswerCount.current += 1;
+      setTimeout(() => {
+        setIsButtonFlashing(false);
+        setSelectedAnswer(0); // Reset selection
+      }, 1000);
+
       if (wrongAnswerCount.current === 3) {
         setLevelFailed(true);
       }
-
-      setTimeout(() => setIsButtonFlashing(false), 500);
     }
   };
-
-  // Track the current level completion status
-  const [completedLevels, setCompletedLevels] = useState<number[]>([]);
-
-  useEffect(() => {
-    // Retrieve completed levels from sessionStorage
-    const storedLevels = sessionStorage.getItem("completedLevels");
-    if (storedLevels) {
-      setCompletedLevels(JSON.parse(storedLevels));
-    }
-  }, []);
-
-  const { incrementRecipeUploadCount } = useRecipeUpload();
-
-  const handleLevelCompletion = (levelId: number) => {
-    // Save level completion status in sessionStorage
-    sessionStorage.setItem(`level${levelId}Completed`, "true");
-  }
 
   const handleLevelFailedClose = () => {
     setSelectedAnswer(0);
@@ -84,25 +109,8 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
   const handleLevelCompleteClose = () => {
     setSelectedAnswer(0);
     setLevelComplete(false);
-  
-    // Update completed levels in sessionStorage
-    const newCompletedLevels = [...completedLevels, level];
-    sessionStorage.setItem("completedLevels", JSON.stringify(newCompletedLevels));
-    setCompletedLevels(newCompletedLevels);
-    
-    handleLevelCompletion(level);
-  
-    // Assuming `level` or another variable can be used as the `recipeId`
-    const recipeId = `recipe-${level}`; // You can adjust this to your needs.
-  
-    if (sessionStorage.level4Completed) {
-      let count = 0;
-      while (count < 10) {
-        incrementRecipeUploadCount(recipeId);  // Pass recipeId here
-        count++;
-      }
-    }
-    
+    wrongAnswerCount.current = 0;
+
     navigate("/YummiGo/");
   };
   
@@ -192,6 +200,11 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
                 borderRadius: "10%",
               }}
             /> 
+            <ThemeProvider theme={textTheme}>
+                <Typography variant="body2" sx={{ color: "#000", fontWeight: "bold" }}>
+                   { wrongAnswerCount.current } / 3 Mistakes
+                </Typography>
+            </ThemeProvider>
         </Box>
         <Box
           sx={{
@@ -214,14 +227,21 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
           <Box sx={{ mt: 2, mb: 5, display: "flex", gap: 2, flexDirection: "column", alignItems: "center", width: "100%" }}>
             <ThemeProvider theme={buttonTheme}>
               <Button
-                onClick={() => handleAnswerClick(answer1)}
+                onClick={() => handleAnswerClick(answer1, 1)}
                 variant="contained"
+                disabled={ isButtonFlashing && selectedAnswer !== 1 }
                 sx={{
                   flex: 1,  // Allow the button to take up available space
                   minWidth: "150px", // Ensure buttons have a minimum width
                   width: "100%",  // Make button stretch to fill available width
                   maxWidth: "300px",
-                  backgroundColor: isButtonFlashing && selectedAnswer === 1 && answer1 !== correctAnswer ? "red" : undefined,
+                  backgroundColor:
+                    isButtonFlashing && correctAnswer != "Continue" &&
+                    selectedAnswer === 1
+                      ? isCorrect
+                        ? "green"
+                        : "red"
+                      : undefined,
                   transition: "background-color 0.3s ease-in-out",
                 }}
               >
@@ -241,14 +261,20 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
               </Button>
               {answer2 && (
                 <Button
-                  onClick={() => handleAnswerClick(answer2)}
+                  onClick={() => handleAnswerClick(answer2, 2)}
                   variant="contained"
+                  disabled={ isButtonFlashing && selectedAnswer !== 2 }
                   sx={{
                     flex: 1,  // Allow the button to take up available space
                     minWidth: "150px", // Ensure buttons have a minimum width
                     width: "100%",  // Make button stretch to fill available width
                     maxWidth: "300px",
-                    backgroundColor: isButtonFlashing && selectedAnswer === 2 && answer2 !== correctAnswer ? "red" : undefined,
+                    backgroundColor:
+                    selectedAnswer === 2
+                      ? isCorrect
+                        ? "green"
+                        : "red"
+                      : undefined,
                     transition: "background-color 0.3s ease-in-out",
                   }}
                 >
@@ -270,14 +296,20 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
 
               {answer3 && (
                 <Button
-                  onClick={() => handleAnswerClick(answer3)}
+                  onClick={() => handleAnswerClick(answer3, 3)}
                   variant="contained"
+                  disabled={ isButtonFlashing && selectedAnswer !== 3 }
                   sx={{
                     flex: 1,  // Allow the button to take up available space
                     minWidth: "150px", // Ensure buttons have a minimum width
                     width: "100%",  // Make button stretch to fill available width
                     maxWidth: "300px",
-                    backgroundColor: isButtonFlashing && selectedAnswer === 3 && answer3 !== correctAnswer ? "red" : undefined,
+                    backgroundColor:
+                    selectedAnswer === 3
+                      ? isCorrect
+                        ? "green"
+                        : "red"
+                      : undefined,
                     transition: "background-color 0.3s ease-in-out",
                   }}
                 >
@@ -300,10 +332,10 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
           </Box>
         </Box>
 
-        {/* Dialog for Level Complete */}
+        {/* Dialog Box */}
         <Dialog open={levelComplete} onClose={handleLevelCompleteClose}>
-        {/* Dialog Title */}
-        <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
+            {/* Dialog Title */}
+            <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
               <Box bgcolor={"#FEAF2F"} border={2}>
                 <ThemeProvider theme={textTheme}>
                   <Typography
@@ -311,25 +343,50 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
                     display={"flex"}
                     justifyContent={"center"}
                   >
-                    {sessionStorage.level3Completed ? "Reward Obtained" : "Surprise Encounter!"}
+                    Level Complete!
                   </Typography>
                 </ThemeProvider>
               </Box>
             </DialogTitle>
+
             {/* Dialog Content */}
-            <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
-              <DialogContentText>
-                <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="body1"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
-                    {sessionStorage.level3Completed ? "10 Recipes" : "You hear a thunderous roar coming from above you. The sun is eclipsed not by storm clouds, but a Dragon!"}
-                  </Typography>
-                </ThemeProvider>
-              </DialogContentText>
-            </DialogContent>
+            {hideDialog ? null : (
+              <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
+                  <DialogContentText>
+                    <ThemeProvider theme={textTheme}>
+                      <Typography
+                        variant="body1"
+                        display={"flex"}
+                        justifyContent={"center"}
+                      >
+                        {level === 4 ? "You earned:" : "Surprise Encounter!"}
+                      </Typography>
+                    </ThemeProvider>
+
+                    <ThemeProvider theme={textTheme}>
+                      <Typography
+                        variant="body1"
+                        display={"flex"}
+                        justifyContent={"center"}
+                      >
+                        {level === 4 ? "10 Recipes" : "You hear a thunderous roar coming from above you. The sun is eclipsed not by storm clouds, but a Dragon!"}
+                      </Typography>
+                    </ThemeProvider>
+
+                    <ThemeProvider theme={textTheme}>
+                      <Typography
+                        variant="body1"
+                        display={"flex"}
+                        justifyContent={"center"}
+                      >
+                        
+                      </Typography>
+                    </ThemeProvider>
+                  </DialogContentText>
+                </DialogContent>
+            )}
+
+            {/* Dialog Action */}
             <DialogActions sx={{ bgcolor: "#FEAF2F", display: 'flex', justifyContent: 'center' }}>
               <ThemeProvider theme={buttonTheme}>
                 <Button onClick={handleLevelCompleteClose} variant="contained">
@@ -345,7 +402,7 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
                 </Button>
               </ThemeProvider>
             </DialogActions>
-        </Dialog>
+          </Dialog>
 
         {/* Dialog for Level Failed */}
         <Dialog open={levelFailed} onClose={handleLevelFailedClose}>

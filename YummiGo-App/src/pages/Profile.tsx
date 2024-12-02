@@ -9,7 +9,7 @@ import {
 import { pageStyle, textTheme } from "../Style";
 import { useRecipeUpload } from "../../RecipeUploadContext";
 import { useQuestUpload } from "../../QuestUploadContext";
-import { useUpload } from "../../UploadContext";
+import { useRecipe } from "../../RecipeContext";
 import HeroAvatarPfp from "/images/HeroAvatarPfp.png";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
@@ -17,9 +17,9 @@ import { Navigate } from 'react-router-dom'; // Import Navigate here
 
 export default function Profile() {
   const navigate = useNavigate();
+  const { recipeCount } = useRecipe();
   const { recipeUploadCount } = useRecipeUpload(); // Get recipe upload count from context
   const { questUploadCount } = useQuestUpload();
-  const { UploadCount } = useUpload();
   const { user, logout } = useContext(AuthContext); // Access user and logout function from AuthContext
 
   // If the user is not logged in, redirect to the login page
@@ -78,7 +78,7 @@ export default function Profile() {
         <ThemeProvider theme={textTheme}>
           <Box sx={textSpacing}>
             <Typography variant="h4">Recipes</Typography>
-            <Typography variant="h4">{recipeUploadCount}/12</Typography>
+            <Typography variant="h4">{recipeCount}/12</Typography>{" "}
           </Box>
         </ThemeProvider>
       </Button>
@@ -96,7 +96,7 @@ export default function Profile() {
         <ThemeProvider theme={textTheme}>
           <Box sx={textSpacing}>
             <Typography variant="h4">Uploads</Typography>
-            <Typography variant="h4">{UploadCount}</Typography>
+            <Typography variant="h4">{recipeUploadCount}</Typography>
           </Box>
         </ThemeProvider>
       </Button>

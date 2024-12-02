@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { pageStyle } from "../Style";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 
 // Image Paths
 import SpringRollImage from "/images/SpringRoll.jpg";
@@ -28,8 +30,10 @@ export default function Recipe() {
   const recipePageStyle = { ...pageStyle };
   const navigate = useNavigate();
 
-  const level2Completed = sessionStorage.getItem("level2Completed");
-  const level4Completed = sessionStorage.getItem("level4Completed");
+  const { completionStatuses } = useContext(AuthContext);
+
+  const level2Completed = completionStatuses[1];
+  const level4Completed = completionStatuses[3];
 
   return (
     <Box sx={recipePageStyle}>

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import { AuthContext } from "./src/context/AuthContext";
 
 interface RecipeUploadContextType {
   incrementRecipeUploadCount: (recipeId: string) => void; // Accept recipe ID to track uploads
@@ -9,6 +10,12 @@ interface RecipeUploadContextType {
 const RecipeUploadContext = createContext<RecipeUploadContextType | undefined>(undefined);
 
 export const RecipeUploadProvider = ({ children }: { children: ReactNode }) => {
+  const { user } = useContext(AuthContext); // Access user from AuthContext
+  const storage = user ? localStorage : sessionStorage;
+
+  const countKey = user ? `${user}_recipeUploadCount` : "recipeUploadCount";
+  const recipesKey = user ? `${user}_uploadedRecipes` : "uploadedRecipes";
+
   // Retrieve stored recipe upload data (count and list of uploaded recipes)
   const initialCount = sessionStorage.getItem("recipeUploadCount");
   const uploadedRecipes = sessionStorage.getItem("uploadedRecipes");
@@ -23,36 +30,33 @@ export const RecipeUploadProvider = ({ children }: { children: ReactNode }) => {
       // Add the recipe to the uploaded list
       setUploadedRecipesList((prevList) => {
         const updatedList = [...prevList, recipeId];
-        sessionStorage.setItem("uploadedRecipes", JSON.stringify(updatedList)); // Save to sessionStorage
+        storage.setItem(recipesKey, JSON.stringify(updatedList));
         return updatedList;
       });
-
+    }
       // Increment the count
       setRecipeUploadCount(prevCount => {
         const newCount = prevCount + 1;
-        sessionStorage.setItem("recipeUploadCount", newCount.toString()); // Save to sessionStorage
+        storage.setItem(countKey, newCount.toString());
         return newCount;
       });
-    }
   };
 
   // Reset the recipe upload count and uploaded recipes list
   const resetRecipeUploadCount = () => {
     setRecipeUploadCount(0);
     setUploadedRecipesList([]);
-    sessionStorage.setItem("recipeUploadCount", "0");
-    sessionStorage.setItem("uploadedRecipes", JSON.stringify([]));
+    storage.setItem(countKey, "0");
+    storage.setItem(recipesKey, JSON.stringify([]));
   };
 
   useEffect(() => {
-    // Sync state with sessionStorage on mount
-    if (recipeUploadCount > 0) {
-      sessionStorage.setItem("recipeUploadCount", recipeUploadCount.toString());
-    }
-    if (uploadedRecipesList.length > 0) {
-      sessionStorage.setItem("uploadedRecipes", JSON.stringify(uploadedRecipesList));
-    }
-  }, [recipeUploadCount, uploadedRecipesList]);
+    const savedCount = storage.getItem(countKey);
+    const savedRecipes = storage.getItem(recipesKey);
+
+    setRecipeUploadCount(savedCount ? parseInt(savedCount) : 0);
+    setUploadedRecipesList(savedRecipes ? JSON.parse(savedRecipes) : []);
+  }, [user, countKey, recipesKey]);
 
   return (
     <RecipeUploadContext.Provider value={{ incrementRecipeUploadCount, recipeUploadCount, resetRecipeUploadCount }}>

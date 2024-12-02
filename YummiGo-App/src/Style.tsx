@@ -84,6 +84,16 @@ textTheme.typography.h4 = {
                   `,
 };
 
+// H5 Font Size
+textTheme.typography.h5 = {
+  fontSize: "1.6rem", // Extra Small Width: Screen Width < 600px
+  [textTheme.breakpoints.up("sm")]: { fontSize: "2.0rem" }, // Small width: Screen Width >= 600px
+  [textTheme.breakpoints.up("md")]: { fontSize: "2.4rem" }, // Medium width: Screen Width >= 900px
+  fontFamily: "sans-serif",
+  color: "black",
+  whiteSpace: "pre-line",
+}
+
 // H6 Font Size
 textTheme.typography.h6 = {
   fontFamily: "'Moul', sans-serif",
