@@ -53,8 +53,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 
   const logout = () => {
-    localStorage.clear();
-    sessionStorage.clear();
     setUser(null);
     loadCompletionStatuses(); // Switch back to guest data in session storage
   };
