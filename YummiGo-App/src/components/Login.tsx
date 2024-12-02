@@ -1,23 +1,47 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { Box, Button, TextField, Typography, ThemeProvider } from '@mui/material';
+import { Alert, Box, Button, TextField, Typography, ThemeProvider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { textTheme, buttonTheme } from '../Style';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    localStorage.setItem('username', username);
-    const initialCompletionStatuses = [false, false, false, false, false];
-    initialCompletionStatuses.forEach((status, index) => {
-      localStorage.setItem(`level${index + 1}Completed`, status.toString());
-    });
-    login(username);
-    navigate('/YummiGo/');
+    if (username.trim() === '' || password.trim() === '') {
+      setErrorMessage('Username and password cannot be empty');
+      return;
+    }
+
+    // Check if username exists in localStorage
+    const storedPassword = localStorage.getItem(`${username}_password`);
+
+    if (storedPassword) {
+      // If username exists, validate password
+      if (storedPassword === password) {
+        setErrorMessage('');
+        localStorage.setItem('username', username);
+        const initialCompletionStatuses = [false, false, false, false, false];
+        localStorage.setItem(`${username}_completionStatuses`, JSON.stringify(initialCompletionStatuses));
+        login(username);
+        navigate('/YummiGo/');
+      } else {
+        // If password doesn't match
+        setErrorMessage('Invalid username or password');
+      }
+    } else {
+      // If username doesn't exist, create a new account
+      localStorage.setItem(`${username}_password`, password); // Store password
+      const initialCompletionStatuses = [false, false, false, false, false];
+      localStorage.setItem(`${username}_completionStatuses`, JSON.stringify(initialCompletionStatuses));
+      setErrorMessage('');
+      login(username);
+      navigate('/YummiGo/');
+    }
   };
 
   return (
@@ -47,6 +71,13 @@ const Login: React.FC = () => {
           >
             Login to YummiGo
           </Typography>
+
+          {errorMessage && (
+            <Alert severity="error" sx={{ marginBottom: '20px' }}>
+              {errorMessage}
+            </Alert>
+          )}
+
           <TextField
             label="Username"
             variant="outlined"
@@ -73,25 +104,23 @@ const Login: React.FC = () => {
             }}
           />
           <ThemeProvider theme={buttonTheme}>
-
-          <Button
-            variant="contained"
-            fullWidth
-            onClick={handleLogin}
-            sx={{
-              color: textTheme.palette.primary.contrastText,
-              '&:hover': {
-                backgroundColor: '#C67B58',
-              },
-              fontFamily: textTheme.typography.button.fontFamily,
-              fontSize: textTheme.typography.button.fontSize,
-              textShadow: textTheme.typography.button.textShadow,
-            }}
-          >
-            Submit
-          </Button>
-
-
+            <Button
+              variant="contained"
+              fullWidth
+              onClick={handleLogin}
+              disabled={username.trim() === '' || password.trim() === ''}
+              sx={{
+                color: textTheme.palette.primary.contrastText,
+                '&:hover': {
+                  backgroundColor: '#C67B58',
+                },
+                fontFamily: textTheme.typography.button.fontFamily,
+                fontSize: textTheme.typography.button.fontSize,
+                textShadow: (username.trim() === '' || password.trim() === '') ? null : textTheme.typography.button.textShadow,
+              }}
+            >
+              Submit
+            </Button>
           </ThemeProvider>
         </Box>
       </Box>

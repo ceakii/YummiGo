@@ -48,12 +48,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = (username: string) => {
     setUser(username);
-    sessionStorage.removeItem('completionStatuses'); // Clear guest progress
     loadCompletionStatuses(); // Load user-specific data
   };
 
 
   const logout = () => {
+    localStorage.clear();
+    sessionStorage.clear();
     setUser(null);
     loadCompletionStatuses(); // Switch back to guest data in session storage
   };

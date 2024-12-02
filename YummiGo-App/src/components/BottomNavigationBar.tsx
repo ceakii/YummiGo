@@ -6,12 +6,17 @@ import Person2Icon from "@mui/icons-material/Person2";
 import OutdoorGrillIcon from "@mui/icons-material/OutdoorGrill";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import { AuthContext } from "../context/AuthContext";
 
 export default function BottomNavigationBar() {
     const bottomBarStyle = { ...barStyle, bottom: 0};
     const [value, setValue] = React.useState(0);
     const navigate=useNavigate();
+    const { user } = React.useContext(AuthContext);
 
+    if (!user) {
+        return null;
+      }
     return (
         <ThemeProvider theme = {textTheme}>
             <Box sx={bottomBarStyle}>

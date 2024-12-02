@@ -99,7 +99,7 @@ export default function Adventure() {
                 onClick={() => {
                   navigate(`/YummiGo/levels/level${button.id}`);
                 }}
-                disabled={completionStatuses[button.id - 1] || (button.id > 1 && !completionStatuses[button.id - 2])}
+                disabled={button.id > 1 && !completionStatuses[button.id - 2]}
               >
                 <ThemeProvider theme={textTheme}>
                   <Typography variant="button">
