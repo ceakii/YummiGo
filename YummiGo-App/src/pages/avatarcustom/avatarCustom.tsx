@@ -28,7 +28,6 @@ import pantsIcon from "/images/PantsIcon.png";
 import shoesIcon from "/images/ShoeIcon.png";
 import bkgIcon from "/images/BkgIcon.png";
 
-
 import wizardHatIcon from "/images/WizardHat.png";
 import crownIcon from "/images/Crown.png";
 import baseballCapIcon from "/images/BaseballCap.png";
@@ -37,28 +36,38 @@ import santaHatIcon from "/images/SantaHat.png";
 
 import bkgPink from "/images/bkg_Pink.png";
 
-
 export default function AvatarCustom() {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [hatAnchorEl, setHatAnchorEl] = useState<null | HTMLElement>(null);
+  const [bkgAnchorEl, setBkgAnchorEl] = useState<null | HTMLElement>(null);
   const [currentHat, setCurrentHat] = useState<string | null>(null);
-  const [confirmationOpen, setConfirmationOpen] = useState(false);
+  const [confirmationOpenHat, setConfirmationOpenHat] = useState(false);
   const [selectedHat, setSelectedHat] = useState<string | null>(null);
 
-  const handleClick = (event: MouseEvent<HTMLElement>) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
+  const [currentBkg, setCurrentBkg] = useState<string | null>(null);
+  const [confirmationOpenBkg, setConfirmationOpenBkg] = useState(false);
+  const [selectedBkg, setSelectedBkg] = useState<string | null>(null);
+  const [backgroundColor, setBackgroundColor] = useState("rgba(0, 0, 0)");
+
+  const handleHatIconClick = (event: MouseEvent<HTMLElement>) => {
+    setHatAnchorEl(hatAnchorEl ? null : event.currentTarget);
+    setBkgAnchorEl(null);
   };
 
+  const handleBkgIconClick = (event: MouseEvent<HTMLElement>) => {
+    setBkgAnchorEl(bkgAnchorEl ? null : event.currentTarget);
+    setHatAnchorEl(null);
+  };
   const handleHatClick = (hat: string) => {
     setSelectedHat(hat);
-    setConfirmationOpen(true);
+    setConfirmationOpenHat(true);
   };
 
   const handleHatSelection = () => {
     if (selectedHat) {
       setCurrentHat(selectedHat);
     }
-    setConfirmationOpen(false);
-    setAnchorEl(null);
+    setConfirmationOpenHat(false);
+    setHatAnchorEl(null);
   };
 
   const getAvatarImage = () => {
@@ -75,6 +84,27 @@ export default function AvatarCustom() {
         return avatarimgwSanta;
       default:
         return avatarimg;
+    }
+  };
+
+  const handleBkgClick = (bkg: string) => {
+    setSelectedBkg(bkg);
+    setConfirmationOpenBkg(true);
+  };
+
+  const handleBkgSelection = () => {
+    if (selectedBkg) {
+      setCurrentBkg(selectedBkg);
+    }
+    setConfirmationOpenBkg(false);
+    setBkgAnchorEl(null);
+  };
+
+  const getBackground = () => {
+    switch (currentBkg) {
+      case "pink":
+        return bkgPink;
+      default:
     }
   };
 
@@ -97,22 +127,49 @@ export default function AvatarCustom() {
     height: { xs: "clamp(4vh, 10vw, 15vh)", sm: "clamp(4vh, 3vw, 7vh)" },
   };
 
+  const getCombinedImage = () => {
+    const background = getBackground();
+    const avatar = getAvatarImage();
+    return background ? `${background}, ${avatar}` : avatar;
+  };
+
   return (
     <Box sx={customPageStyle}>
       <Box
-        component="img"
         sx={{
-          height: "70vh",
-          border: "1px",
-          borderRadius: "50%",
+          position: "relative", // Enables absolute positioning inside the parent
+          width: "100%", // Makes the parent take full width
+          height: "70vh", // Optional: sets a height for the parent container
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
-        alt="Avatar customization screen"
-        src={getAvatarImage()}
-      />
+      >
+        {/* Background Overlay */}
+        <Box
+          sx={{
+            backgroundColor: "rgba(0, 0, 0)", // Semi-transparent black overlay
+            borderRadius: "5% 5% 50% 50%", // Optional: to make the overlay circular if needed
+            width: "30vh",
+            height: "59vh",
+          }}
+        />
+        <Box
+          component="img"
+          sx={{
+            height: "70vh",
+            border: "1px",
+            borderRadius: "30%",
+            position: "absolute",
+          }}
+          alt="Avatar with background"
+          src={getCombinedImage()}
+        />
+      </Box>
 
       <Dialog
-        open={confirmationOpen}
-        onClose={() => setConfirmationOpen(false)}
+        open={confirmationOpenHat}
+        onClose={() => setConfirmationOpenHat(false)}
       >
         <DialogContent>
           <DialogContentText>
@@ -131,16 +188,34 @@ export default function AvatarCustom() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleHatSelection}>Yes</Button>
-          <Button onClick={() => setConfirmationOpen(false)}>No</Button>
+          <Button onClick={() => setConfirmationOpenHat(false)}>No</Button>
         </DialogActions>
       </Dialog>
 
-      {anchorEl && (
+      <Dialog
+        open={confirmationOpenBkg}
+        onClose={() => setConfirmationOpenBkg(false)}
+      >
+        <DialogContent>
+          <DialogContentText>
+            {selectedBkg === "pink"
+              ? "Get pink background"
+              : "Remove background?"}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleBkgSelection}>Yes</Button>
+          <Button onClick={() => setConfirmationOpenBkg(false)}>No</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/*hat stuff */}
+      {hatAnchorEl && (
         <Box
           sx={{
             position: "absolute",
-            top: anchorEl.getBoundingClientRect().top + 40,
-            middle: anchorEl.getBoundingClientRect(),
+            top: hatAnchorEl.getBoundingClientRect().top + 40,
+            middle: hatAnchorEl.getBoundingClientRect(),
             zIndex: (theme) => theme.zIndex.modal + 1,
             backgroundColor: "#FEAF2F",
             padding: 2,
@@ -242,6 +317,66 @@ export default function AvatarCustom() {
         </Box>
       )}
 
+      {/*Background stuff */}
+      {bkgAnchorEl && (
+        <Box
+          sx={{
+            position: "absolute",
+            top: bkgAnchorEl.getBoundingClientRect().top + 40,
+            middle: bkgAnchorEl.getBoundingClientRect(),
+            zIndex: (theme) => theme.zIndex.modal + 1,
+            backgroundColor: "#FEAF2F",
+            padding: 2,
+            borderRadius: "10px",
+          }}
+        >
+          <Card
+            sx={{
+              bgcolor: "#FEAF2F",
+              boxShadow: "none",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "15vw",
+            }}
+          >
+            <CardContent>
+              <ThemeProvider theme={textTheme}>
+                <Typography variant="h6">CHOOSE BACKGROUND</Typography>
+              </ThemeProvider>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginTop: "1vh",
+                }}
+              >
+                <Button onClick={() => handleBkgClick("pink")}>
+                  <Box
+                    component="img"
+                    src={bkgPink}
+                    alt="Pink bkg"
+                    sx={{ ...iconImageStyle }}
+                  />
+                  <ThemeProvider theme={textTheme}>
+                    <Typography variant="h6">Pink</Typography>
+                  </ThemeProvider>
+                </Button>
+
+                {/*no bkg*/}
+                <Button onClick={() => handleBkgClick("none")}>
+                  <ThemeProvider theme={textTheme}>
+                    <Typography variant="h6">Remove Bkg</Typography>
+                  </ThemeProvider>
+                </Button>
+              </Box>
+            </CardContent>
+          </Card>
+        </Box>
+      )}
+
       <Stack
         spacing={{ xs: 1, sm: 2 }}
         useFlexGap
@@ -254,7 +389,7 @@ export default function AvatarCustom() {
         }}
       >
         <IconButton
-          onClick={handleClick}
+          onClick={handleHatIconClick}
           sx={{ ...iconButtonStyle }}
           aria-label="Hats"
         >
@@ -267,7 +402,7 @@ export default function AvatarCustom() {
         </IconButton>
 
         <IconButton
-          onClick={handleClick}
+          onClick={handleBkgIconClick}
           sx={{ ...iconButtonStyle }}
           aria-label="Background"
         >
@@ -304,7 +439,7 @@ export default function AvatarCustom() {
             sx={{ ...iconImageStyle }}
           />
         </IconButton>
-        */} 
+        */}
       </Stack>
     </Box>
   );
