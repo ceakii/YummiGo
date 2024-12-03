@@ -8,58 +8,115 @@ import {
   Typography,
   Button,
   ThemeProvider,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
 } from "@mui/material";
 import { useState, MouseEvent } from "react";
 import { pageStyle, textTheme } from "../../Style";
+import { SketchPicker } from "react-color"; // Import color picker from react-color
+
 import avatarimg from "/images/avatar_customization_screen.png";
 import avatarimgwCrown from "/images/avatar_customization_wCrown.png";
 import avatarimgwWizard from "/images/avatar_customization_wWizard.png";
+import avatarimgwBaseball from "/images/avatar_customization_wBaseball.png";
+import avatarimgwCowboy from "/images/avatar_customization_wCowboy.png";
+import avatarimgwSanta from "/images/avatar_customization_wSanta.png";
+
 import hatIcon from "/images/hat_icon.png";
-import shirtIcon from "/images/ShirtIcon.png";
-import pantsIcon from "/images/PantsIcon.png";
-import shoesIcon from "/images/ShoeIcon.png";
+import bkgIcon from "/images/BkgIcon.png";
+
 import wizardHatIcon from "/images/WizardHat.png";
 import crownIcon from "/images/Crown.png";
+import baseballCapIcon from "/images/BaseballCap.png";
+import cowboyHatIcon from "/images/CowboyHat.png";
+import santaHatIcon from "/images/SantaHat.png";
+
+import bkgPink from "/images/bkg_Pink.png";
 
 export default function AvatarCustom() {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [anchorCrown, setAnchorCrown] = useState<null | HTMLElement>(null);
-  const [anchorWiz, setAnchorWiz] = useState<null | HTMLElement>(null);
+  const [hatAnchorEl, setHatAnchorEl] = useState<null | HTMLElement>(null);
+  const [bkgAnchorEl, setBkgAnchorEl] = useState<null | HTMLElement>(null);
+  const [currentHat, setCurrentHat] = useState<string | null>(null);
+  const [confirmationOpenHat, setConfirmationOpenHat] = useState(false);
+  const [selectedHat, setSelectedHat] = useState<string | null>(null);
 
-  const [isCrownOn, setIsCrownOn] = useState(
-    () => localStorage.getItem("isCrownOn") === "true"
-  );
-  const [isWizardOn, setIsWizardOn] = useState(
-    () => localStorage.getItem("isWizardHatOn") === "true"
-  );
+  const [currentBkg, setCurrentBkg] = useState<string | null>(null);
+  const [confirmationOpenBkg, setConfirmationOpenBkg] = useState(false);
+  const [selectedBkg, setSelectedBkg] = useState<string | null>(null);
+  const [backgroundColor, setBackgroundColor] = useState("rgba(0, 0, 0)");
+  const [colorPickerOpen, setColorPickerOpen] = useState(false); // Toggle for color picker
 
-  const handleClick = (event: MouseEvent<HTMLElement>) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
-  };
-  const handleClick2 = (event: MouseEvent<HTMLElement>) => {
-    setAnchorCrown(anchorCrown ? null : event.currentTarget);
-  };
-  const handleClick3 = (event: MouseEvent<HTMLElement>) => {
-    setAnchorWiz(anchorWiz ? null : event.currentTarget);
+
+  const handleHatIconClick = (event: MouseEvent<HTMLElement>) => {
+    setHatAnchorEl(hatAnchorEl ? null : event.currentTarget);
+    setBkgAnchorEl(null);
   };
 
-  // Handle crown button click
-  const handleCrownToggle = () => {
-    const newCrownState = !isCrownOn;
-    setIsCrownOn(newCrownState);
-    localStorage.setItem("isCrownOn", JSON.stringify(newCrownState));
-    setAnchorCrown(null);
+  const handleBkgIconClick = (event: MouseEvent<HTMLElement>) => {
+    setBkgAnchorEl(bkgAnchorEl ? null : event.currentTarget);
+    setHatAnchorEl(null);
+    setColorPickerOpen(!colorPickerOpen);
+
   };
 
-  const handleWizardHatToggle = () => {
-    const newWizardHatState = !isWizardOn;
-    setIsWizardOn(newWizardHatState);
-    localStorage.setItem("isWizardHatOn", JSON.stringify(newWizardHatState));
-    setAnchorWiz(null);
+
+  const handleHatClick = (hat: string) => {
+    setSelectedHat(hat);
+    setConfirmationOpenHat(true);
   };
 
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popper" : undefined;
+  const handleHatSelection = () => {
+    if (selectedHat) {
+      setCurrentHat(selectedHat);
+    }
+    setConfirmationOpenHat(false);
+    setHatAnchorEl(null);
+  };
+
+  const getAvatarImage = () => {
+    switch (currentHat) {
+      case "crown":
+        return avatarimgwCrown;
+      case "wizard":
+        return avatarimgwWizard;
+      case "baseball":
+        return avatarimgwBaseball;
+      case "cowboy":
+        return avatarimgwCowboy;
+      case "santa":
+        return avatarimgwSanta;
+      default:
+        return avatarimg;
+    }
+  };
+
+  const handleBkgClick = (bkg: string) => {
+    setSelectedBkg(bkg);
+    setConfirmationOpenBkg(true);
+  };
+
+  const handleBkgSelection = () => {
+    if (selectedBkg) {
+      setCurrentBkg(selectedBkg);
+    }
+    setConfirmationOpenBkg(false);
+    setBkgAnchorEl(null);
+  };
+
+  const handleColorChange = (color: any) => {
+    setBackgroundColor(color.hex); // Update the background color with the chosen color
+  };
+
+
+  const getBackground = () => {
+    switch (currentBkg) {
+      case "pink":
+        return bkgPink;
+      default:
+    }
+  };
 
   const customPageStyle = {
     ...pageStyle,
@@ -80,34 +137,96 @@ export default function AvatarCustom() {
     height: { xs: "clamp(4vh, 10vw, 15vh)", sm: "clamp(4vh, 3vw, 7vh)" },
   };
 
+  const getCombinedImage = () => {
+    const background = getBackground();
+    const avatar = getAvatarImage();
+    return background || avatar;
+  };
+
   return (
     <Box sx={customPageStyle}>
       <Box
-        component="img"
         sx={{
-          height: "70vh",
-          border: "1px",
-          borderRadius: "50%",
+          position: "relative", // Enables absolute positioning inside the parent
+          width: "100%", // Makes the parent take full width
+          height: "70vh", // Optional: sets a height for the parent container
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
-        alt="Avatar customization screen"
-        src={
-          isCrownOn && isWizardOn
-            ? avatarimgwCrown // Crown and Wizard Hat applied together, adjust as needed
-            : isCrownOn
-            ? avatarimgwCrown
-            : isWizardOn
-            ? avatarimgwWizard
-            : avatarimg
-        }
-      />
+      >
+        {/* Background Overlay */}
+        <Box
+          sx={{
+            backgroundColor: backgroundColor, // Use dynamic state to set background color
+            borderRadius: "5% 5% 50% 50%", // Optional: to make the overlay circular if needed
+            width: "30vh",
+            height: "59vh",
+          }}
+        />
 
-      {anchorCrown && (
+        <Box
+          component="img"
+          sx={{
+            height: "70vh",
+            border: "1px",
+            borderRadius: "30%",
+            position: "absolute",
+          }}
+          alt="Avatar with background"
+          src={getCombinedImage()}
+        />
+      </Box>
+
+      <Dialog
+        open={confirmationOpenHat}
+        onClose={() => setConfirmationOpenHat(false)}
+      >
+        <DialogContent>
+          <DialogContentText>
+            {selectedHat === "crown"
+              ? "Get Crown?"
+              : selectedHat === "wizard"
+              ? "Get Wizard Hat?"
+              : selectedHat === "baseball"
+              ? "Get Baseball Cap?"
+              : selectedHat === "cowboy"
+              ? "Get Cowboy Hat?"
+              : selectedHat === "santa"
+              ? "Get Santa Hat?"
+              : "Remove all hats?"}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleHatSelection}>Yes</Button>
+          <Button onClick={() => setConfirmationOpenHat(false)}>No</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={colorPickerOpen}
+        onClose={() => setColorPickerOpen(false)}
+      >
+        <DialogContent>
+          <DialogContentText>
+            <SketchPicker
+              color={backgroundColor}
+              onChangeComplete={handleColorChange}
+          />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setColorPickerOpen(false)}>Apply</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/*hat stuff */}
+      {hatAnchorEl && (
         <Box
           sx={{
             position: "absolute",
-            top: "30%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
+            top: hatAnchorEl.getBoundingClientRect().top + 40,
+            middle: hatAnchorEl.getBoundingClientRect(),
             zIndex: (theme) => theme.zIndex.modal + 1,
             backgroundColor: "#FEAF2F",
             padding: 2,
@@ -122,41 +241,85 @@ export default function AvatarCustom() {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              width: "30vw",
-              height: "30vh",
+              width: "15vw",
             }}
           >
             <CardContent>
               <ThemeProvider theme={textTheme}>
-                <Typography variant="h4">Wear</Typography>
+                <Typography variant="h6">CHOOSE HAT</Typography>
               </ThemeProvider>
               <Box
                 sx={{
-                  borderRadius: "50px",
-                  width: "4vw",
-                  height: "4vw",
-                  bgcolor: "#FFFFFFB0",
                   display: "flex",
-                  justifyContent: "center",
+                  flexDirection: "column",
                   alignItems: "center",
-                  marginLeft: "3vw",
-                }}
-              >
-                <Box
-                  component="img"
-                  src={crownIcon}
-                  alt="Crown icon"
-                  sx={{ ...iconImageStyle }}
-                />
-              </Box>
-              <Box
-                sx={{
                   marginTop: "1vh",
                 }}
               >
-                <Button onClick={handleCrownToggle}>
+                <Button onClick={() => handleHatClick("crown")}>
+                  <Box
+                    component="img"
+                    src={crownIcon}
+                    alt="Crown Icon"
+                    sx={{ ...iconImageStyle }}
+                  />
                   <ThemeProvider theme={textTheme}>
-                    <Typography variant="h6">Get Crown</Typography>
+                    <Typography variant="h6">Crown</Typography>
+                  </ThemeProvider>
+                </Button>
+
+                <Button onClick={() => handleHatClick("wizard")}>
+                  <Box
+                    component="img"
+                    src={wizardHatIcon}
+                    alt="Wizard Hat Icon"
+                    sx={{ ...iconImageStyle }}
+                  />
+                  <ThemeProvider theme={textTheme}>
+                    <Typography variant="h6">Wizard Hat</Typography>
+                  </ThemeProvider>
+                </Button>
+
+                <Button onClick={() => handleHatClick("baseball")}>
+                  <Box
+                    component="img"
+                    src={baseballCapIcon}
+                    alt="Baseball Hat Icon"
+                    sx={{ ...iconImageStyle }}
+                  />
+                  <ThemeProvider theme={textTheme}>
+                    <Typography variant="h6">Baseball Cap</Typography>
+                  </ThemeProvider>
+                </Button>
+
+                <Button onClick={() => handleHatClick("cowboy")}>
+                  <Box
+                    component="img"
+                    src={cowboyHatIcon}
+                    alt="Cowboy Hat Icon"
+                    sx={{ ...iconImageStyle }}
+                  />
+                  <ThemeProvider theme={textTheme}>
+                    <Typography variant="h6">Cowboy Hat</Typography>
+                  </ThemeProvider>
+                </Button>
+
+                <Button onClick={() => handleHatClick("santa")}>
+                  <Box
+                    component="img"
+                    src={santaHatIcon}
+                    alt="Santa Hat Icon"
+                    sx={{ ...iconImageStyle }}
+                  />
+                  <ThemeProvider theme={textTheme}>
+                    <Typography variant="h6">Santa Hat</Typography>
+                  </ThemeProvider>
+                </Button>
+
+                {/*no hat*/}
+                <Button onClick={() => handleHatClick("none")}>
+                  <ThemeProvider theme={textTheme}>
+                    <Typography variant="h6">Remove Hat</Typography>
                   </ThemeProvider>
                 </Button>
               </Box>
@@ -165,142 +328,43 @@ export default function AvatarCustom() {
         </Box>
       )}
 
-      {anchorWiz && (
-        <Box
-          sx={{
-            position: "absolute",
-            top: "30%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            zIndex: (theme) => theme.zIndex.modal + 1,
-            backgroundColor: "#FEAF2F",
-            padding: 2,
-            borderRadius: "10px",
-          }}
-        >
-          <Card
-            sx={{
-              bgcolor: "#FEAF2F",
-              boxShadow: "none",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "30vw",
-              height: "30vh",
-            }}
-          >
-            <CardContent>
-              <ThemeProvider theme={textTheme}>
-                <Typography variant="h4">Wear</Typography>
-              </ThemeProvider>
-              <Box
-                sx={{
-                  borderRadius: "50px",
-                  width: "4vw",
-                  height: "4vw",
-                  bgcolor: "#FFFFFFB0",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginLeft: "3vw",
-                }}
-              >
-                <Box
-                  component="img"
-                  src={wizardHatIcon}
-                  alt="Wizard Hat Icon"
-                  sx={{ ...iconImageStyle }}
-                />
-              </Box>
-              <Box
-                sx={{
-                  marginTop: "1vh",
-                }}
-              >
-                <Button onClick={handleWizardHatToggle}>
-                  <ThemeProvider theme={textTheme}>
-                    <Typography variant="h6">Get Wizard Hat </Typography>
-                  </ThemeProvider>
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
-        </Box>
-      )}
+      {/*Background stuff */}
+
 
       <Stack
         spacing={{ xs: 1, sm: 2 }}
         useFlexGap
+        direction="column"
         sx={{
           position: "absolute",
-          alignItems: "flex-end",
-          justifyContent: "center",
-          marginTop: "5vh",
-          height: "80vh",
-          pl: { xs: "80vw", sm: "90vw" },
+          right: "2vw",
+          top: "10vh",
+          alignItems: "center",
         }}
       >
-        <IconButton sx={{ ...iconButtonStyle }} onClick={handleClick}>
+        <IconButton
+          onClick={handleHatIconClick}
+          sx={{ ...iconButtonStyle }}
+          aria-label="Hats"
+        >
           <Box
             component="img"
             src={hatIcon}
-            alt="Hat icon"
+            alt="Hat Icon"
             sx={{ ...iconImageStyle }}
           />
-          <Popper
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            placement="left-end"
-            sx={{ pr: "1vw" }}
-          >
-            <IconButton
-              sx={{ ...iconButtonStyle, marginRight: "0.5vw" }}
-              onClick={handleClick2}
-            >
-              <Box
-                component="img"
-                src={crownIcon}
-                alt="Crown icon"
-                sx={{ ...iconImageStyle }}
-              />
-            </IconButton>
-            <IconButton sx={{ ...iconButtonStyle }} onClick={handleClick3}>
-              <Box
-                component="img"
-                src={wizardHatIcon}
-                alt="wizard hat icon"
-                sx={{ ...iconImageStyle }}
-              />
-            </IconButton>
-          </Popper>
         </IconButton>
 
-        <IconButton sx={iconButtonStyle}>
+        <IconButton
+          onClick={handleBkgIconClick}
+          sx={{ ...iconButtonStyle }}
+          aria-label="Background"
+        >
           <Box
             component="img"
-            src={shirtIcon}
-            alt="Shirt icon"
-            sx={iconImageStyle}
-          />
-        </IconButton>
-
-        <IconButton sx={iconButtonStyle}>
-          <Box
-            component="img"
-            src={pantsIcon}
-            alt="Pants icon"
-            sx={iconImageStyle}
-          />
-        </IconButton>
-
-        <IconButton sx={iconButtonStyle}>
-          <Box
-            component="img"
-            src={shoesIcon}
-            alt="Shoes icon"
-            sx={iconImageStyle}
+            src={bkgIcon}
+            alt="Bkg Icon"
+            sx={{ ...iconImageStyle }}
           />
         </IconButton>
       </Stack>
