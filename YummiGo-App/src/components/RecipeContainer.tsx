@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import Webcam from "react-webcam";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { useRecipeUpload } from "../../RecipeUploadContext"; 
 import { useUpload } from "../../UploadContext"; // Import the UploadContext
+import { AuthContext } from "../context/AuthContext";
 
 interface RecipeContainer {
   children: React.ReactNode;
@@ -16,18 +18,68 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
   const recipePageStyle = { ...pageStyle, overflowX: "hidden"};
   const pictureFrameSize = "40vw";
   const pictureSize = "38vw";
+  const user = useContext(AuthContext);
+  const username = user.user;
+  const [isWebcamOpen, setIsWebcamOpen] = useState(false);
+  const [facingMode, setFacingMode] = useState<"user" | "environment">("user");
+
+  // Webcam reference
+  const webcamRef = useRef<Webcam>(null);
 
   // For Dialog Box
   const [open, setOpen] = React.useState(false);
+
+  // State for uploaded image
+  const [uploadedPhoto, setUploadedPhoto] = useState<string | null>(null);
 
   // Use custom hooks to get functions from contexts
   const { incrementRecipeUploadCount } = useRecipeUpload(); // From RecipeUploadContext
   const { incrementUploadCount } = useUpload(); // From UploadContext
 
-  const handleClickOpen = () => { 
-    setOpen(true); 
-    incrementRecipeUploadCount(recipeId); // Call the recipe upload count
-    incrementUploadCount(); // Call the upload count
+  // Load photo from localStorage on mount
+  useEffect(() => {
+    const savedPhoto = localStorage.getItem(`${username}_recipePhoto_${recipeId}`);
+    if (savedPhoto) {
+      setUploadedPhoto(savedPhoto); // Load the saved photo if it exists
+    }
+  }, [user, recipeId]);
+
+  // Save photo to localStorage on upload
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64Photo = reader.result as string;
+        setUploadedPhoto(base64Photo); // Update state
+        localStorage.setItem(`${username}_recipePhoto_${recipeId}`, base64Photo); // Save to localStorage
+      };
+      reader.readAsDataURL(file);
+      setOpen(true); 
+      incrementRecipeUploadCount(recipeId); // Call the recipe upload count
+      incrementUploadCount();
+    }
+  };
+
+  // Handle photo capture from webcam
+  const capturePhoto = () => {
+    if (webcamRef.current) {
+      const photo = webcamRef.current.getScreenshot();
+      if (photo) {
+        setUploadedPhoto(photo);
+        localStorage.setItem(`${username}_recipePhoto_${recipeId}`, photo);
+        setIsWebcamOpen(false); // Close the webcam modal
+        setOpen(true); 
+        incrementRecipeUploadCount(recipeId); // Call the recipe upload count
+        incrementUploadCount();
+      }
+    }
+  }
+
+  // Remove the uploaded photo
+  const deletePhoto = () => {
+    setUploadedPhoto(null);
+    localStorage.removeItem(`${username}_recipePhoto_${recipeId}`); // Remove from localStorage
   };
 
   const handleClose = () => { setOpen(false); };
@@ -64,7 +116,7 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
             }}>
             <CardMedia
               component="img"
-              image={imageSrc}
+              image={uploadedPhoto || imageSrc}
               alt={title} // Use the title as the alt text for better accessibility
               sx={{
                 height: pictureSize,
@@ -84,31 +136,117 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
             width: "100vw",
             height: "10vh",
             display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            padding: 2,
+            padding: 10,
             borderBottom: 2,
             borderColor: "black"
           }}>
           <ThemeProvider theme={buttonTheme}>
+            {/* Take Picture */}
             <Button
-              onClick={handleClickOpen}
+              component="label"
               variant="contained"
+              onClick={() => setIsWebcamOpen(true)}
               sx={{
-                width: "60vw",
+                width: "75vw",
                 height: "10vh",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                borderRadius: 4
+                borderRadius: 4,
+                margin: 1
               }}>
               <ThemeProvider theme={textTheme}>
                 <Typography variant="button">
-                  Upload Quest Photo
+                  Take Photo
                 </Typography>
               </ThemeProvider>
             </Button>
+
+            {/* Upload from Gallery */}
+            <Button
+              component="label"
+              variant="contained"
+              sx={{
+                width: "75vw",
+                height: "10vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 4,
+                margin: 1
+              }}>
+              <ThemeProvider theme={textTheme}>
+                <Typography variant="button">
+                  Upload Photo
+                </Typography>
+              </ThemeProvider>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handlePhotoUpload}
+                hidden // Hide the input and link it to the button
+              />
+            </Button>
           </ThemeProvider>
+
+          {/* Delete Photo Button */}
+          {uploadedPhoto && (
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={deletePhoto}
+                sx={{
+                  width: "75vw",
+                  height: "10vh",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: 4,
+                  margin: 1
+                }}
+              >
+                <ThemeProvider theme={textTheme}>
+                  <Typography variant="button">
+                    Delete Photo
+                  </Typography>
+                </ThemeProvider>
+              </Button>
+            )}
+
+          {/* Webcam Modal */}
+          <Dialog open={isWebcamOpen} onClose={() => setIsWebcamOpen(false)}>
+            <DialogTitle>Take a Photo</DialogTitle>
+            <DialogContent>
+              <Webcam
+                audio={false}
+                ref={webcamRef}
+                screenshotFormat="image/jpeg"
+                width="100%"
+                height="auto"
+                videoConstraints={{ facingMode }}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setIsWebcamOpen(false)} color="secondary">
+                Cancel
+              </Button>
+              <Button onClick={capturePhoto} color="primary">
+                Capture
+              </Button>
+              <Button
+                onClick={() => setFacingMode(facingMode === "user" ? "environment" : "user")}
+                variant="contained"
+                sx={{
+                  marginTop: 2,
+                }}
+              >
+                Flip Camera
+              </Button>
+            </DialogActions>
+          </Dialog>
 
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
