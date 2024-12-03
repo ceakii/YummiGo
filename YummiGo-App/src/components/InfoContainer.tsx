@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle }
   from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useRecipeUpload } from "../../RecipeUploadContext";
+import { useRecipe } from "../../RecipeContext";
+import { AuthContext } from "../context/AuthContext";
 
 interface InfoContainer {
   children: React.ReactNode;
@@ -14,7 +15,7 @@ interface InfoContainer {
   recipeId: string;
 }
 
-export default function InfoContainer({ children, title, imageSrc, level, recipeId }: InfoContainer) {
+export default function InfoContainer({ children, title, imageSrc, level }: InfoContainer) {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden"}
   const pictureFrameSize = "20vw";
   const pictureSize = "19vw";
@@ -28,38 +29,29 @@ export default function InfoContainer({ children, title, imageSrc, level, recipe
   const navigate = useNavigate();
 
   // Track the current level completion status
-  const [completedLevels, setCompletedLevels] = useState<number[]>([]);
+  const { completionStatuses, setCompletionStatuses } = useContext(AuthContext);
 
-  useEffect(() => {
-    // Retrieve completed levels from sessionStorage
-    const storedLevels = sessionStorage.getItem("completedLevels");
-    if (storedLevels) {
-      setCompletedLevels(JSON.parse(storedLevels));
-    }
-  }, []);
-
-  const { incrementRecipeUploadCount } = useRecipeUpload();
+  const { incrementRecipeCount } = useRecipe();
 
   const handleLevelCompletion = (levelId: number) => {
-    // Save level completion status in sessionStorage
-    sessionStorage.setItem(`level${levelId}Completed`, "true");
-  }
+    if (setCompletionStatuses) {
+      const updatedCompletionStatuses = [...completionStatuses];
+      updatedCompletionStatuses[levelId - 1] = true;
+      setCompletionStatuses(updatedCompletionStatuses);
+    }
+  };
 
   const handleContinue = () => {
     setOpen(false);
 
-    // Update completed levels in sessionStorage
-    const newCompletedLevels = [...completedLevels, level];
-    sessionStorage.setItem("completedLevels", JSON.stringify(newCompletedLevels));
-    setCompletedLevels(newCompletedLevels);
-
-     // Or some other unique identifier for the recipe
-    incrementRecipeUploadCount(recipeId);
-
-
+    // Update the level as completed in AuthContext
     handleLevelCompletion(level);
 
-    // Navigate to next page
+    if (!completionStatuses[level - 1]) {
+      incrementRecipeCount();
+    }
+
+    // Navigate to the main adventure page or another appropriate page
     navigate("/YummiGo/");
   };
 
@@ -117,8 +109,45 @@ export default function InfoContainer({ children, title, imageSrc, level, recipe
           </Box>
         </Box>
 
-        {/* Button Container */}
+        {/* Title Container */}
         <Box
+          sx={{
+            width: "100vw",
+            height: "vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderBottom: 2,
+            borderColor: "black"
+          }}
+        >
+          <ThemeProvider theme={textTheme}>
+            <Typography variant="h3" align="center">
+              {title}
+            </Typography>
+          </ThemeProvider>
+        </Box>
+      </Box>
+
+      {/* Food Description Container */}
+      <Box
+        sx={{
+          width: "100%",
+          height: "vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ThemeProvider theme={textTheme}>
+          <Typography variant="h5" marginLeft={5} marginRight={5}>
+            {children}
+          </Typography>
+        </ThemeProvider>
+      </Box>
+
+      {/* Button Container */}
+      <Box
           sx={{
             width: "100vw",
             height: "10vh",
@@ -174,39 +203,41 @@ export default function InfoContainer({ children, title, imageSrc, level, recipe
             </DialogTitle>
 
             {/* Dialog Content */}
-            <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
-              <DialogContentText>
-                <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="body1"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
-                    You earned:
-                  </Typography>
-                </ThemeProvider>
+            {completionStatuses[level - 1] ? null : (
+              <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
+                <DialogContentText>
+                  <ThemeProvider theme={textTheme}>
+                    <Typography
+                      variant="body1"
+                      display={"flex"}
+                      justifyContent={"center"}
+                    >
+                      You earned:
+                    </Typography>
+                  </ThemeProvider>
 
-                <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="body1"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
-                    Recipe: {title}
-                  </Typography>
-                </ThemeProvider>
+                  <ThemeProvider theme={textTheme}>
+                    <Typography
+                      variant="body1"
+                      display={"flex"}
+                      justifyContent={"center"}
+                    >
+                      Recipe: {title}
+                    </Typography>
+                  </ThemeProvider>
 
-                <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="body1"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
-                    
-                  </Typography>
-                </ThemeProvider>
-              </DialogContentText>
-            </DialogContent>
+                  <ThemeProvider theme={textTheme}>
+                    <Typography
+                      variant="body1"
+                      display={"flex"}
+                      justifyContent={"center"}
+                    >
+                      
+                    </Typography>
+                  </ThemeProvider>
+                </DialogContentText>
+              </DialogContent>
+            )}
 
             {/* Dialog Action */}
             <DialogActions sx={{ bgcolor: "#FEAF2F", display: 'flex', justifyContent: 'center' }}>
@@ -224,47 +255,8 @@ export default function InfoContainer({ children, title, imageSrc, level, recipe
                 </Button>
               </ThemeProvider>
             </DialogActions>
-
           </Dialog>
         </Box>
-
-        {/* Title Container */}
-        <Box
-          sx={{
-            width: "100vw",
-            height: "vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            borderBottom: 2,
-            borderColor: "black"
-          }}
-        >
-          <ThemeProvider theme={textTheme}>
-            <Typography variant="h3" align="center">
-              {title}
-            </Typography>
-          </ThemeProvider>
-        </Box>
-      </Box>
-
-      {/* Food Description Container */}
-      <Box
-        sx={{
-          width: "100%",
-          height: "vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          bgcolor: "#FEAF2F"
-        }}
-      >
-        <ThemeProvider theme={textTheme}>
-          <Typography variant="body1" marginLeft={5} marginRight={5}>
-            {children}
-          </Typography>
-        </ThemeProvider>
-      </Box>
     </Box>
   );
 }

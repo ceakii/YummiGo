@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
 import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
 import { Dialog, DialogActions, DialogTitle } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 interface YummigoContainer {
   children: React.ReactNode;
   title: string;
   imageSrc: string;
-  level: number; // Added level prop to identify the current level
+  level: number;
 }
 
 export default function YummigoContainer({ children, title, imageSrc, level }: YummigoContainer) {
@@ -19,7 +20,9 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
   // For Dialog Box
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => { 
+  const { completionStatuses, setCompletionStatuses, user } = useContext(AuthContext);
+
+  const handleClickOpen = () => {
     if (!isLevelCompleted()) {
       setOpen(true);
     }
@@ -28,37 +31,33 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
 
   const navigate = useNavigate();
 
-  // Track the current level completion status
-  const [completedLevels, setCompletedLevels] = useState<number[]>([]);
-
   useEffect(() => {
-    // Retrieve completed levels from sessionStorage
-    const storedLevels = sessionStorage.getItem("completedLevels");
-    if (storedLevels) {
-      setCompletedLevels(JSON.parse(storedLevels));
+    const storedStatuses = localStorage.getItem("completionStatuses");
+    if (storedStatuses) {
+      setCompletionStatuses(JSON.parse(storedStatuses));
+    } else {
+      const storedSessionStatuses = sessionStorage.getItem("completionStatuses");
+      if (storedSessionStatuses) {
+        setCompletionStatuses(JSON.parse(storedSessionStatuses));
+      }
     }
-  }, []);
+  }, [user, setCompletionStatuses]);
 
   const isLevelCompleted = () => {
-    return completedLevels.includes(level);
+    return completionStatuses[level - 1];
   };
 
-  const handleLevelCompletion = (level: number) => {
-    // Save level completion status in sessionStorage
-    sessionStorage.setItem(`level${level}Completed`, "true");
-  }
+  const handleLevelCompletion = (levelId: number) => {
+    if (setCompletionStatuses) {
+      const updatedCompletionStatuses = [...completionStatuses];
+      updatedCompletionStatuses[levelId - 1] = true;
+      setCompletionStatuses(updatedCompletionStatuses);
+    }
+  };
 
   const handleContinue = () => {
     setOpen(false);
-
-    // Update completed levels in sessionStorage
-    const newCompletedLevels = [...completedLevels, level];
-    sessionStorage.setItem("completedLevels", JSON.stringify(newCompletedLevels));
-    setCompletedLevels(newCompletedLevels);
-
     handleLevelCompletion(level);
-
-    // Navigate to next page
     navigate("/YummiGo/");
   };
 
@@ -118,8 +117,45 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
           </Box>
         </Box>
 
-        {/* Button Container */}
+        {/* Title Container */}
         <Box
+          sx={{
+            width: "100vw",
+            height: "vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderBottom: 2,
+            borderColor: "black"
+          }}
+        >
+          <ThemeProvider theme={textTheme}>
+            <Typography variant="h3" align="center">
+              {title}
+            </Typography>
+          </ThemeProvider>
+        </Box>
+      </Box>
+
+      {/* Yummigo Description Container */}
+      <Box
+        sx={{
+          width: "100%",
+          height: "vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ThemeProvider theme={textTheme}>
+          <Typography variant="h5" marginLeft={5} marginRight={5}>
+            {children}
+          </Typography>
+        </ThemeProvider>
+      </Box>
+
+      {/* Button Container */}
+      <Box
           sx={{
             width: "100vw",
             height: "10vh",
@@ -192,44 +228,6 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
             </DialogActions>
           </Dialog>
         </Box>
-
-        {/* Title Container */}
-        <Box
-          sx={{
-            width: "100vw",
-            height: "vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            borderBottom: 2,
-            borderColor: "black"
-          }}
-        >
-          <ThemeProvider theme={textTheme}>
-            <Typography variant="h3" align="center">
-              {title}
-            </Typography>
-          </ThemeProvider>
-        </Box>
-      </Box>
-
-      {/* Food Description Container */}
-      <Box
-        sx={{
-          width: "100%",
-          height: "vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          bgcolor: "#FEAF2F"
-        }}
-      >
-        <ThemeProvider theme={textTheme}>
-          <Typography variant="body1" marginLeft={5} marginRight={5}>
-            {children}
-          </Typography>
-        </ThemeProvider>
-      </Box>
     </Box>
   );
 }

@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 // Components
 import TopBar from "./components/TopBar";
 import BottomNavigationBar from "./components/BottomNavigationBar";
+import { RecipeProvider } from "../RecipeContext";
 import { RecipeUploadProvider } from "../RecipeUploadContext";
 import { QuestUploadProvider } from "../QuestUploadContext";
 import { UploadProvider } from "../UploadContext";
@@ -58,6 +59,7 @@ function App() {
       <RecipeUploadProvider>
         <QuestUploadProvider>
           <UploadProvider>
+            <RecipeProvider>
           <>
             {/* Always Render TopBar */}
             <TopBar />
@@ -152,6 +154,7 @@ function App() {
             <TopBar />
             <BottomNavigationBar />
           </>
+            </RecipeProvider>
           </UploadProvider>
         </QuestUploadProvider>
       </RecipeUploadProvider>

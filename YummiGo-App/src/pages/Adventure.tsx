@@ -6,7 +6,8 @@ import {
   Typography,
 } from "@mui/material";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 // Image Paths
 import AdventureBackground from "/images/AdventureBackground.png";
@@ -21,34 +22,18 @@ export default function Adventure() {
   const adventurePageStyle = { ...pageStyle };
   const navigate = useNavigate();
   const [buttons, setButtons] = useState<ButtonData[]>([]);
-  const [levelCompletion, setLevelCompletion] = useState<boolean[]>([]); // Track completion of each level
+  const { completionStatuses } = useContext(AuthContext);
   const [hoveredButtonId, setHoveredButtonId] = useState<number | null>(null);
 
   useEffect(() => {
-    const storedButtons: ButtonData[] = JSON.parse(sessionStorage.getItem("buttons") || "[]");
-    if (storedButtons.length === 0) {
-      const initialButtons = [
-        { id: 1, label: "Level 1" },
-        { id: 2, label: "Level 2" },
-        { id: 3, label: "Level 3" },
-        { id: 4, label: "Level 4" },
-        { id: 5, label: "Level 5" }
-      ];
-      setButtons(initialButtons);
-      sessionStorage.setItem("buttons", JSON.stringify(initialButtons));
-    } else {
-      setButtons(storedButtons);
-    }
-
-    // Retrieve level completion statuses from sessionStorage
-    const completionStatuses = [
-      sessionStorage.getItem("level1Completed") === "true",
-      sessionStorage.getItem("level2Completed") === "true",
-      sessionStorage.getItem("level3Completed") === "true",
-      sessionStorage.getItem("level4Completed") === "true",
-      sessionStorage.getItem("level5Completed") === "true",
+    const initialButtons = [
+      { id: 1, label: "Level 1" },
+      { id: 2, label: "Level 2" },
+      { id: 3, label: "Level 3" },
+      { id: 4, label: "Level 4" },
+      { id: 5, label: "Level 5" }
     ];
-    setLevelCompletion(completionStatuses);
+    setButtons(initialButtons);
   }, []);
 
   return (
@@ -79,7 +64,7 @@ export default function Adventure() {
           overflowY: "auto",
         }}
       >
-        {buttons.map((button, index) => (
+        {buttons.map((button) => (
           <Box
             key={button.id}
             onMouseEnter={() => setHoveredButtonId(button.id)}
@@ -114,7 +99,7 @@ export default function Adventure() {
                 onClick={() => {
                   navigate(`/YummiGo/levels/level${button.id}`);
                 }}
-                disabled={(index == 0 && levelCompletion[index]) || (index > 0 && (!levelCompletion[index - 1] || levelCompletion[button.id - 1]))}
+                disabled={button.id > 1 && !completionStatuses[button.id - 2]}
               >
                 <ThemeProvider theme={textTheme}>
                   <Typography variant="button">
