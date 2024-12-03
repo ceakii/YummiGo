@@ -1,4 +1,4 @@
-import { useContext } from 'react'; // Import useContext here
+import { useContext } from "react"; // Import useContext here
 import {
   Box,
   ThemeProvider,
@@ -13,14 +13,30 @@ import { useRecipe } from "../../RecipeContext";
 import HeroAvatarPfp from "/images/HeroAvatarPfp.png";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { Navigate } from 'react-router-dom'; // Import Navigate here
+import { Navigate } from "react-router-dom"; // Import Navigate here
+import { useEffect, useState } from "react";
 
 export default function Profile() {
   const navigate = useNavigate();
   const { recipeCount } = useRecipe();
-  const { recipeUploadCount } = useRecipeUpload(); // Get recipe upload count from context
+  const [recipeUploadCount, setRecipeUploadCount] = useState(0);
   const { questUploadCount } = useQuestUpload();
   const { user, logout } = useContext(AuthContext); // Access user and logout function from AuthContext
+
+  useEffect(() => {
+    const storageKey = localStorage.getItem("username");
+    const prefix = `${storageKey}_recipePhoto_`;
+    var count = 0;
+
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith(prefix)) {
+        count++;
+      }
+    }
+
+    setRecipeUploadCount(count);
+  });
 
   // If the user is not logged in, redirect to the login page
   if (!user) {
@@ -71,7 +87,8 @@ export default function Profile() {
       />
 
       <ThemeProvider theme={textTheme}>
-        <Typography variant="h3">{user}</Typography> {/* Display the logged-in username */}
+        <Typography variant="h3">{user}</Typography>{" "}
+        {/* Display the logged-in username */}
       </ThemeProvider>
 
       <Button sx={{ ...orangeBox, textTransform: "none" }}>
@@ -92,7 +109,10 @@ export default function Profile() {
         </ThemeProvider>
       </Button>
 
-      <Button sx={{ ...orangeBox, textTransform: "none" }}>
+      <Button
+        sx={{ ...orangeBox, textTransform: "none" }}
+        onClick={() => navigate("/YummiGo/myuploads/myuploads")} // Add this line
+      >
         <ThemeProvider theme={textTheme}>
           <Box sx={textSpacing}>
             <Typography variant="h4">Uploads</Typography>

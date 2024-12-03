@@ -4,7 +4,7 @@ import QuinoaSaladwCaV from "/images/QuinoaSaladwCaV.png"
 export default function quinoasaladwcav() {
   return (
     <RecipeContainer
-      recipeId="Quinoa-Salad-with-Chickpeas-and-Vegetables"
+      recipeId="Quinoa_Salad_with_Chickpeas_and_Vegetables"
       title="Quinoa Salad with Chickpeas and Vegetables"
       imageSrc={QuinoaSaladwCaV}
     >

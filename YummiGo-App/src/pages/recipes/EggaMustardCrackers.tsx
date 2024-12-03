@@ -4,7 +4,7 @@ import EggaMustardCrackers from "/images/EggaMustardCrackers.png"
 export default function eggamustardcrackers() {
   return (
     <RecipeContainer
-      recipeId="Egg-&-Mustard-Crackers"
+      recipeId="Egg_&_Mustard_Crackers"
       title="Egg & Mustard Crackers"
       imageSrc={EggaMustardCrackers}
     >

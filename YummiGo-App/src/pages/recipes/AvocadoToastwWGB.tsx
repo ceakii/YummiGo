@@ -4,7 +4,7 @@ import AvocadoToastwWGB from "/images/AvocadoToastwWGB.png";
 export default function avocadotoastwwgb() {
   return (
     <RecipeContainer
-      recipeId = "Avocado-Toast-with-Whole-Grain-Bread"
+      recipeId = "Avocado_Toast_with_Whole_Grain_Bread"
       title="Avocado Toast with Whole Grain Bread"
       imageSrc={AvocadoToastwWGB}
     >

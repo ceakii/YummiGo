@@ -34,6 +34,7 @@ import cowboyHatIcon from "/images/CowboyHat.png";
 import santaHatIcon from "/images/SantaHat.png";
 
 import bkgPink from "/images/bkg_Pink.png";
+import { useEffect } from "react";
 
 export default function AvatarCustom() {
   const [hatAnchorEl, setHatAnchorEl] = useState<null | HTMLElement>(null);
@@ -48,6 +49,11 @@ export default function AvatarCustom() {
   const [backgroundColor, setBackgroundColor] = useState("rgba(0, 0, 0)");
   const [colorPickerOpen, setColorPickerOpen] = useState(false); // Toggle for color picker
 
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    setCurrentHat(localStorage.getItem(`${username}_currhat`));
+    setBackgroundColor(localStorage.getItem(`${username}_currbkg`) ?? '');
+  });
 
   const handleHatIconClick = (event: MouseEvent<HTMLElement>) => {
     setHatAnchorEl(hatAnchorEl ? null : event.currentTarget);
@@ -58,9 +64,7 @@ export default function AvatarCustom() {
     setBkgAnchorEl(bkgAnchorEl ? null : event.currentTarget);
     setHatAnchorEl(null);
     setColorPickerOpen(!colorPickerOpen);
-
   };
-
 
   const handleHatClick = (hat: string) => {
     setSelectedHat(hat);
@@ -70,6 +74,8 @@ export default function AvatarCustom() {
   const handleHatSelection = () => {
     if (selectedHat) {
       setCurrentHat(selectedHat);
+      const username = localStorage.getItem("username");
+      localStorage.setItem(`${username}_currhat`, selectedHat);
     }
     setConfirmationOpenHat(false);
     setHatAnchorEl(null);
@@ -107,8 +113,9 @@ export default function AvatarCustom() {
 
   const handleColorChange = (color: any) => {
     setBackgroundColor(color.hex); // Update the background color with the chosen color
+    const username = localStorage.getItem("username");
+    localStorage.setItem(`${username}_currbkg`, color.hex);
   };
-
 
   const getBackground = () => {
     switch (currentBkg) {
@@ -203,16 +210,13 @@ export default function AvatarCustom() {
         </DialogActions>
       </Dialog>
 
-      <Dialog
-        open={colorPickerOpen}
-        onClose={() => setColorPickerOpen(false)}
-      >
+      <Dialog open={colorPickerOpen} onClose={() => setColorPickerOpen(false)}>
         <DialogContent>
           <DialogContentText>
             <SketchPicker
               color={backgroundColor}
               onChangeComplete={handleColorChange}
-          />
+            />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -329,7 +333,6 @@ export default function AvatarCustom() {
       )}
 
       {/*Background stuff */}
-
 
       <Stack
         spacing={{ xs: 1, sm: 2 }}
