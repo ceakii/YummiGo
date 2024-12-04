@@ -2,7 +2,6 @@ import {
   Box,
   IconButton,
   Stack,
-  Popper,
   Card,
   CardContent,
   Typography,
@@ -16,6 +15,9 @@ import {
 import { useState, MouseEvent } from "react";
 import { pageStyle, textTheme } from "../../Style";
 import { SketchPicker } from "react-color"; // Import color picker from react-color
+import { useEffect } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
 
 import avatarimg from "/images/avatar_customization_screen.png";
 import avatarimgwCrown from "/images/avatar_customization_wCrown.png";
@@ -32,8 +34,8 @@ import crownIcon from "/images/Crown.png";
 import baseballCapIcon from "/images/BaseballCap.png";
 import cowboyHatIcon from "/images/CowboyHat.png";
 import santaHatIcon from "/images/SantaHat.png";
-
-import bkgPink from "/images/bkg_Pink.png";
+import bigRedX from "/images/bigRedX.png";
+import goldCoin from "/images/goldCoin.png";
 
 export default function AvatarCustom() {
   const [hatAnchorEl, setHatAnchorEl] = useState<null | HTMLElement>(null);
@@ -42,12 +44,38 @@ export default function AvatarCustom() {
   const [confirmationOpenHat, setConfirmationOpenHat] = useState(false);
   const [selectedHat, setSelectedHat] = useState<string | null>(null);
 
-  const [currentBkg, setCurrentBkg] = useState<string | null>(null);
-  const [confirmationOpenBkg, setConfirmationOpenBkg] = useState(false);
-  const [selectedBkg, setSelectedBkg] = useState<string | null>(null);
   const [backgroundColor, setBackgroundColor] = useState("rgba(0, 0, 0)");
   const [colorPickerOpen, setColorPickerOpen] = useState(false); // Toggle for color picker
+  const [numOfCoins, setNumOfCoins] = useState(0);
 
+  const { boughtStatus, setBoughtStatus, user } =
+    useContext(AuthContext);
+
+  const crownHatBought = boughtStatus[0];
+  const wizardHatBought = boughtStatus[1];
+  const baseballHatBought = boughtStatus[2];
+  const cowboyHatBought = boughtStatus[3];
+  const santaHatBought = boughtStatus[4];
+
+  const username = user ?? "";
+
+  useEffect(() => {
+    var newCoins = 0;
+   
+    setCurrentHat(localStorage.getItem(`${username}_currhat`));
+    setBackgroundColor(localStorage.getItem(`${username}_currbkg`) ?? "");
+
+    if (!localStorage.getItem(`${username}_coins`)) {
+      localStorage.setItem(`${username}_coins`, newCoins.toString());
+      setNumOfCoins(newCoins);
+    } else {
+      const currentCoins = parseInt(
+        localStorage.getItem(`${username}_coins`) || "0",
+        10
+      );
+      setNumOfCoins(currentCoins);
+    }
+  });
 
   const handleHatIconClick = (event: MouseEvent<HTMLElement>) => {
     setHatAnchorEl(hatAnchorEl ? null : event.currentTarget);
@@ -58,19 +86,94 @@ export default function AvatarCustom() {
     setBkgAnchorEl(bkgAnchorEl ? null : event.currentTarget);
     setHatAnchorEl(null);
     setColorPickerOpen(!colorPickerOpen);
-
   };
-
 
   const handleHatClick = (hat: string) => {
+    const hatIndexes: Record<string, number> = {
+      crown: 0,
+      wizard: 1,
+      baseball: 2,
+      cowboy: 3,
+      santa: 4,
+    };
     setSelectedHat(hat);
-    setConfirmationOpenHat(true);
+
+    if (hat === "none") {
+      // Directly handle removing hats
+      handleHatSelection("none");
+      return;
+    }
+
+    if (!hat || !(hat in hatIndexes)) {
+      return; // Handle invalid hat case
+    }
+
+    const hatIndex = hatIndexes[hat];
+    const isHatBought = boughtStatus[hatIndex];
+
+    if (isHatBought) {
+      // Directly apply the hat if already purchased
+      handleHatSelection(hat);
+    } else {
+      // Open the dialog for unbought hats
+      setConfirmationOpenHat(true);
+    }
   };
 
-  const handleHatSelection = () => {
-    if (selectedHat) {
-      setCurrentHat(selectedHat);
+  const handleHatSelection = (hat: string) => {
+    const coins = parseInt(
+      localStorage.getItem(`${username}_coins`) || "0",
+      10
+    );
+
+    // Define hat mappings
+    const hatIndexes: Record<string, number> = {
+      crown: 0,
+      wizard: 1,
+      baseball: 2,
+      cowboy: 3,
+      santa: 4,
+    };
+
+    // Validate `selectedHat`
+    if (!hat || !(hat in hatIndexes)) {
+      setCurrentHat("none");
+      localStorage.setItem(`${username}_currhat`, "none");
+      setConfirmationOpenHat(false);
+      setHatAnchorEl(null);
+      return;
     }
+
+    const hatIndex = hatIndexes[hat];
+    const isHatBought = boughtStatus[hatIndex];
+
+    console.log(!isHatBought && coins >= 200);
+
+    if (!isHatBought && coins >= 200) {
+      // Deduct coins and mark the hat as bought
+      localStorage.setItem(`${username}_coins`, (coins - 200).toString());
+      const updatedBoughtStatus = [...boughtStatus];
+      updatedBoughtStatus[hatIndex] = true;
+      setBoughtStatus(updatedBoughtStatus); // Update context state
+
+      // Optionally persist the bought status (e.g., in localStorage or via API)
+      localStorage.setItem(
+        `${username}_boughtStatus`,
+        JSON.stringify(updatedBoughtStatus)
+      );
+    } else if (!isHatBought && coins < 200) {
+      // Reset selection if hat not bought or insufficient coins
+      setSelectedHat("none");
+      hat = "none";
+    }
+    else if (isHatBought && coins < 200) {
+      // Reset selection if hat not bought or insufficient coins
+      setSelectedHat(hat);
+    }
+
+    // Update current hat and UI state
+    localStorage.setItem(`${username}_currhat`, hat);
+    setCurrentHat(hat);
     setConfirmationOpenHat(false);
     setHatAnchorEl(null);
   };
@@ -92,30 +195,10 @@ export default function AvatarCustom() {
     }
   };
 
-  const handleBkgClick = (bkg: string) => {
-    setSelectedBkg(bkg);
-    setConfirmationOpenBkg(true);
-  };
-
-  const handleBkgSelection = () => {
-    if (selectedBkg) {
-      setCurrentBkg(selectedBkg);
-    }
-    setConfirmationOpenBkg(false);
-    setBkgAnchorEl(null);
-  };
-
   const handleColorChange = (color: any) => {
-    setBackgroundColor(color.hex); // Update the background color with the chosen color
-  };
-
-
-  const getBackground = () => {
-    switch (currentBkg) {
-      case "pink":
-        return bkgPink;
-      default:
-    }
+    setBackgroundColor(color.hex);
+   
+    localStorage.setItem(`${username}_currbkg`, color.hex);
   };
 
   const customPageStyle = {
@@ -132,15 +215,26 @@ export default function AvatarCustom() {
     p: "1vh",
   };
 
+  const iconCoinsBox = {
+    bgcolor: "#FEAF2F",
+    borderRadius: "15px",
+    p: "2vh", // Adjust padding for smaller devices
+    minWidth: "8vw", // Minimum width to accommodate content
+    position: "absolute",
+    display: "flex", // Enables flexbox
+    justifyContent: "center", // Center the content horizontally
+    alignItems: "center", // Center the content vertically
+    flexWrap: "no-wrap", // Allow wrapping
+  };
+
   const iconImageStyle = {
     width: { xs: "clamp(4vh, 10vw, 15vh)", sm: "clamp(4vh, 4vw, 7vh)" },
     height: { xs: "clamp(4vh, 10vw, 15vh)", sm: "clamp(4vh, 3vw, 7vh)" },
   };
 
   const getCombinedImage = () => {
-    const background = getBackground();
     const avatar = getAvatarImage();
-    return background || avatar;
+    return avatar;
   };
 
   return (
@@ -155,7 +249,7 @@ export default function AvatarCustom() {
           alignItems: "center",
         }}
       >
-        {/* Background Overlay */}
+        {/* Background Banner */}
         <Box
           sx={{
             backgroundColor: backgroundColor, // Use dynamic state to set background color
@@ -176,6 +270,32 @@ export default function AvatarCustom() {
           alt="Avatar with background"
           src={getCombinedImage()}
         />
+
+        {/* Gold coin balance */}
+        <Box
+          sx={{
+            ...iconCoinsBox,
+            bottom: "-2vw",
+            height: "20px",
+            display: "flex", // Enable flexbox
+            justifyContent: "flex", // Align to the left
+            alignItems: "center", // Center vertically
+          }}
+        >
+          <Box
+            component="img"
+            alt="Gold coin"
+            src={goldCoin}
+            sx={{
+              height: "30px",
+            }}
+          />
+          <ThemeProvider theme={textTheme}>
+            <Typography variant="h2" sx={{ marginLeft: "2.5vw" }}>
+              {numOfCoins}
+            </Typography>
+          </ThemeProvider>
+        </Box>
       </Box>
 
       <Dialog
@@ -185,34 +305,37 @@ export default function AvatarCustom() {
         <DialogContent>
           <DialogContentText>
             {selectedHat === "crown"
-              ? "Get Crown?"
+              ? "Get Crown for 200 coins?"
               : selectedHat === "wizard"
-              ? "Get Wizard Hat?"
+              ? "Get Wizard Hat for 200 coins?"
               : selectedHat === "baseball"
-              ? "Get Baseball Cap?"
+              ? "Get Baseball Cap for 200 coins?"
               : selectedHat === "cowboy"
-              ? "Get Cowboy Hat?"
+              ? "Get Cowboy Hat for 200 coins?"
               : selectedHat === "santa"
-              ? "Get Santa Hat?"
+              ? "Get Santa Hat for 200 coins?"
               : "Remove all hats?"}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleHatSelection}>Yes</Button>
+          <Button
+            onClick={() => {
+              handleHatSelection(selectedHat as string);
+            }}
+          >
+            Yes
+          </Button>
           <Button onClick={() => setConfirmationOpenHat(false)}>No</Button>
         </DialogActions>
       </Dialog>
 
-      <Dialog
-        open={colorPickerOpen}
-        onClose={() => setColorPickerOpen(false)}
-      >
+      <Dialog open={colorPickerOpen} onClose={() => setColorPickerOpen(false)}>
         <DialogContent>
           <DialogContentText>
             <SketchPicker
               color={backgroundColor}
               onChangeComplete={handleColorChange}
-          />
+            />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -241,13 +364,18 @@ export default function AvatarCustom() {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              width: "15vw",
+              width: "55vw",
             }}
           >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                marginTop: "1vh",
+              }}
+            ></Box>
             <CardContent>
-              <ThemeProvider theme={textTheme}>
-                <Typography variant="h6">CHOOSE HAT</Typography>
-              </ThemeProvider>
               <Box
                 sx={{
                   display: "flex",
@@ -256,68 +384,89 @@ export default function AvatarCustom() {
                   marginTop: "1vh",
                 }}
               >
+                <ThemeProvider theme={textTheme}>
+                  <Typography variant="h6">CHOOSE HAT</Typography>
+                </ThemeProvider>
+                <Box sx={{ marginBottom: 5 }} />{" "}
+                {/* Adds a blank space between elements */}
                 <Button onClick={() => handleHatClick("crown")}>
                   <Box
                     component="img"
                     src={crownIcon}
                     alt="Crown Icon"
-                    sx={{ ...iconImageStyle }}
+                    sx={{
+                      ...iconImageStyle,
+                      filter: crownHatBought ? "none" : "grayscale(100%)", // Apply grayscale effect when locked
+                    }}
                   />
                   <ThemeProvider theme={textTheme}>
                     <Typography variant="h6">Crown</Typography>
                   </ThemeProvider>
                 </Button>
-
                 <Button onClick={() => handleHatClick("wizard")}>
                   <Box
                     component="img"
                     src={wizardHatIcon}
                     alt="Wizard Hat Icon"
-                    sx={{ ...iconImageStyle }}
+                    sx={{
+                      ...iconImageStyle,
+                      filter: wizardHatBought ? "none" : "grayscale(100%)", // Apply grayscale effect when locked
+                    }}
                   />
                   <ThemeProvider theme={textTheme}>
                     <Typography variant="h6">Wizard Hat</Typography>
                   </ThemeProvider>
                 </Button>
-
                 <Button onClick={() => handleHatClick("baseball")}>
                   <Box
                     component="img"
                     src={baseballCapIcon}
                     alt="Baseball Hat Icon"
-                    sx={{ ...iconImageStyle }}
+                    sx={{
+                      ...iconImageStyle,
+                      filter: baseballHatBought ? "none" : "grayscale(100%)", // Apply grayscale effect when locked
+                    }}
                   />
                   <ThemeProvider theme={textTheme}>
                     <Typography variant="h6">Baseball Cap</Typography>
                   </ThemeProvider>
                 </Button>
-
                 <Button onClick={() => handleHatClick("cowboy")}>
                   <Box
                     component="img"
                     src={cowboyHatIcon}
                     alt="Cowboy Hat Icon"
-                    sx={{ ...iconImageStyle }}
+                    sx={{
+                      ...iconImageStyle,
+                      filter: cowboyHatBought ? "none" : "grayscale(100%)", // Apply grayscale effect when locked
+                    }}
                   />
                   <ThemeProvider theme={textTheme}>
                     <Typography variant="h6">Cowboy Hat</Typography>
                   </ThemeProvider>
                 </Button>
-
                 <Button onClick={() => handleHatClick("santa")}>
                   <Box
                     component="img"
                     src={santaHatIcon}
                     alt="Santa Hat Icon"
-                    sx={{ ...iconImageStyle }}
+                    sx={{
+                      ...iconImageStyle,
+                      filter: santaHatBought ? "none" : "grayscale(100%)", // Apply grayscale effect when locked
+                    }}
                   />
                   <ThemeProvider theme={textTheme}>
                     <Typography variant="h6">Santa Hat</Typography>
                   </ThemeProvider>
                 </Button>
-
                 {/*no hat*/}
                 <Button onClick={() => handleHatClick("none")}>
+                  <Box
+                    component="img"
+                    src={bigRedX}
+                    alt="Remove Hat"
+                    sx={{ ...iconImageStyle }}
+                  />
                   <ThemeProvider theme={textTheme}>
                     <Typography variant="h6">Remove Hat</Typography>
                   </ThemeProvider>
@@ -329,7 +478,6 @@ export default function AvatarCustom() {
       )}
 
       {/*Background stuff */}
-
 
       <Stack
         spacing={{ xs: 1, sm: 2 }}

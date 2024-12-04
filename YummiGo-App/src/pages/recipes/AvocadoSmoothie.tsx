@@ -4,7 +4,7 @@ import AvocadoSmoothieImage from "/images/AvocadoSmoothie.jpg";
 export default function AvocadoSmoothie() {
   return (
     <RecipeContainer
-      recipeId="avocado-smoothie"
+      recipeId="Avocado_Smoothie"
       title="Avocado Smoothie"
       imageSrc={AvocadoSmoothieImage}
     >

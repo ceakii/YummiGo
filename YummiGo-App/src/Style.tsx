@@ -54,6 +54,20 @@ const pageStyle = {
   flexDirection: "column",
 };
 
+textTheme.typography.h2 = {
+  fontSize: "70px",
+  [textTheme.breakpoints.up('sm')]: { fontSize: '3rem', },   // Small width: Screen Width >= 600px
+  [textTheme.breakpoints.up('md')]: { fontSize: '4rem', },   // Medium width: Screen Width >= 900px
+  color: "white",
+  fontFamily: "'Micro 5', sans-serif",
+  textShadow: `
+                  -1px -1px 0px #000,  
+                  1px -1px 0px #000,
+                  -1px 1px 0px #000,
+                  1px 1px 0px #000
+                  `,
+};
+
 // H3 Font Size
 textTheme.typography.h3 = {
   fontSize: '2.5rem',                                        // Extra Small Width: Screen Width < 600px

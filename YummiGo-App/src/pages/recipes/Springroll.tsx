@@ -1,10 +1,10 @@
-import RecipeContainer from "../../components/RecipeContainer"
-import SpringRollImage from "/images/SpringRoll.jpg"
+import RecipeContainer from "../../components/RecipeContainer";
+import SpringRollImage from "/images/SpringRoll.jpg";
 
 export default function SpringRoll() {
   return (
     <RecipeContainer
-      recipeId="Spring-Roll"
+      recipeId="Spring_Roll"
       title="Spring Roll"
       imageSrc={SpringRollImage}
     >

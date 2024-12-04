@@ -4,7 +4,7 @@ import ChickenPorridgeImage from "/images/ChickenPorridge.jpg";
 export default function ChickenPorridge() {
   return (
     <RecipeContainer
-      recipeId="Chicken-Porridge"
+      recipeId="Chicken_Porridge"
       title="Chicken Porridge"
       imageSrc={ChickenPorridgeImage}
     >

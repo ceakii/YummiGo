@@ -17,6 +17,8 @@ import Quest from "./pages/Quest";
 
 // Profile Pages
 import AvatarCustom from "./pages/avatarcustom/avatarCustom";
+import MyUploads from "./pages/myuploads/myUploads";
+
 import Login from "./components/Login";
 
 // Recipe Pages
@@ -76,6 +78,12 @@ function App() {
               <Route
                 path="/YummiGo/avatarcustom/avatarcustom"
                 element={<AvatarCustom />}
+              />
+
+              {/* User Uploads */}
+              <Route
+                path="/YummiGo/myuploads/myuploads"
+                element={<MyUploads />}
               />
 
               {/* Recipes Pages Routing */}

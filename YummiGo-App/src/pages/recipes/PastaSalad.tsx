@@ -4,8 +4,8 @@ import PastaSaladImage from "/images/PastaSalad.jpg";
 export default function PastaSalad() {
   return (
     <RecipeContainer
-      recipeId="Tri-Color-Pasta-Salad-with-Spinach-Basil-Sauce"
-      title="Tri-Color Pasta Salad with Spinach Basil Sauce"
+      recipeId="Spinach-Basil_Pasta_Salad"
+      title="Spinach-Basil Pasta Salad"
       imageSrc={PastaSaladImage}
     >
       {`
