@@ -68,7 +68,7 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
             setHideDialog(true);
           }
           if (level === 4 && !completionStatuses[level - 1]) {
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 8; i++) {
               incrementRecipeCount();
             }
           }
@@ -370,7 +370,7 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
                         display={"flex"}
                         justifyContent={"center"}
                       >
-                        {level === 4 ? "10 Recipes" : "You hear a thunderous roar coming from above you. The sun is eclipsed not by storm clouds, but a Dragon!"}
+                        {level === 4 ? "8 Recipes" : "You hear a thunderous roar coming from above you. The sun is eclipsed not by storm clouds, but a Dragon!"}
                       </Typography>
                     </ThemeProvider>
 

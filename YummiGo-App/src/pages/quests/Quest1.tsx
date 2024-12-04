@@ -10,7 +10,8 @@ import Grid from "@mui/material/Grid2";
 import { buttonTheme, pageStyle, textTheme } from "../../Style";
 import { useQuestUpload } from "../../../QuestUploadContext";
 import { useRecipeUpload } from "../../../RecipeUploadContext";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 // Image Paths
 import FruitBowl from "/images/FruitBowl.png";
@@ -22,10 +23,15 @@ export default function Quest1() {
 
   const [ clicked, setClicked ] = useState(false);
 
+  const { user } = useContext(AuthContext);
+
   // For Dialog Box
   const [open, setOpen] = useState(false);
   const handleClose = () => { 
     incrementQuestCount("quest1");
+    const coinsString = localStorage.getItem(`${user}_coins`);
+    const coins = coinsString ? parseInt(coinsString, 10) : 0;
+    localStorage.setItem(`${user}_coins`, (coins + 200).toString());
     setClicked(false);
     setOpen(false); 
   };
@@ -145,7 +151,7 @@ export default function Quest1() {
           {/* Quest Objective */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 Cook one recipe and Upload a picture of it!
               </Typography>
             </ThemeProvider>
@@ -163,7 +169,7 @@ export default function Quest1() {
           {/* Quest Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 Your first quest to start your healthy adventure!
               </Typography>
             </ThemeProvider>
@@ -259,12 +265,7 @@ export default function Quest1() {
               <DialogContentText>
                 <ThemeProvider theme={textTheme}>
                   <Typography variant="body1" display={"flex"} justifyContent={"center"}>
-                    You earned: 10 XP!
-                  </Typography>
-                </ThemeProvider>
-                <ThemeProvider theme={textTheme}>
-                  <Typography variant="body1" display={"flex"} justifyContent={"center"}>
-                    Got: 100 Coins
+                    Got: 200 Coins
                   </Typography>
                 </ThemeProvider>
               </DialogContentText>

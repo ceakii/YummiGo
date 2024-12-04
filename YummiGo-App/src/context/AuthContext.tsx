@@ -34,6 +34,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [user, setUser] = useState<string | null>(null);
+  const [numOfCoins, setNumOfCoins] = useState(0);
   const [completionStatusesState, setCompletionStatusesState] = useState<
     boolean[]
   >(() => {
@@ -148,16 +149,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     loadCompletionStatuses();
     loadBoughtStatus();
     loadQuestProgress();
+    if (!localStorage.getItem(`${username}_coins`)) {
+      var newCoins = 0;
+      localStorage.setItem(`${username}_coins`, newCoins.toString());
+      setNumOfCoins(newCoins);
+    } else {
+      const currentCoins = parseInt(
+        localStorage.getItem(`${username}_coins`) || "0",
+        10
+      );
+      setNumOfCoins(currentCoins);
+    }
   };
 
   const logout = () => {
     setUser(null);
     setQuestProgress({ count: 0, completedQuests: new Set() });
-    setCompletionStatuses([false, false, false, false, false]);
 
-    localStorage.removeItem(`${user}_completionStatuses`);
-    localStorage.removeItem(`${user}_questCount`);
-    localStorage.removeItem(`${user}_completedQuests`);
     loadBoughtStatus();
   };
 
