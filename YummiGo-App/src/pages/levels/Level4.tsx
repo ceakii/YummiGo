@@ -132,7 +132,7 @@ export default function Level4() {
           {/* Level Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 You have been spotted by a carnivorous Dragon! It stares at you with the intent of making you its next meal. Fighting is not an option, but fortunately you have... vegetables?
               </Typography>
             </ThemeProvider>
@@ -150,7 +150,7 @@ export default function Level4() {
           {/* Level Objective */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 Drive away the Dragon by answering 5 questions correctly.
               </Typography>
             </ThemeProvider>
@@ -168,7 +168,7 @@ export default function Level4() {
           {/* Level Fail Conditions */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 Make 3 Mistakes.
               </Typography>
             </ThemeProvider>
@@ -186,7 +186,7 @@ export default function Level4() {
           {/* Level Rewards Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 10 Recipes
               </Typography>
             </ThemeProvider>

@@ -365,7 +365,8 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
 
                     <ThemeProvider theme={textTheme}>
                       <Typography
-                        variant="body1"
+                        variant="h5" 
+                        color="black"
                         display={"flex"}
                         justifyContent={"center"}
                       >

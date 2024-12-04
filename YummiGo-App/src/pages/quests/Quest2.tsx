@@ -15,7 +15,7 @@ import { useState } from "react";
 // Image Paths
 import FruitBowl from "/images/FruitBowl.png";
 
-export default function Quest1() {
+export default function Quest2() {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" }
   const { questUploadCount, incrementQuestCount } = useQuestUpload();
   const { recipeUploadCount } = useRecipeUpload();
@@ -25,7 +25,7 @@ export default function Quest1() {
   // For Dialog Box
   const [open, setOpen] = useState(false);
   const handleClose = () => { 
-    incrementQuestCount("quest1");
+    incrementQuestCount("quest2");
     setClicked(false);
     setOpen(false); 
   };
@@ -101,7 +101,7 @@ export default function Quest1() {
           {/* Title */}
           <ThemeProvider theme={textTheme}>
             <Typography variant="h4" align="center">
-              Quest 1
+              Quest 2
             </Typography>
           </ThemeProvider>
         </Box>
@@ -146,7 +146,7 @@ export default function Quest1() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                Cook one recipe and Upload a picture of it!
+                Cook two recipes and Upload their pictures!
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -164,7 +164,7 @@ export default function Quest1() {
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="body1">
-                Your first quest to start your healthy adventure!
+                Your second quest to start your healthy adventure!
               </Typography>
             </ThemeProvider>
           </Grid>
@@ -183,7 +183,7 @@ export default function Quest1() {
           >
             {/* Quest Button */}
             <ThemeProvider theme={buttonTheme}>
-              { questUploadCount === 0 && !(recipeUploadCount > 0) ? (
+              { questUploadCount === 1 && !(recipeUploadCount > 1) ? (
               <Button
                 onClick={() => setClicked(true)}
                 variant="contained"
@@ -215,7 +215,7 @@ export default function Quest1() {
               <Button
                 onClick={() => setOpen(true)}
                 variant="contained"
-                disabled={ questUploadCount >= 1 }
+                disabled={ questUploadCount >= 2 }
                 sx={{
                   width: "50vw",
                   height: "10vh",
@@ -228,7 +228,7 @@ export default function Quest1() {
               >
                 {/* Button Label */}
                 <ThemeProvider theme={textTheme}>
-                  { !(questUploadCount >= 1) ? (
+                  { !(questUploadCount >= 2) ? (
                   <Typography variant="button">
                     Complete
                   </Typography>
@@ -243,7 +243,7 @@ export default function Quest1() {
             </ThemeProvider>
           </Box>
 
-          { (questUploadCount > 0) ? null : (
+          { (questUploadCount > 1) ? null : (
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
               <Box bgcolor={"#FEAF2F"} border={2}>

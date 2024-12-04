@@ -7,6 +7,9 @@ interface AuthContextType {
   completionStatuses: boolean[];
   setCompletionStatuses: (statuses: boolean[]) => void;
   loadCompletionStatuses: () => void;
+  questProgress: { count: number; completedQuests: Set<string> };
+  incrementQuestProgress: (questId: string) => void;
+  loadQuestProgress: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -16,6 +19,9 @@ export const AuthContext = createContext<AuthContextType>({
   completionStatuses: [false, false, false, false, false],
   setCompletionStatuses: () => {},
   loadCompletionStatuses: () => {},
+  questProgress: { count: 0, completedQuests: new Set() },
+  incrementQuestProgress: () => {},
+  loadQuestProgress: () => {}
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -33,38 +39,81 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (user) {
       // For logged-in users, use localStorage with a user-specific key
       localStorage.setItem(`${user}_completionStatuses`, JSON.stringify(statuses));
-    } else {
-      // For guests, use sessionStorage
-      sessionStorage.setItem('completionStatuses', JSON.stringify(statuses));
     }
     setCompletionStatusesState(statuses);
   };
 
   const loadCompletionStatuses = () => {
-    const storage = user ? localStorage : sessionStorage;
-    const savedStatuses = storage.getItem(user ? `${user}_completionStatuses` : 'completionStatuses');
+    const savedStatuses = localStorage.getItem(`${user}_completionStatuses`);
     setCompletionStatusesState(savedStatuses ? JSON.parse(savedStatuses) : [false, false, false, false, false]);
+  };
+
+  // Quest Progress
+  const [questProgress, setQuestProgress] = useState<{ count: number; completedQuests: Set<string> }>({
+    count: 0,
+    completedQuests: new Set(),
+  });
+
+  const incrementQuestProgress = (questId: string) => {
+    setQuestProgress((prev) => {
+      if (prev.completedQuests.has(questId)) return prev; // Prevent duplicate completions
+      const updatedCompletedQuests = new Set(prev.completedQuests).add(questId);
+      const updatedCount = prev.count + 1;
+
+      const newProgress = { count: updatedCount, completedQuests: updatedCompletedQuests };
+      saveQuestProgress(newProgress); // Save progress to storage
+      return newProgress;
+    });
+  };
+
+  const loadQuestProgress = () => {
+    if (user) {
+      const savedCount = localStorage.getItem(`${user}_questCount`);
+      const savedQuests = localStorage.getItem(`${user}_completedQuests`);
+
+      setQuestProgress({
+        count: savedCount ? parseInt(savedCount, 10) : 0,
+        completedQuests: savedQuests ? new Set(JSON.parse(savedQuests)) : new Set(),
+      });
+    } else {
+      setQuestProgress({ count: 0, completedQuests: new Set() }); // Default quest progress for guest
+    }
+  };
+
+  const saveQuestProgress = (progress: { count: number; completedQuests: Set<string> }) => {
+    if (user) {
+      localStorage.setItem(`${user}_questCount`, progress.count.toString());
+      localStorage.setItem(`${user}_completedQuests`, JSON.stringify([...progress.completedQuests]));
+    }
   };
 
   const login = (username: string) => {
     setUser(username);
     loadCompletionStatuses();
+    loadQuestProgress();
   };
 
-
   const logout = () => {
-    //localStorage.clear();
-    //sessionStorage.clear();
     setUser(null);
-    loadCompletionStatuses();
+    setQuestProgress({ count: 0, completedQuests: new Set() });
+    setCompletionStatuses([false, false, false, false, false]);
+
+    localStorage.removeItem(`${user}_completionStatuses`);
+    localStorage.removeItem(`${user}_questCount`);
+    localStorage.removeItem(`${user}_completedQuests`);
   };
 
   useEffect(() => {
     loadCompletionStatuses();
+    loadQuestProgress();
   }, [user]);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, completionStatuses: completionStatusesState, setCompletionStatuses, loadCompletionStatuses }}>
+    <AuthContext.Provider value={{ 
+      user, login, logout, 
+      completionStatuses: completionStatusesState, setCompletionStatuses, loadCompletionStatuses,
+      questProgress, incrementQuestProgress, loadQuestProgress,
+    }}>
       {children}
     </AuthContext.Provider>
   );

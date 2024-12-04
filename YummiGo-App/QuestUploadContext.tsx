@@ -20,10 +20,10 @@ interface QuestUploadProviderProps {
 // Context provider component
 export const QuestUploadProvider = ({ children }: QuestUploadProviderProps) => {
   const { user } = useContext(AuthContext); // Access user from AuthContext
-  const storage = user ? localStorage : sessionStorage; // Use localStorage for logged-in users, sessionStorage for guests
+  const storage = localStorage; // Use localStorage for logged-in users, sessionStorage for guests
 
-  const countKey = user ? `${user}_questUploadCount` : "questUploadCount";
-  const questsKey = user ? `${user}_completedQuests` : "completedQuests";
+  const countKey = `${user}_questUploadCount`;
+  const questsKey = `${user}_completedQuests`;
 
   const [questUploadCount, setQuestUploadCount] = useState<number>(0);
   const [completedQuestsList, setCompletedQuestsList] = useState<Set<string>>(new Set());
@@ -35,9 +35,6 @@ export const QuestUploadProvider = ({ children }: QuestUploadProviderProps) => {
       
       setQuestUploadCount(initialCount ? parseInt(initialCount) : 0);
       setCompletedQuestsList(completedQuests ? new Set(JSON.parse(completedQuests)) : new Set());
-    } else {
-      setQuestUploadCount(0);
-      setCompletedQuestsList(new Set());
     }
   }, [user, storage, countKey, questsKey]);
 

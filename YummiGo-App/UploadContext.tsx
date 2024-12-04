@@ -1,37 +1,35 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import { AuthContext } from "./src/context/AuthContext";
 
 interface UploadContextType {
   incrementUploadCount: () => void;
   UploadCount: number;
-  resetUploadCount: () => void; // Add reset function to the type
+  resetUploadCount: () => void;
 }
 
 const UploadContext = createContext<UploadContextType | undefined>(undefined);
 
 export const UploadProvider = ({ children }: { children: ReactNode }) => {
-  // Check sessionStorage for the initial UploadCount or default to 0
-  const initialCount = sessionStorage.getItem("UploadCount");
+  const { user } = useContext(AuthContext);
+  const initialCount = localStorage.getItem(`${user}_UploadCount`);
   const [UploadCount, setUploadCount] = useState<number>(initialCount ? parseInt(initialCount) : 0);
 
-  // Increment the upload count and save it to sessionStorage
   const incrementUploadCount = () => {
     setUploadCount(prevCount => {
       const newCount = prevCount + 1;
-      sessionStorage.setItem("UploadCount", newCount.toString()); // Save to sessionStorage
+      localStorage.setItem(`${user}_UploadCount`, newCount.toString());
       return newCount;
     });
   };
 
-  // Reset the upload count
   const resetUploadCount = () => {
-    setUploadCount(0); // Reset the count to 0
-    sessionStorage.setItem("UploadCount", "0"); // Reset the sessionStorage value
+    setUploadCount(0);
+    localStorage.setItem(`${user}_UploadCount`, "0");
   };
 
   useEffect(() => {
-    // Set the initial value in sessionStorage when the component mounts (if it's not already set)
     if (UploadCount > 0) {
-      sessionStorage.setItem("UploadCount", UploadCount.toString());
+      localStorage.setItem(`${user}_UploadCount`, UploadCount.toString());
     }
   }, [UploadCount]);
 

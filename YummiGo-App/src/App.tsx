@@ -7,6 +7,7 @@ import { RecipeProvider } from "../RecipeContext";
 import { RecipeUploadProvider } from "../RecipeUploadContext";
 import { QuestUploadProvider } from "../QuestUploadContext";
 import { UploadProvider } from "../UploadContext";
+import { AuthProvider } from "./context/AuthContext";
 
 // Main Pages
 import Adventure from "./pages/Adventure";
@@ -34,6 +35,7 @@ import BakedSweetPotatoFries from "./pages/recipes/BakedSweetPotatoFries";
 
 // Quest Pages
 import Quest1 from "./pages/quests/Quest1";
+import Quest2 from "./pages/quests/Quest2";
 
 // Adventure
 import Level1 from "./pages/levels/Level1";
@@ -51,7 +53,6 @@ import Carrotti from "./pages/yummigo/Carrotti";
 // Quiz Pages
 import CarrottiQuiz from "./pages/quiz/Carrotti";
 import DragonQuiz from "./pages/quiz/Dragon";
-import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
@@ -129,6 +130,7 @@ function App() {
 
               {/* Quests Pages Routing */}
               <Route path="/YummiGo/quests/quest1" element={<Quest1 />} />
+              <Route path="/YummiGo/quests/quest2" element={<Quest2 />} />
 
               {/* Adventure Pages Routing */}
               <Route path="/YummiGo/levels/level1" element={<Level1 />} />

@@ -116,7 +116,7 @@ export default function Level1() {
           {/* Level Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 On your way to the castle, you spot something on the ground. 
                 At first glance, it looks like a stem, but this one looks different from the surrounding vegetation.
                 You decide to remove the stem, and find that you've disturbed a Carrotti! 
@@ -137,7 +137,7 @@ export default function Level1() {
           {/* Level Objective */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 Learn about Carrotti.
               </Typography>
             </ThemeProvider>

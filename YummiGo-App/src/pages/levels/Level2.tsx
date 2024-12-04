@@ -131,7 +131,7 @@ export default function Level2() {
           {/* Level Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 Although you have disturbed Carrotti, it is actually not angry. 
                 It just has very poor eyesight and can't see you very well.
                 You realize the soil in this area is actually not suitable for Carrotti's growth. 
@@ -153,7 +153,7 @@ export default function Level2() {
           {/* Level Objective */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 Read about Hummus and Veggie Sticks.
               </Typography>
             </ThemeProvider>
@@ -171,7 +171,7 @@ export default function Level2() {
           {/* Level Rewards Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 Recipe: Hummus and Veggie Sticks
               </Typography>
             </ThemeProvider>
