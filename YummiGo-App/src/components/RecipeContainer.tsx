@@ -1,9 +1,21 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import Webcam from "react-webcam";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
-import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
-import { useRecipeUpload } from "../../RecipeUploadContext"; 
+import {
+  Box,
+  Button,
+  CardMedia,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
+import { useRecipeUpload } from "../../RecipeUploadContext";
 import { useUpload } from "../../UploadContext"; // Import the UploadContext
 import { AuthContext } from "../context/AuthContext";
 
@@ -14,8 +26,13 @@ interface RecipeContainer {
   recipeId: string; // Add recipeId as a prop
 }
 
-export default function RecipeContainer({ children, title, imageSrc, recipeId }: RecipeContainer) {
-  const recipePageStyle = { ...pageStyle, overflowX: "hidden"};
+export default function RecipeContainer({
+  children,
+  title,
+  imageSrc,
+  recipeId,
+}: RecipeContainer) {
+  const recipePageStyle = { ...pageStyle, overflowX: "hidden" };
   const pictureFrameSize = "40vw";
   const pictureSize = "38vw";
   const user = useContext(AuthContext);
@@ -38,7 +55,9 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
 
   // Load photo from localStorage on mount
   useEffect(() => {
-    const savedPhoto = localStorage.getItem(`${username}_recipePhoto_${recipeId}`);
+    const savedPhoto = localStorage.getItem(
+      `${username}_recipePhoto_${recipeId}`
+    );
     if (savedPhoto) {
       setUploadedPhoto(savedPhoto); // Load the saved photo if it exists
     }
@@ -52,10 +71,13 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
       reader.onload = () => {
         const base64Photo = reader.result as string;
         setUploadedPhoto(base64Photo); // Update state
-        localStorage.setItem(`${username}_recipePhoto_${recipeId}`, base64Photo); // Save to localStorage
+        localStorage.setItem(
+          `${username}_recipePhoto_${recipeId}`,
+          base64Photo
+        ); // Save to localStorage
       };
       reader.readAsDataURL(file);
-      setOpen(true); 
+      setOpen(true);
       incrementRecipeUploadCount(recipeId); // Call the recipe upload count
       incrementUploadCount();
     }
@@ -69,12 +91,23 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
         setUploadedPhoto(photo);
         localStorage.setItem(`${username}_recipePhoto_${recipeId}`, photo);
         setIsWebcamOpen(false); // Close the webcam modal
-        setOpen(true); 
+        setOpen(true);
+        var newCoins = 0;
+        if (!localStorage.getItem(`${username}_coins`)) {
+          localStorage.setItem(`${username}_coins`, newCoins.toString());
+        } else {
+          const currentCoins = parseInt(
+            localStorage.getItem(`${username}_coins`) || "0",
+            10
+          );
+          newCoins = currentCoins + 100;
+          localStorage.setItem(`${username}_coins`, newCoins.toString());
+        }
         incrementRecipeUploadCount(recipeId); // Call the recipe upload count
         incrementUploadCount();
       }
     }
-  }
+  };
 
   // Remove the uploaded photo
   const deletePhoto = () => {
@@ -82,7 +115,9 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
     localStorage.removeItem(`${username}_recipePhoto_${recipeId}`); // Remove from localStorage
   };
 
-  const handleClose = () => { setOpen(false); };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Box sx={recipePageStyle}>
@@ -92,8 +127,9 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#38E2DF"
-        }}>
+          backgroundColor: "#38E2DF",
+        }}
+      >
         <Box
           sx={{
             width: "100vw",
@@ -101,8 +137,9 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            padding: 2
-          }}>
+            padding: 2,
+          }}
+        >
           <Box
             sx={{
               width: pictureFrameSize,
@@ -112,8 +149,9 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
               alignItems: "center",
               bgcolor: "white",
               borderRadius: "10%",
-              boxShadow: 4
-            }}>
+              boxShadow: 4,
+            }}
+          >
             <CardMedia
               component="img"
               image={uploadedPhoto || imageSrc}
@@ -125,7 +163,7 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
                 justifyContent: "center",
                 alignItems: "center",
                 borderRadius: "10%",
-                boxShadow: 4
+                boxShadow: 4,
               }}
             />
           </Box>
@@ -141,8 +179,9 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
             alignItems: "center",
             padding: 10,
             borderBottom: 2,
-            borderColor: "black"
-          }}>
+            borderColor: "black",
+          }}
+        >
           <ThemeProvider theme={buttonTheme}>
             {/* Take Picture */}
             <Button
@@ -156,12 +195,11 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
                 justifyContent: "center",
                 alignItems: "center",
                 borderRadius: 4,
-                margin: 1
-              }}>
+                margin: 1,
+              }}
+            >
               <ThemeProvider theme={textTheme}>
-                <Typography variant="button">
-                  Take Photo
-                </Typography>
+                <Typography variant="button">Take Photo</Typography>
               </ThemeProvider>
             </Button>
 
@@ -176,12 +214,11 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
                 justifyContent: "center",
                 alignItems: "center",
                 borderRadius: 4,
-                margin: 1
-              }}>
+                margin: 1,
+              }}
+            >
               <ThemeProvider theme={textTheme}>
-                <Typography variant="button">
-                  Upload Photo
-                </Typography>
+                <Typography variant="button">Upload Photo</Typography>
               </ThemeProvider>
               <input
                 type="file"
@@ -194,27 +231,25 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
 
           {/* Delete Photo Button */}
           {uploadedPhoto && (
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={deletePhoto}
-                sx={{
-                  width: "75vw",
-                  height: "10vh",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: 4,
-                  margin: 1
-                }}
-              >
-                <ThemeProvider theme={textTheme}>
-                  <Typography variant="button">
-                    Delete Photo
-                  </Typography>
-                </ThemeProvider>
-              </Button>
-            )}
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={deletePhoto}
+              sx={{
+                width: "75vw",
+                height: "10vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 4,
+                margin: 1,
+              }}
+            >
+              <ThemeProvider theme={textTheme}>
+                <Typography variant="button">Delete Photo</Typography>
+              </ThemeProvider>
+            </Button>
+          )}
 
           {/* Webcam Modal */}
           <Dialog open={isWebcamOpen} onClose={() => setIsWebcamOpen(false)}>
@@ -237,7 +272,9 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
                 Capture
               </Button>
               <Button
-                onClick={() => setFacingMode(facingMode === "user" ? "environment" : "user")}
+                onClick={() =>
+                  setFacingMode(facingMode === "user" ? "environment" : "user")
+                }
                 variant="contained"
                 sx={{
                   marginTop: 2,
@@ -252,7 +289,11 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
             <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
               <Box bgcolor={"#FEAF2F"} border={2}>
                 <ThemeProvider theme={textTheme}>
-                  <Typography variant="button" display={"flex"} justifyContent={"center"}>
+                  <Typography
+                    variant="button"
+                    display={"flex"}
+                    justifyContent={"center"}
+                  >
                     Quest Complete!
                   </Typography>
                 </ThemeProvider>
@@ -261,12 +302,20 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
             <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
               <DialogContentText>
                 <ThemeProvider theme={textTheme}>
-                  <Typography variant="body1" display={"flex"} justifyContent={"center"}>
+                  <Typography
+                    variant="body1"
+                    display={"flex"}
+                    justifyContent={"center"}
+                  >
                     You earned: 10 XP!
                   </Typography>
                 </ThemeProvider>
                 <ThemeProvider theme={textTheme}>
-                  <Typography variant="body1" display={"flex"} justifyContent={"center"}>
+                  <Typography
+                    variant="body1"
+                    display={"flex"}
+                    justifyContent={"center"}
+                  >
                     Got: 100 Coins
                   </Typography>
                 </ThemeProvider>
@@ -276,7 +325,11 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
               <ThemeProvider theme={buttonTheme}>
                 <Button onClick={handleClose} variant="contained">
                   <ThemeProvider theme={textTheme}>
-                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>
+                    <Typography
+                      variant="h6"
+                      display={"flex"}
+                      justifyContent={"center"}
+                    >
                       Continue
                     </Typography>
                   </ThemeProvider>
@@ -294,8 +347,9 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
             justifyContent: "center",
             alignItems: "center",
             borderBottom: 2,
-            borderColor: "black"
-          }}>
+            borderColor: "black",
+          }}
+        >
           <ThemeProvider theme={textTheme}>
             <Typography variant="h3" align="center">
               {title}
@@ -311,8 +365,9 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          bgcolor: "#FEAF2F"
-        }}>
+          bgcolor: "#FEAF2F",
+        }}
+      >
         <ThemeProvider theme={textTheme}>
           <Typography variant="body1" marginLeft={5} marginRight={5}>
             {children}

@@ -7,7 +7,6 @@ import {
   Button,
 } from "@mui/material";
 import { pageStyle, textTheme } from "../Style";
-import { useRecipeUpload } from "../../RecipeUploadContext";
 import { useQuestUpload } from "../../QuestUploadContext";
 import { useRecipe } from "../../RecipeContext";
 import HeroAvatarPfp from "/images/HeroAvatarPfp.png";
@@ -24,7 +23,7 @@ export default function Profile() {
   const { user, logout } = useContext(AuthContext); // Access user and logout function from AuthContext
 
   useEffect(() => {
-    const storageKey = localStorage.getItem("username");
+    const storageKey = user;
     const prefix = `${storageKey}_recipePhoto_`;
     var count = 0;
 

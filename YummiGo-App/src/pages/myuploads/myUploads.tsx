@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { pageStyle } from "../../Style";
 import { Card, CardMedia, Typography, Box } from "@mui/material";
+import { AuthContext } from "../../context/AuthContext";
 
 import Grid from "@mui/material/Grid2";
 
@@ -12,7 +13,8 @@ type ImageData = {
 const MyUploads: React.FC = () => {
   const recipePageStyle = { ...pageStyle };
   const [images, setImages] = useState<ImageData[]>([]);
-  const storageKey = localStorage.getItem("username");
+  const { user} = useContext(AuthContext);
+  const storageKey = user;
 
   useEffect(() => {
     const prefix = `${storageKey}_recipePhoto_`;

@@ -28,11 +28,7 @@ export default function BottomNavigationBar() {
                     }}
                     sx={bottomBarStyle}
                 >
-                    <BottomNavigationAction
-                        label="Profile"
-                        icon={<Person2Icon />}
-                        onClick={() => navigate("/YummiGo/profile")}
-                    />
+                    
                     <BottomNavigationAction
                         label="Recipe"
                         icon={<OutdoorGrillIcon />}
@@ -47,6 +43,11 @@ export default function BottomNavigationBar() {
                         label="Quest"
                         icon={<AssignmentIcon />}
                         onClick={() => navigate("/YummiGo/quest")}
+                    />
+                    <BottomNavigationAction
+                        label="Profile"
+                        icon={<Person2Icon />}
+                        onClick={() => navigate("/YummiGo/profile")}
                     />
                 </BottomNavigation>
             </Box>
