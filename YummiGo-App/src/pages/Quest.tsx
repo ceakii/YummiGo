@@ -19,10 +19,9 @@ import QuestIcon from "/images/QuestIcon.png";
 export default function Quest() {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" };
   const navigate = useNavigate();
-  const { incrementQuestCount } = useQuestUpload(); // Access the increment function
+  const { questUploadCount } = useQuestUpload();
 
   const handleQuestClick = (questId: string) => {
-    incrementQuestCount(questId); // Increment quest count when quest is clicked
     navigate(`/YummiGo/quests/${questId}`); // Navigate to the quest page
   };
 
@@ -207,7 +206,7 @@ export default function Quest() {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  bgcolor: "#b0a996",
+                  bgcolor: (questUploadCount < 1) ? "#b0a996" : "#fae7b1",
                   borderRadius: "10%",
                   boxShadow: 4,
                 }}
@@ -224,10 +223,11 @@ export default function Quest() {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    bgcolor: "#FEAF2F",
+                    bgcolor: (questUploadCount < 1) ? "#b0a996" : "#FEAF2F",
                     borderRadius: "10%",
                     boxShadow: 4,
                   }}
+                  disabled={questUploadCount < 1}
                 >
                   {/* Button Contents */}
                   <Grid display="flex" flexDirection={"column"} padding={2}>

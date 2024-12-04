@@ -1,23 +1,14 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import Webcam from "react-webcam";
 import { buttonTheme, pageStyle, textTheme } from "../Style";
-import {
-  Box,
-  Button,
-  CardMedia,
-  ThemeProvider,
-  Typography,
-} from "@mui/material";
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from "@mui/material";
-import { useRecipeUpload } from "../../RecipeUploadContext";
-import { useUpload } from "../../UploadContext"; // Import the UploadContext
+import { Box, Button, CardMedia, ThemeProvider, Typography } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { useQuestUpload } from "../../QuestUploadContext";
+import { useRecipeUpload } from "../../RecipeUploadContext"; 
 import { AuthContext } from "../context/AuthContext";
+import FlipCameraIosIcon from '@mui/icons-material/FlipCameraIos';
+import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
+import { Close } from "@mui/icons-material";
 
 interface RecipeContainer {
   children: React.ReactNode;
@@ -26,13 +17,8 @@ interface RecipeContainer {
   recipeId: string; // Add recipeId as a prop
 }
 
-export default function RecipeContainer({
-  children,
-  title,
-  imageSrc,
-  recipeId,
-}: RecipeContainer) {
-  const recipePageStyle = { ...pageStyle, overflowX: "hidden" };
+export default function RecipeContainer({ children, title, imageSrc, recipeId }: RecipeContainer) {
+  const recipePageStyle = { ...pageStyle, overflowX: "hidden"};
   const pictureFrameSize = "40vw";
   const pictureSize = "38vw";
   const user = useContext(AuthContext);
@@ -51,13 +37,11 @@ export default function RecipeContainer({
 
   // Use custom hooks to get functions from contexts
   const { incrementRecipeUploadCount } = useRecipeUpload(); // From RecipeUploadContext
-  const { incrementUploadCount } = useUpload(); // From UploadContext
+  const { incrementQuestCount } = useQuestUpload(); // From QuestUploadContext
 
   // Load photo from localStorage on mount
   useEffect(() => {
-    const savedPhoto = localStorage.getItem(
-      `${username}_recipePhoto_${recipeId}`
-    );
+    const savedPhoto = localStorage.getItem(`${username}_recipePhoto_${recipeId}`);
     if (savedPhoto) {
       setUploadedPhoto(savedPhoto); // Load the saved photo if it exists
     }
@@ -71,15 +55,11 @@ export default function RecipeContainer({
       reader.onload = () => {
         const base64Photo = reader.result as string;
         setUploadedPhoto(base64Photo); // Update state
-        localStorage.setItem(
-          `${username}_recipePhoto_${recipeId}`,
-          base64Photo
-        ); // Save to localStorage
+        localStorage.setItem(`${username}_recipePhoto_${recipeId}`, base64Photo); // Save to localStorage
       };
       reader.readAsDataURL(file);
-      setOpen(true);
       incrementRecipeUploadCount(recipeId); // Call the recipe upload count
-      incrementUploadCount();
+      incrementQuestCount;
     }
   };
 
@@ -91,23 +71,10 @@ export default function RecipeContainer({
         setUploadedPhoto(photo);
         localStorage.setItem(`${username}_recipePhoto_${recipeId}`, photo);
         setIsWebcamOpen(false); // Close the webcam modal
-        setOpen(true);
-        var newCoins = 0;
-        if (!localStorage.getItem(`${username}_coins`)) {
-          localStorage.setItem(`${username}_coins`, newCoins.toString());
-        } else {
-          const currentCoins = parseInt(
-            localStorage.getItem(`${username}_coins`) || "0",
-            10
-          );
-          newCoins = currentCoins + 100;
-          localStorage.setItem(`${username}_coins`, newCoins.toString());
-        }
         incrementRecipeUploadCount(recipeId); // Call the recipe upload count
-        incrementUploadCount();
       }
     }
-  };
+  }
 
   // Remove the uploaded photo
   const deletePhoto = () => {
@@ -115,9 +82,7 @@ export default function RecipeContainer({
     localStorage.removeItem(`${username}_recipePhoto_${recipeId}`); // Remove from localStorage
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleClose = () => { setOpen(false); };
 
   return (
     <Box sx={recipePageStyle}>
@@ -127,9 +92,8 @@ export default function RecipeContainer({
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#38E2DF",
-        }}
-      >
+          backgroundColor: "#38E2DF"
+        }}>
         <Box
           sx={{
             width: "100vw",
@@ -137,9 +101,8 @@ export default function RecipeContainer({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            padding: 2,
-          }}
-        >
+            padding: 2
+          }}>
           <Box
             sx={{
               width: pictureFrameSize,
@@ -149,9 +112,8 @@ export default function RecipeContainer({
               alignItems: "center",
               bgcolor: "white",
               borderRadius: "10%",
-              boxShadow: 4,
-            }}
-          >
+              boxShadow: 4
+            }}>
             <CardMedia
               component="img"
               image={uploadedPhoto || imageSrc}
@@ -163,7 +125,7 @@ export default function RecipeContainer({
                 justifyContent: "center",
                 alignItems: "center",
                 borderRadius: "10%",
-                boxShadow: 4,
+                boxShadow: 4
               }}
             />
           </Box>
@@ -179,9 +141,8 @@ export default function RecipeContainer({
             alignItems: "center",
             padding: 10,
             borderBottom: 2,
-            borderColor: "black",
-          }}
-        >
+            borderColor: "black"
+          }}>
           <ThemeProvider theme={buttonTheme}>
             {/* Take Picture */}
             <Button
@@ -195,11 +156,12 @@ export default function RecipeContainer({
                 justifyContent: "center",
                 alignItems: "center",
                 borderRadius: 4,
-                margin: 1,
-              }}
-            >
+                margin: 1
+              }}>
               <ThemeProvider theme={textTheme}>
-                <Typography variant="button">Take Photo</Typography>
+                <Typography variant="button">
+                  Take Photo
+                </Typography>
               </ThemeProvider>
             </Button>
 
@@ -214,11 +176,12 @@ export default function RecipeContainer({
                 justifyContent: "center",
                 alignItems: "center",
                 borderRadius: 4,
-                margin: 1,
-              }}
-            >
+                margin: 1
+              }}>
               <ThemeProvider theme={textTheme}>
-                <Typography variant="button">Upload Photo</Typography>
+                <Typography variant="button">
+                  Upload Photo
+                </Typography>
               </ThemeProvider>
               <input
                 type="file"
@@ -227,33 +190,62 @@ export default function RecipeContainer({
                 hidden // Hide the input and link it to the button
               />
             </Button>
-          </ThemeProvider>
 
-          {/* Delete Photo Button */}
-          {uploadedPhoto && (
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={deletePhoto}
-              sx={{
-                width: "75vw",
-                height: "10vh",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: 4,
-                margin: 1,
-              }}
-            >
-              <ThemeProvider theme={textTheme}>
-                <Typography variant="button">Delete Photo</Typography>
-              </ThemeProvider>
-            </Button>
-          )}
+            {/* Delete Photo Button */}
+            {uploadedPhoto && (
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={deletePhoto}
+                  sx={{
+                    width: "75vw",
+                    height: "10vh",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: 4,
+                    margin: 1
+                  }}
+                >
+                  <ThemeProvider theme={textTheme}>
+                    <Typography variant="button">
+                      Delete Photo
+                    </Typography>
+                  </ThemeProvider>
+                </Button>
+              )}
+            </ThemeProvider>
 
           {/* Webcam Modal */}
           <Dialog open={isWebcamOpen} onClose={() => setIsWebcamOpen(false)}>
-            <DialogTitle>Take a Photo</DialogTitle>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-evenly"
+              }}
+              >
+              <DialogActions>
+                {<Close 
+                  onClick={() => setIsWebcamOpen(false)} 
+                  color="error"
+                  sx={{
+                    display: "flex"
+                  }}
+                  style={{marginRight:"100px"}}
+                />}
+              </DialogActions>
+
+              <DialogActions>
+                {<FlipCameraIosIcon 
+                  onClick={() => setFacingMode(facingMode === "user" ? "environment" : "user")}
+                  sx={{
+                    display: "flex"
+                  }}
+                  style={{marginLeft:"100px"}}/>}
+              </DialogActions>
+            </Box>
+          
             <DialogContent>
               <Webcam
                 audio={false}
@@ -264,36 +256,33 @@ export default function RecipeContainer({
                 videoConstraints={{ facingMode }}
               />
             </DialogContent>
-            <DialogActions>
-              <Button onClick={() => setIsWebcamOpen(false)} color="secondary">
-                Cancel
-              </Button>
-              <Button onClick={capturePhoto} color="primary">
-                Capture
-              </Button>
-              <Button
-                onClick={() =>
-                  setFacingMode(facingMode === "user" ? "environment" : "user")
-                }
-                variant="contained"
-                sx={{
-                  marginTop: 2,
-                }}
-              >
-                Flip Camera
-              </Button>
-            </DialogActions>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center"
+              }}>
+              <DialogActions>
+                {<PanoramaFishEyeIcon
+                  onClick={capturePhoto}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginBottom: "20px",
+                    transform: "scale(2)"
+                  }}
+                />}
+              </DialogActions>
+            </Box>
           </Dialog>
 
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
               <Box bgcolor={"#FEAF2F"} border={2}>
                 <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="button"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
+                  <Typography variant="button" display={"flex"} justifyContent={"center"}>
                     Quest Complete!
                   </Typography>
                 </ThemeProvider>
@@ -302,20 +291,12 @@ export default function RecipeContainer({
             <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
               <DialogContentText>
                 <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="body1"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
+                  <Typography variant="body1" display={"flex"} justifyContent={"center"}>
                     You earned: 10 XP!
                   </Typography>
                 </ThemeProvider>
                 <ThemeProvider theme={textTheme}>
-                  <Typography
-                    variant="body1"
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
+                  <Typography variant="body1" display={"flex"} justifyContent={"center"}>
                     Got: 100 Coins
                   </Typography>
                 </ThemeProvider>
@@ -325,11 +306,7 @@ export default function RecipeContainer({
               <ThemeProvider theme={buttonTheme}>
                 <Button onClick={handleClose} variant="contained">
                   <ThemeProvider theme={textTheme}>
-                    <Typography
-                      variant="h6"
-                      display={"flex"}
-                      justifyContent={"center"}
-                    >
+                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>
                       Continue
                     </Typography>
                   </ThemeProvider>
@@ -347,9 +324,8 @@ export default function RecipeContainer({
             justifyContent: "center",
             alignItems: "center",
             borderBottom: 2,
-            borderColor: "black",
-          }}
-        >
+            borderColor: "black"
+          }}>
           <ThemeProvider theme={textTheme}>
             <Typography variant="h3" align="center">
               {title}
@@ -365,11 +341,10 @@ export default function RecipeContainer({
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          bgcolor: "#FEAF2F",
-        }}
-      >
+          bgcolor: "#FEAF2F"
+        }}>
         <ThemeProvider theme={textTheme}>
-          <Typography variant="body1" marginLeft={5} marginRight={5}>
+          <Typography variant="h5" color="black" marginLeft={5} marginRight={5}>
             {children}
           </Typography>
         </ThemeProvider>

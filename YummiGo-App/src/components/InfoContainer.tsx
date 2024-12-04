@@ -140,7 +140,7 @@ export default function InfoContainer({ children, title, imageSrc, level }: Info
         }}
       >
         <ThemeProvider theme={textTheme}>
-          <Typography variant="h5" marginLeft={5} marginRight={5}>
+          <Typography variant="h5" color="black" marginLeft={5} marginRight={5}>
             {children}
           </Typography>
         </ThemeProvider>
@@ -218,7 +218,8 @@ export default function InfoContainer({ children, title, imageSrc, level }: Info
 
                   <ThemeProvider theme={textTheme}>
                     <Typography
-                      variant="body1"
+                      variant="h5" 
+                      color="black"
                       display={"flex"}
                       justifyContent={"center"}
                     >

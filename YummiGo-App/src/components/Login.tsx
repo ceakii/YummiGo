@@ -24,20 +24,22 @@ const Login: React.FC = () => {
       // If username exists, validate password
       if (storedPassword === password) {
         setErrorMessage('');
-        localStorage.setItem('username', username);
-        const initialCompletionStatuses = [false, false, false, false, false];
-        localStorage.setItem(`${username}_completionStatuses`, JSON.stringify(initialCompletionStatuses));
         login(username);
         navigate('/YummiGo/');
-      } else {
+      } 
+      else {
         // If password doesn't match
         setErrorMessage('Invalid username or password');
       }
-    } else {
+    } 
+    else {
       // If username doesn't exist, create a new account
       localStorage.setItem(`${username}_password`, password); // Store password
       const initialCompletionStatuses = [false, false, false, false, false];
       localStorage.setItem(`${username}_completionStatuses`, JSON.stringify(initialCompletionStatuses));
+      const initialQuestProgress = { count: 0, completedQuests: [] };
+      localStorage.setItem(`${username}_questCount`, initialQuestProgress.count.toString());
+      localStorage.setItem(`${username}_completedQuests`, JSON.stringify(initialQuestProgress.completedQuests));
       setErrorMessage('');
       login(username);
       navigate('/YummiGo/');

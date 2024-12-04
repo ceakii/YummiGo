@@ -5,16 +5,36 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { buttonTheme, pageStyle, textTheme } from "../../Style";
-import { useNavigate } from "react-router-dom";
+import { useQuestUpload } from "../../../QuestUploadContext";
+import { useRecipeUpload } from "../../../RecipeUploadContext";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 // Image Paths
 import FruitBowl from "/images/FruitBowl.png";
 
 export default function Quest1() {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" }
-  const navigate = useNavigate();
+  const { questUploadCount, incrementQuestCount } = useQuestUpload();
+  const { recipeUploadCount } = useRecipeUpload();
+
+  const [ clicked, setClicked ] = useState(false);
+
+  const { user } = useContext(AuthContext);
+
+  // For Dialog Box
+  const [open, setOpen] = useState(false);
+  const handleClose = () => { 
+    incrementQuestCount("quest1");
+    const coinsString = localStorage.getItem(`${user}_coins`);
+    const coins = coinsString ? parseInt(coinsString, 10) : 0;
+    localStorage.setItem(`${user}_coins`, (coins + 200).toString());
+    setClicked(false);
+    setOpen(false); 
+  };
 
   return (
     /* Page Container */
@@ -131,7 +151,7 @@ export default function Quest1() {
           {/* Quest Objective */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 Cook one recipe and Upload a picture of it!
               </Typography>
             </ThemeProvider>
@@ -149,7 +169,7 @@ export default function Quest1() {
           {/* Quest Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 Your first quest to start your healthy adventure!
               </Typography>
             </ThemeProvider>
@@ -169,9 +189,39 @@ export default function Quest1() {
           >
             {/* Quest Button */}
             <ThemeProvider theme={buttonTheme}>
+              { questUploadCount === 0 && !(recipeUploadCount > 0) ? (
               <Button
-                onClick={() => navigate("/YummiGo/recipe")}
+                onClick={() => setClicked(true)}
                 variant="contained"
+                sx={{
+                  width: "50vw",
+                  height: "10vh",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "#C67B58",
+                  borderRadius: 4
+                }}
+                disabled={clicked}
+              >
+                {/* Button Label */}
+                <ThemeProvider theme={textTheme}>
+                  { !clicked ? (
+                  <Typography variant="button">
+                    Accept
+                  </Typography>
+                  ) : (
+                  <Typography variant="button">
+                    Accepted
+                  </Typography>
+                  )}
+                </ThemeProvider>
+              </Button>
+              ) : (
+              <Button
+                onClick={() => setOpen(true)}
+                variant="contained"
+                disabled={ questUploadCount >= 1 }
                 sx={{
                   width: "50vw",
                   height: "10vh",
@@ -184,13 +234,56 @@ export default function Quest1() {
               >
                 {/* Button Label */}
                 <ThemeProvider theme={textTheme}>
+                  { !(questUploadCount >= 1) ? (
                   <Typography variant="button">
-                    Browse Recipes
+                    Complete
                   </Typography>
+                  ) : (
+                    <Typography variant="button">
+                    Completed
+                  </Typography>
+                  )}
                 </ThemeProvider>
               </Button>
+              )}
             </ThemeProvider>
           </Box>
+
+          { (questUploadCount > 0) ? null : (
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
+              <Box bgcolor={"#FEAF2F"} border={2}>
+                <ThemeProvider theme={textTheme}>
+                  <Typography variant="button" display={"flex"} justifyContent={"center"}>
+                    Quest Complete!
+                  </Typography>
+                </ThemeProvider>
+              </Box>
+            </DialogTitle>
+            
+            <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
+              <DialogContentText>
+                <ThemeProvider theme={textTheme}>
+                  <Typography variant="body1" display={"flex"} justifyContent={"center"}>
+                    Got: 200 Coins
+                  </Typography>
+                </ThemeProvider>
+              </DialogContentText>
+
+            </DialogContent>
+            <DialogActions sx={{ bgcolor: "#FEAF2F", display:"flex", justifyContent:"center"}}>
+              <ThemeProvider theme={buttonTheme}>
+                <Button onClick={handleClose} variant="contained">
+                  <ThemeProvider theme={textTheme}>
+                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>
+                      Continue
+                    </Typography>
+                  </ThemeProvider>
+                </Button>
+              </ThemeProvider>
+            </DialogActions>
+          </Dialog>
+          )}
         </Grid>
       </Box>
     </Box>

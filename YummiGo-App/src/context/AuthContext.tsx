@@ -10,6 +10,9 @@ interface AuthContextType {
   loadCompletionStatuses: () => void;
   setBoughtStatus: (statuses: boolean[]) => void;
   loadBoughtStatus: () => void;
+  questProgress: { count: number; completedQuests: Set<string> };
+  incrementQuestProgress: (questId: string) => void;
+  loadQuestProgress: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -22,12 +25,16 @@ export const AuthContext = createContext<AuthContextType>({
   loadCompletionStatuses: () => {},
   setBoughtStatus: () => {},
   loadBoughtStatus: () => {},
+  questProgress: { count: 0, completedQuests: new Set() },
+  incrementQuestProgress: () => {},
+  loadQuestProgress: () => {}
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [user, setUser] = useState<string | null>(null);
+  const [numOfCoins, setNumOfCoins] = useState(0);
   const [completionStatusesState, setCompletionStatusesState] = useState<
     boolean[]
   >(() => {
@@ -51,6 +58,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const setCompletionStatuses = (statuses: boolean[]) => {
     if (user) {
       // For logged-in users, use localStorage with a user-specific key
+      localStorage.setItem(`${user}_completionStatuses`, JSON.stringify(statuses));
       localStorage.setItem(
         `${user}_completionStatuses`,
         JSON.stringify(statuses)
@@ -97,23 +105,74 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     );
   };
 
+  // Quest Progress
+  const [questProgress, setQuestProgress] = useState<{ count: number; completedQuests: Set<string> }>({
+    count: 0,
+    completedQuests: new Set(),
+  });
+
+  const incrementQuestProgress = (questId: string) => {
+    setQuestProgress((prev) => {
+      if (prev.completedQuests.has(questId)) return prev; // Prevent duplicate completions
+      const updatedCompletedQuests = new Set(prev.completedQuests).add(questId);
+      const updatedCount = prev.count + 1;
+
+      const newProgress = { count: updatedCount, completedQuests: updatedCompletedQuests };
+      saveQuestProgress(newProgress); // Save progress to storage
+      return newProgress;
+    });
+  };
+
+  const loadQuestProgress = () => {
+    if (user) {
+      const savedCount = localStorage.getItem(`${user}_questCount`);
+      const savedQuests = localStorage.getItem(`${user}_completedQuests`);
+
+      setQuestProgress({
+        count: savedCount ? parseInt(savedCount, 10) : 0,
+        completedQuests: savedQuests ? new Set(JSON.parse(savedQuests)) : new Set(),
+      });
+    } else {
+      setQuestProgress({ count: 0, completedQuests: new Set() }); // Default quest progress for guest
+    }
+  };
+
+  const saveQuestProgress = (progress: { count: number; completedQuests: Set<string> }) => {
+    if (user) {
+      localStorage.setItem(`${user}_questCount`, progress.count.toString());
+      localStorage.setItem(`${user}_completedQuests`, JSON.stringify([...progress.completedQuests]));
+    }
+  };
+
   const login = (username: string) => {
     setUser(username);
     loadCompletionStatuses();
     loadBoughtStatus();
+    loadQuestProgress();
+    if (!localStorage.getItem(`${username}_coins`)) {
+      var newCoins = 0;
+      localStorage.setItem(`${username}_coins`, newCoins.toString());
+      setNumOfCoins(newCoins);
+    } else {
+      const currentCoins = parseInt(
+        localStorage.getItem(`${username}_coins`) || "0",
+        10
+      );
+      setNumOfCoins(currentCoins);
+    }
   };
 
   const logout = () => {
-    //localStorage.clear();
-    //sessionStorage.clear();
     setUser(null);
-    loadCompletionStatuses();
+    setQuestProgress({ count: 0, completedQuests: new Set() });
+
     loadBoughtStatus();
   };
 
   useEffect(() => {
     loadCompletionStatuses();
     loadBoughtStatus();
+    loadQuestProgress();
   }, [user]);
 
   return (
@@ -128,6 +187,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         boughtStatus: boughtStatusState,
         setBoughtStatus,
         loadBoughtStatus,
+        questProgress, 
+        incrementQuestProgress, 
+        loadQuestProgress,
       }}
     >
       {children}

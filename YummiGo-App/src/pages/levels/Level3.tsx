@@ -116,7 +116,7 @@ export default function Level3() {
           {/* Level Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 Now that you've found a possible source of nutrition for Carrotti, it's time to put your knowledge to the test.
                 If you can show that this dish will help Carrotti, then it will join you as your Yummigo!
               </Typography>
@@ -135,7 +135,7 @@ export default function Level3() {
           {/* Level Objective */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 Help Carrotti by answering 3 questions correctly.
               </Typography>
             </ThemeProvider>
@@ -153,7 +153,7 @@ export default function Level3() {
           {/* Level Fail Conditions */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 Make 3 Mistakes.
               </Typography>
             </ThemeProvider>

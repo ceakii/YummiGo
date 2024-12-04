@@ -7,14 +7,54 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { buttonTheme, pageStyle, textTheme } from "../../Style";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle }
+  from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import React, { useEffect, useState } from "react";
 
 // Image Paths
 import HeroImage from "/images/HeroAvatar.png";
 
 export default function Level5() {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" }
+  const { completionStatuses, setCompletionStatuses, user } = React.useContext(AuthContext);
+
   const navigate = useNavigate();
+
+  // For Dialog Box
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => { setOpen(false); };
+
+  const handleContinue = () => {
+    setOpen(false);
+    handleLevelCompletion(5);
+    navigate("/YummiGo/");
+  };
+
+  useEffect(() => {
+    const storedStatuses = localStorage.getItem("completionStatuses");
+    if (storedStatuses) {
+      setCompletionStatuses(JSON.parse(storedStatuses));
+    } else {
+      const storedSessionStatuses = sessionStorage.getItem("completionStatuses");
+      if (storedSessionStatuses) {
+        setCompletionStatuses(JSON.parse(storedSessionStatuses));
+      }
+    }
+  }, [user, setCompletionStatuses]);
+
+  const handleLevelCompletion = (levelId: number) => {
+    if (setCompletionStatuses) {
+      const updatedCompletionStatuses = [...completionStatuses];
+      updatedCompletionStatuses[levelId - 1] = true;
+      setCompletionStatuses(updatedCompletionStatuses);
+    }
+  };
 
   return (
     /* Page Container */
@@ -132,7 +172,7 @@ export default function Level5() {
           {/* Level Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 The path to a healthy future starts with you. Where will you go? What will you do?
               </Typography>
             </ThemeProvider>
@@ -150,7 +190,7 @@ export default function Level5() {
           {/* Level Objective */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
+              <Typography variant="h5" color="black">
                 Explore the other parts of YummiGo!
               </Typography>
             </ThemeProvider>
@@ -171,10 +211,7 @@ export default function Level5() {
             {/* Level Button */}
             <ThemeProvider theme={buttonTheme}>
             <Button
-              onClick={() => {
-                sessionStorage.setItem("level5Completed", "true");
-                navigate("/YummiGo/");
-              }}
+              onClick={handleClickOpen}
               variant="contained"
               sx={{
                 width: "50vw",
@@ -194,6 +231,70 @@ export default function Level5() {
                 </ThemeProvider>
               </Button>
             </ThemeProvider>
+
+            {/* Dialog Box */}
+            <Dialog
+              open={open}
+              onClose={handleClose}
+            >
+              {/* Dialog Title */}
+              <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
+                <Box bgcolor={"#FEAF2F"} border={2}>
+                  <ThemeProvider theme={textTheme}>
+                    <Typography
+                      variant="button"
+                      display={"flex"}
+                      justifyContent={"center"}
+                    >
+                      Level Complete!
+                    </Typography>
+                  </ThemeProvider>
+                </Box>
+              </DialogTitle>
+
+              {/* Dialog Content */}
+              <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
+                <DialogContentText>
+                  <ThemeProvider theme={textTheme}>
+                    <Typography
+                      variant="h5" 
+                      color="black"
+                      display={"flex"}
+                      justifyContent={"center"}
+                    >
+                      You have completed the first chapter!
+                    </Typography>
+                  </ThemeProvider>
+
+                  <ThemeProvider theme={textTheme}>
+                    <Typography
+                      variant="body1"
+                      display={"flex"}
+                      justifyContent={"center"}
+                    >
+                      
+                    </Typography>
+                  </ThemeProvider>
+                </DialogContentText>
+              </DialogContent>
+
+              {/* Dialog Action */}
+              <DialogActions sx={{ bgcolor: "#FEAF2F", display: 'flex', justifyContent: 'center' }}>
+                <ThemeProvider theme={buttonTheme}>
+                  <Button onClick={handleContinue} variant="contained">
+                    <ThemeProvider theme={textTheme}>
+                      <Typography
+                        variant="h6"
+                        display={"flex"}
+                        justifyContent={"center"}
+                      >
+                        Continue
+                      </Typography>
+                    </ThemeProvider>
+                  </Button>
+                </ThemeProvider>
+              </DialogActions>
+            </Dialog>
           </Box>
         </Grid>
       </Box>

@@ -5,16 +5,36 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { buttonTheme, pageStyle, textTheme } from "../../Style";
-import { useNavigate } from "react-router-dom";
+import { useQuestUpload } from "../../../QuestUploadContext";
+import { useRecipeUpload } from "../../../RecipeUploadContext";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 // Image Paths
-import HummusaVeggieSticks from "/images/HummusaVeggieSticks.png";
+import FruitBowl from "/images/FruitBowl.png";
 
-export default function Level2() {
+export default function Quest2() {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" }
-  const navigate = useNavigate();
+  const { questUploadCount, incrementQuestCount } = useQuestUpload();
+  const { recipeUploadCount } = useRecipeUpload();
+
+  const [ clicked, setClicked ] = useState(false);
+
+  const { user } = useContext(AuthContext);
+
+  // For Dialog Box
+  const [open, setOpen] = useState(false);
+  const handleClose = () => { 
+    incrementQuestCount("quest2");
+    const coinsString = localStorage.getItem(`${user}_coins`);
+    const coins = coinsString ? parseInt(coinsString, 10) : 0;
+    localStorage.setItem(`${user}_coins`, (coins + 400).toString());
+    setClicked(false);
+    setOpen(false); 
+  };
 
   return (
     /* Page Container */
@@ -42,8 +62,8 @@ export default function Level2() {
           {/* Image Frame */}
           <Box
             sx={{
-              width: "20vw",
-              height: "20vw",
+              width: "40vw",
+              height: "40vw",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -55,11 +75,11 @@ export default function Level2() {
             {/* Image */}
             <CardMedia
               component="img"
-              image={HummusaVeggieSticks}
-              alt="Carrotti"
+              image={FruitBowl}
+              alt="Fruit Bowl"
               sx={{
-                width: "19vw",
-                height: "19vw",
+                width: "38vw",
+                height: "38vw",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -87,13 +107,13 @@ export default function Level2() {
           {/* Title */}
           <ThemeProvider theme={textTheme}>
             <Typography variant="h4" align="center">
-              Level 2: A Healthy Snack
+              Quest 2
             </Typography>
           </ThemeProvider>
         </Box>
       </Box>
 
-      {/* Levels List Container */}
+      {/* Quests List Container */}
       <Box
         sx={{
           width: "vw",
@@ -104,7 +124,7 @@ export default function Level2() {
           padding: 5
         }}
       >
-        {/* Level Container (Objective + Description + Browse Recipe Button) */}
+        {/* Quest Container (Objective + Description + Browse Recipe Button) */}
         <Grid
           size={{ xs: 9, sm: 10, md: 10, lg: 10 }}
           sx={{
@@ -119,29 +139,7 @@ export default function Level2() {
             boxShadow: 4
           }}
         >
-          {/* Level Description Header */}
-          <Grid size={"auto"} flexWrap={"wrap"}>
-            <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
-                Story:
-              </Typography>
-            </ThemeProvider>
-          </Grid>
-
-          {/* Level Description */}
-          <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
-            <ThemeProvider theme={textTheme}>
-              <Typography variant="h5" color="black">
-                Although you have disturbed Carrotti, it is actually not angry. 
-                It just has very poor eyesight and can't see you very well.
-                You realize the soil in this area is actually not suitable for Carrotti's growth. 
-                It will take a long time for Carrotti to get the nutrients it needs to develop its eyesight.
-                What if there was a way to help Carrotti?
-              </Typography>
-            </ThemeProvider>
-          </Grid>
-          
-          {/* Level Objective Header */}
+          {/* Quest Objective Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="h3">
@@ -150,34 +148,34 @@ export default function Level2() {
             </ThemeProvider>
           </Grid>
 
-          {/* Level Objective */}
+          {/* Quest Objective */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="h5" color="black">
-                Read about Hummus and Veggie Sticks.
+                Cook two recipes and Upload their pictures!
               </Typography>
             </ThemeProvider>
           </Grid>
 
-          {/* Level Rewards Header */}
+          {/* Quest Description Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="h3">
-                Reward(s):
+                Description:
               </Typography>
             </ThemeProvider>
           </Grid>
 
-          {/* Level Rewards Description */}
+          {/* Quest Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
               <Typography variant="h5" color="black">
-                Recipe: Hummus and Veggie Sticks
+                Your second quest to start your healthy adventure!
               </Typography>
             </ThemeProvider>
           </Grid>
 
-          {/* Level Button Container */}
+          {/* Quest Button Container */}
           <Box
             sx={{
               width: "100vw",
@@ -189,11 +187,41 @@ export default function Level2() {
               marginTop: 2
             }}
           >
-            {/* Level Button */}
+            {/* Quest Button */}
             <ThemeProvider theme={buttonTheme}>
+              { questUploadCount === 1 && !(recipeUploadCount > 1) ? (
               <Button
-                onClick={() => navigate("/YummiGo/info/hummusaveggiesticksinfo")}
+                onClick={() => setClicked(true)}
                 variant="contained"
+                sx={{
+                  width: "50vw",
+                  height: "10vh",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "#C67B58",
+                  borderRadius: 4
+                }}
+                disabled={clicked}
+              >
+                {/* Button Label */}
+                <ThemeProvider theme={textTheme}>
+                  { !clicked ? (
+                  <Typography variant="button">
+                    Accept
+                  </Typography>
+                  ) : (
+                  <Typography variant="button">
+                    Accepted
+                  </Typography>
+                  )}
+                </ThemeProvider>
+              </Button>
+              ) : (
+              <Button
+                onClick={() => setOpen(true)}
+                variant="contained"
+                disabled={ questUploadCount >= 2 }
                 sx={{
                   width: "50vw",
                   height: "10vh",
@@ -206,13 +234,56 @@ export default function Level2() {
               >
                 {/* Button Label */}
                 <ThemeProvider theme={textTheme}>
+                  { !(questUploadCount >= 2) ? (
                   <Typography variant="button">
-                    START
+                    Complete
                   </Typography>
+                  ) : (
+                    <Typography variant="button">
+                    Completed
+                  </Typography>
+                  )}
                 </ThemeProvider>
               </Button>
+              )}
             </ThemeProvider>
           </Box>
+
+          { (questUploadCount > 1) ? null : (
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
+              <Box bgcolor={"#FEAF2F"} border={2}>
+                <ThemeProvider theme={textTheme}>
+                  <Typography variant="button" display={"flex"} justifyContent={"center"}>
+                    Quest Complete!
+                  </Typography>
+                </ThemeProvider>
+              </Box>
+            </DialogTitle>
+            
+            <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
+              <DialogContentText>
+                <ThemeProvider theme={textTheme}>
+                  <Typography variant="body1" display={"flex"} justifyContent={"center"}>
+                    Got: 400 Coins
+                  </Typography>
+                </ThemeProvider>
+              </DialogContentText>
+
+            </DialogContent>
+            <DialogActions sx={{ bgcolor: "#FEAF2F", display:"flex", justifyContent:"center"}}>
+              <ThemeProvider theme={buttonTheme}>
+                <Button onClick={handleClose} variant="contained">
+                  <ThemeProvider theme={textTheme}>
+                    <Typography variant="h6" display={"flex"} justifyContent={"center"}>
+                      Continue
+                    </Typography>
+                  </ThemeProvider>
+                </Button>
+              </ThemeProvider>
+            </DialogActions>
+          </Dialog>
+          )}
         </Grid>
       </Box>
     </Box>
