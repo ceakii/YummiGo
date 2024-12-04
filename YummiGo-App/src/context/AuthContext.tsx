@@ -150,7 +150,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     loadBoughtStatus();
     loadQuestProgress();
     if (!localStorage.getItem(`${username}_coins`)) {
-      var newCoins = 0;
+      var newCoins = (numOfCoins === null) ? 0 : 0;
       localStorage.setItem(`${username}_coins`, newCoins.toString());
       setNumOfCoins(newCoins);
     } else {
