@@ -20,13 +20,20 @@ export default function Level5() {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" }
   const { completionStatuses, setCompletionStatuses, user } = React.useContext(AuthContext);
 
+  const level5Completed = completionStatuses[4];
+
   const navigate = useNavigate();
 
   // For Dialog Box
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    if(level5Completed) {
+      navigate("/YummiGo");
+    }
+    else {
+      setOpen(true);
+    }
   };
   const handleClose = () => { setOpen(false); };
 
@@ -71,8 +78,8 @@ export default function Level5() {
         {/* Image Container */}
         <Box
           sx={{
-            width: "100vw",
-            minHeight: "20vh",
+            width: { xs: "40vw", sm: "20vw" },
+            height: { xs: "40vw", sm: "20vw" },
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -98,8 +105,8 @@ export default function Level5() {
               image={HeroImage}
               alt="Dragon"
               sx={{
-                width: "19vw",
-                height: "19vw",
+                width: { xs: "38vw", sm: "19vw" },
+                height: { xs: "38vw", sm: "19vw" },
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -126,7 +133,7 @@ export default function Level5() {
         >
           {/* Title */}
           <ThemeProvider theme={textTheme}>
-            <Typography variant="h4" align="center">
+            <Typography variant="h4" fontSize={"16pt"} align="center" padding={1}>
               Level 5: Thank You!
             </Typography>
           </ThemeProvider>
@@ -141,7 +148,7 @@ export default function Level5() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          padding: 5
+          padding: 2
         }}
       >
         {/* Level Container (Objective + Description + Browse Recipe Button) */}
@@ -163,7 +170,7 @@ export default function Level5() {
           {/* Level Description Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
+              <Typography variant="h4" fontSize = {"14pt"}>
                 Story:
               </Typography>
             </ThemeProvider>
@@ -172,7 +179,7 @@ export default function Level5() {
           {/* Level Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h5" color="black">
+              <Typography variant="h5" fontSize = {"12pt"} color="black">
                 The path to a healthy future starts with you. Where will you go? What will you do?
               </Typography>
             </ThemeProvider>
@@ -181,7 +188,7 @@ export default function Level5() {
           {/* Level Objective Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
+              <Typography variant="h4" fontSize = {"14pt"}>
                 Objective:
               </Typography>
             </ThemeProvider>
@@ -190,7 +197,7 @@ export default function Level5() {
           {/* Level Objective */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h5" color="black">
+              <Typography variant="h5" fontSize = {"12pt"} color="black">
                 Explore the other parts of YummiGo!
               </Typography>
             </ThemeProvider>
@@ -239,7 +246,7 @@ export default function Level5() {
             >
               {/* Dialog Title */}
               <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
-                <Box bgcolor={"#FEAF2F"} border={2}>
+                <Box>
                   <ThemeProvider theme={textTheme}>
                     <Typography
                       variant="button"
@@ -257,22 +264,14 @@ export default function Level5() {
                 <DialogContentText>
                   <ThemeProvider theme={textTheme}>
                     <Typography
-                      variant="h5" 
-                      color="black"
-                      display={"flex"}
-                      justifyContent={"center"}
-                    >
-                      You have completed the first chapter!
-                    </Typography>
-                  </ThemeProvider>
-
-                  <ThemeProvider theme={textTheme}>
-                    <Typography
                       variant="body1"
                       display={"flex"}
                       justifyContent={"center"}
+                      alignContent={"center"}
+                      fontSize={"14pt"}
+                      marginTop={1}
                     >
-                      
+                      Chapter 1 Completed
                     </Typography>
                   </ThemeProvider>
                 </DialogContentText>

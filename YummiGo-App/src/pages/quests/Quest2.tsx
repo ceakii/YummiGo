@@ -62,8 +62,8 @@ export default function Quest2() {
           {/* Image Frame */}
           <Box
             sx={{
-              width: "40vw",
-              height: "40vw",
+              width: { xs: "40vw", sm: "20vw" },
+              height: { xs: "40vw", sm: "20vw" },
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -78,8 +78,8 @@ export default function Quest2() {
               image={FruitBowl}
               alt="Fruit Bowl"
               sx={{
-                width: "38vw",
-                height: "38vw",
+                width: { xs: "38vw", sm: "19vw" },
+                height: { xs: "38vw", sm: "19vw" },
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -106,7 +106,7 @@ export default function Quest2() {
         >
           {/* Title */}
           <ThemeProvider theme={textTheme}>
-            <Typography variant="h4" align="center">
+            <Typography variant="h4" fontSize={"16pt"} align="center" padding={2}>
               Quest 2
             </Typography>
           </ThemeProvider>
@@ -142,7 +142,7 @@ export default function Quest2() {
           {/* Quest Objective Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
+              <Typography variant="h4" fontSize = {"14pt"}>
                 Objective:
               </Typography>
             </ThemeProvider>
@@ -151,7 +151,7 @@ export default function Quest2() {
           {/* Quest Objective */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h5" color="black">
+              <Typography variant="h5" fontSize = {"12pt"} color="black">
                 Cook two recipes and Upload their pictures!
               </Typography>
             </ThemeProvider>
@@ -160,7 +160,7 @@ export default function Quest2() {
           {/* Quest Description Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
+              <Typography variant="h4" fontSize = {"14pt"}>
                 Description:
               </Typography>
             </ThemeProvider>
@@ -169,7 +169,7 @@ export default function Quest2() {
           {/* Quest Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h5" color="black">
+              <Typography variant="h5" fontSize = {"12pt"} color="black">
                 Your second quest to start your healthy adventure!
               </Typography>
             </ThemeProvider>

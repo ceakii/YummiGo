@@ -31,8 +31,8 @@ export default function Level1() {
         {/* Image Container */}
         <Box
           sx={{
-            width: "100vw",
-            minHeight: "20vh",
+            width: { xs: "40vw", sm: "20vw" },
+            height: { xs: "40vw", sm: "20vw" },
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -45,8 +45,8 @@ export default function Level1() {
             image={CarrottiImage}
             alt="Carrotti"
             sx={{
-              width: "19vw",
-              height: "19vw",
+              width: { xs: "38vw", sm: "19vw" },
+              height: { xs: "38vw", sm: "19vw" },
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -70,7 +70,7 @@ export default function Level1() {
         >
           {/* Title */}
           <ThemeProvider theme={textTheme}>
-            <Typography variant="h4" align="center">
+            <Typography variant="h4" fontSize={"16pt"} align="center" padding={2}>
               Level 1: Meeting Carrotti
             </Typography>
           </ThemeProvider>
@@ -85,7 +85,7 @@ export default function Level1() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          padding: 5
+          padding: 2
         }}
       >
         {/* Level Container (Objective + Description + Browse Recipe Button) */}
@@ -97,7 +97,8 @@ export default function Level1() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            padding: 2,
+            paddingTop: 2,
+            paddingBottom: 2,
             bgcolor: "#FEAF2F",
             borderRadius: "10%",
             boxShadow: 4
@@ -107,7 +108,7 @@ export default function Level1() {
           {/* Level Description Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
+              <Typography variant="h4" fontSize = {"14pt"}>
                 Story:
               </Typography>
             </ThemeProvider>
@@ -116,7 +117,7 @@ export default function Level1() {
           {/* Level Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h5" color="black">
+              <Typography variant="h5" fontSize = {"12pt"} color="black">
                 On your way to the castle, you spot something on the ground. 
                 At first glance, it looks like a stem, but this one looks different from the surrounding vegetation.
                 You decide to remove the stem, and find that you've disturbed a Carrotti! 
@@ -128,7 +129,7 @@ export default function Level1() {
           {/* Level Objective Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
+              <Typography variant="h4" fontSize = {"14pt"}>
                 Objective:
               </Typography>
             </ThemeProvider>
@@ -137,29 +138,12 @@ export default function Level1() {
           {/* Level Objective */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h5" color="black">
+              <Typography variant="h5" fontSize = {"12pt"} color="black">
                 Learn about Carrotti.
               </Typography>
             </ThemeProvider>
           </Grid>
-          
-          {/* Level Rewards Header */}
-          <Grid size={"auto"} flexWrap={"wrap"}>
-            <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
 
-              </Typography>
-            </ThemeProvider>
-          </Grid>
-
-          {/* Level Rewards Description */}
-          <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
-            <ThemeProvider theme={textTheme}>
-              <Typography variant="body1">
-
-              </Typography>
-            </ThemeProvider>
-          </Grid>
           {/* Level Button Container */}
           <Box
             sx={{

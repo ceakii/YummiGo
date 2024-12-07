@@ -19,8 +19,8 @@ interface RecipeContainer {
 
 export default function RecipeContainer({ children, title, imageSrc, recipeId }: RecipeContainer) {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden"};
-  const pictureFrameSize = "40vw";
-  const pictureSize = "38vw";
+  const pictureFrameSize = { xs: "40vw", sm: "20vw" };
+  const pictureSize = { xs: "38vw", sm: "19vw" };
   const user = useContext(AuthContext);
   const username = user.user;
   const [isWebcamOpen, setIsWebcamOpen] = useState(false);
@@ -49,6 +49,7 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
 
   // Save photo to localStorage on upload
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const fileInput = e.target;
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -56,10 +57,11 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
         const base64Photo = reader.result as string;
         setUploadedPhoto(base64Photo); // Update state
         localStorage.setItem(`${username}_recipePhoto_${recipeId}`, base64Photo); // Save to localStorage
+        incrementRecipeUploadCount(recipeId); // Call the recipe upload count
+        incrementQuestCount;
       };
       reader.readAsDataURL(file);
-      incrementRecipeUploadCount(recipeId); // Call the recipe upload count
-      incrementQuestCount;
+      fileInput.value = '';
     }
   };
 
@@ -72,6 +74,7 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
         localStorage.setItem(`${username}_recipePhoto_${recipeId}`, photo);
         setIsWebcamOpen(false); // Close the webcam modal
         incrementRecipeUploadCount(recipeId); // Call the recipe upload count
+        incrementQuestCount;
       }
     }
   }
@@ -139,7 +142,7 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            padding: 10,
+            padding: {xs: 8, sm: 12},
             borderBottom: 2,
             borderColor: "black"
           }}>
@@ -344,7 +347,7 @@ export default function RecipeContainer({ children, title, imageSrc, recipeId }:
           bgcolor: "#FEAF2F"
         }}>
         <ThemeProvider theme={textTheme}>
-          <Typography variant="h5" color="black" marginLeft={5} marginRight={5}>
+          <Typography variant="h5" color="black" fontSize={"12pt"} marginLeft={5} marginRight={5}>
             {children}
           </Typography>
         </ThemeProvider>

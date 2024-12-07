@@ -14,19 +14,15 @@ interface YummigoContainer {
 
 export default function YummigoContainer({ children, title, imageSrc, level }: YummigoContainer) {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden" };
-  const pictureFrameSize = "20vw";
-  const pictureSize = "19vw";
+  const pictureFrameSize = { xs: "40vw", sm: "20vw" };
+  const pictureSize = { xs: "38vw", sm: "19vw" };
 
   // For Dialog Box
   const [open, setOpen] = useState(false);
 
   const { completionStatuses, setCompletionStatuses, user } = useContext(AuthContext);
 
-  const handleClickOpen = () => {
-    if (!isLevelCompleted()) {
-      setOpen(true);
-    }
-  };
+  const handleClickOpen = () => { setOpen(true); };
   const handleClose = () => { setOpen(false); };
 
   const navigate = useNavigate();
@@ -42,10 +38,6 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
       }
     }
   }, [user, setCompletionStatuses]);
-
-  const isLevelCompleted = () => {
-    return completionStatuses[level - 1];
-  };
 
   const handleLevelCompletion = (levelId: number) => {
     if (setCompletionStatuses) {
@@ -90,6 +82,8 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
             sx={{
               width: pictureFrameSize,
               height: pictureFrameSize,
+              maxWidth: "200px",
+              maxHeight: "200px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -106,6 +100,8 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
               sx={{
                 height: pictureSize,
                 width: pictureSize,
+                maxWidth: "190px",
+                maxHeight: "190px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -130,7 +126,7 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
           }}
         >
           <ThemeProvider theme={textTheme}>
-            <Typography variant="h3" align="center">
+            <Typography variant="h4" fontSize={"16pt"} align="center">
               {title}
             </Typography>
           </ThemeProvider>
@@ -148,7 +144,7 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
         }}
       >
         <ThemeProvider theme={textTheme}>
-          <Typography variant="h5" marginLeft={5} marginRight={5}>
+          <Typography variant="h5" fontSize={"12pt"} marginLeft={2} marginRight={2}>
             {children}
           </Typography>
         </ThemeProvider>
@@ -162,7 +158,7 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            padding: 2,
+            paddingBottom: 2,
             borderBottom: 2,
             borderColor: "black"
           }}
@@ -196,8 +192,8 @@ export default function YummigoContainer({ children, title, imageSrc, level }: Y
             onClose={handleClose}
           >
             {/* Dialog Title */}
-            <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
-              <Box bgcolor={"#FEAF2F"} border={2}>
+            <DialogTitle bgcolor={"#38E2DF"} borderBottom ={2}>
+              <Box>
                 <ThemeProvider theme={textTheme}>
                   <Typography
                     variant="button"

@@ -17,8 +17,8 @@ interface InfoContainer {
 
 export default function InfoContainer({ children, title, imageSrc, level }: InfoContainer) {
   const recipePageStyle = { ...pageStyle, overflowX: "hidden"}
-  const pictureFrameSize = "20vw";
-  const pictureSize = "19vw";
+  const pictureFrameSize = { xs: "40vw", sm: "20vw" };
+  const pictureSize = { xs: "38vw", sm: "19vw" };
 
   // For Dialog Box
   const [open, setOpen] = useState(false);
@@ -122,7 +122,7 @@ export default function InfoContainer({ children, title, imageSrc, level }: Info
           }}
         >
           <ThemeProvider theme={textTheme}>
-            <Typography variant="h3" align="center">
+            <Typography variant="h4" fontSize={"16pt"} align="center">
               {title}
             </Typography>
           </ThemeProvider>
@@ -140,7 +140,7 @@ export default function InfoContainer({ children, title, imageSrc, level }: Info
         }}
       >
         <ThemeProvider theme={textTheme}>
-          <Typography variant="h5" color="black" marginLeft={5} marginRight={5}>
+          <Typography variant="h5" fontSize={"12pt"} marginLeft={2} marginRight={2}>
             {children}
           </Typography>
         </ThemeProvider>
@@ -154,7 +154,7 @@ export default function InfoContainer({ children, title, imageSrc, level }: Info
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            padding: 2,
+            paddingBottom: 2,
             borderBottom: 2,
             borderColor: "black"
           }}
@@ -189,7 +189,7 @@ export default function InfoContainer({ children, title, imageSrc, level }: Info
           >
             {/* Dialog Title */}
             <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
-              <Box bgcolor={"#FEAF2F"} border={2}>
+              <Box>
                 <ThemeProvider theme={textTheme}>
                   <Typography
                     variant="button"
