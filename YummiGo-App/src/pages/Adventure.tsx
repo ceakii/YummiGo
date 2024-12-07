@@ -52,13 +52,13 @@ export default function Adventure() {
           position: "absolute",
           width: "100%",
           display: "flex",
-          flexDirection: { xs: "column", sm: "row" },
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          top: { xs: "43%", sm: "50%" },
+          top: "43%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          p: 15,
+          p: 5,
           gap: 1,
           maxHeight: "80vh",
           overflowY: "auto",
@@ -79,8 +79,8 @@ export default function Adventure() {
                 alt="Hero Image"
                 sx={{
                   position: "absolute",
-                  top: "-120px",
-                  width: "100%",
+                  left: "-120px",
+                  width: "80%",
                   opacity: 1,
                   transition: "opacity 0.3s ease-in-out",
                 }}
