@@ -10,4 +10,4 @@ By learning and mastering the world of good nutrition, bring all the monsters ba
 
 
 # Visit Website:
-https://ceakii.github.io/YummiGo/
+https://ceakii.github.io/YummiGo/#/YummiGo/login
