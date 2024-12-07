@@ -1,5 +1,8 @@
+import React from "react"
 import { useContext } from 'react';
 import { AppBar, Box, Button, ThemeProvider, Toolbar, Typography } from "@mui/material";
+import { Menu, MenuItem } from "@mui/material"
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { barStyle, textTheme } from "../Style";
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +14,16 @@ export default function TopBar() {
 
     const handleLoginClick = () => {
         navigate('/YummiGo/login');
+    };
+
+    // Handle logout menu
+    const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+    const open = Boolean(anchorEl);
+    const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleMenuClose = () => {
+        setAnchorEl(null);
     };
 
     const handleLogoutClick = () => {
@@ -35,22 +48,42 @@ export default function TopBar() {
                         {/* Display User Name and Logout Button */}
                         {user ? (
                             <>
-                                <Typography
-                                    variant="button"
-                                    align="center"
-                                    sx={{ flexGrow: 0, marginRight: 2 }}
+                                <Button
+                                    color="inherit"
+                                    id="logoutButton"
+                                    aria-controls={open ? 'logoutMenu' : undefined}
+                                    aria-haspopup="true"
+                                    aria-expanded={open ? 'true' : undefined}
+                                    endIcon={<KeyboardArrowDownIcon />}
+                                    onClick={handleMenuClick}
                                 >
-                                    {user}
-                                </Typography>
-                                <Button color="inherit" onClick={handleLogoutClick}>
                                     <Typography
                                         variant="button"
                                         align="center"
-                                        sx={{ flexGrow: 1 }}
+                                        sx={{ flexGrow: 0, marginRight: 2 }}
                                     >
-                                        Logout
+                                        {user}
                                     </Typography>
                                 </Button>
+                                <Menu
+                                    id="logoutMenu"
+                                    anchorEl={anchorEl}
+                                    open={open}
+                                    onClose={handleMenuClose}
+                                    MenuListProps={{
+                                    'aria-labelledby': 'logoutButton',
+                                    }}
+                                >
+                                    <MenuItem onClick={handleLogoutClick}>
+                                        <Typography
+                                            variant="button"
+                                            align="center"
+                                            sx={{ flexGrow: 1 }}
+                                        >
+                                            Logout
+                                        </Typography>
+                                    </MenuItem>
+                                </Menu>
                             </>
                         ) : (
                             <Button color="inherit" onClick={handleLoginClick}>
