@@ -11,7 +11,7 @@ export default function Carrotti() {
       level={level}
     >
       <Box sx={{ width: '100%', textAlign: 'center' }}>
-        <Typography variant="h5" sx={{ marginTop: 10 }}>
+        <Typography variant="h4" fontSize={"14pt"} sx={{ marginTop: 3 }}>
           "The Sprout Yummigo"
         </Typography>
       </Box>

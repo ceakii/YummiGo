@@ -62,8 +62,8 @@ export default function Quest1() {
           {/* Image Frame */}
           <Box
             sx={{
-              width: "40vw",
-              height: "40vw",
+              width: { xs: "40vw", sm: "20vw" },
+              height: { xs: "40vw", sm: "20vw" },
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -78,8 +78,8 @@ export default function Quest1() {
               image={FruitBowl}
               alt="Fruit Bowl"
               sx={{
-                width: "38vw",
-                height: "38vw",
+                width: { xs: "38vw", sm: "19vw" },
+                height: { xs: "38vw", sm: "19vw" },
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -106,7 +106,7 @@ export default function Quest1() {
         >
           {/* Title */}
           <ThemeProvider theme={textTheme}>
-            <Typography variant="h4" align="center">
+            <Typography variant="h4" fontSize={"16pt"} align="center" padding={2}>
               Quest 1
             </Typography>
           </ThemeProvider>
@@ -121,7 +121,7 @@ export default function Quest1() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          padding: 5
+          padding: 2
         }}
       >
         {/* Quest Container (Objective + Description + Browse Recipe Button) */}
@@ -142,7 +142,7 @@ export default function Quest1() {
           {/* Quest Objective Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
+              <Typography variant="h4" fontSize = {"14pt"}>
                 Objective:
               </Typography>
             </ThemeProvider>
@@ -151,7 +151,7 @@ export default function Quest1() {
           {/* Quest Objective */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h5" color="black">
+              <Typography variant="h5" fontSize = {"12pt"} color="black">
                 Cook one recipe and Upload a picture of it!
               </Typography>
             </ThemeProvider>
@@ -160,7 +160,7 @@ export default function Quest1() {
           {/* Quest Description Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
+              <Typography variant="h4" fontSize = {"14pt"}>
                 Description:
               </Typography>
             </ThemeProvider>
@@ -169,7 +169,7 @@ export default function Quest1() {
           {/* Quest Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h5" color="black">
+              <Typography variant="h5" fontSize = {"12pt"} color="black">
                 Your first quest to start your healthy adventure!
               </Typography>
             </ThemeProvider>
@@ -252,7 +252,7 @@ export default function Quest1() {
           { (questUploadCount > 0) ? null : (
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
-              <Box bgcolor={"#FEAF2F"} border={2}>
+              <Box>
                 <ThemeProvider theme={textTheme}>
                   <Typography variant="button" display={"flex"} justifyContent={"center"}>
                     Quest Complete!

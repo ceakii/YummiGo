@@ -47,8 +47,7 @@ export default function Profile() {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "column",
-    gap: "1vw",
+    flexDirection: "column"
   };
 
   const orangeBox = {
@@ -77,11 +76,11 @@ export default function Profile() {
         image={HeroAvatarPfp}
         alt="Hero Avatar"
         sx={{
-          height: "70vw",
+          height: "100vw",
           width: "70vh",
           border: "1px",
           borderRadius: "50%",
-          marginTop: "33vw",
+          marginTop: "33vw"
         }}
       />
 
@@ -110,7 +109,7 @@ export default function Profile() {
 
       <Button
         sx={{ ...orangeBox, textTransform: "none" }}
-        onClick={() => navigate("/YummiGo/myuploads/myuploads")} // Add this line
+        onClick={() => navigate("/YummiGo/myuploads/myuploads")}
       >
         <ThemeProvider theme={textTheme}>
           <Box sx={textSpacing}>

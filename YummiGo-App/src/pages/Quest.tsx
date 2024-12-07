@@ -52,8 +52,8 @@ export default function Quest() {
           {/* Image Frame */}
           <Box
             sx={{
-              width: "40vw",
-              height: "40vw",
+              width: { xs: "40vw", sm: "20vw" },
+              height: { xs: "40vw", sm: "20vw" },
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -68,8 +68,8 @@ export default function Quest() {
               image={Trophy}
               alt="Trophy"
               sx={{
-                height: "38vw",
-                width: "38vw",
+                width: { xs: "38vw", sm: "19vw" },
+                height: { xs: "38vw", sm: "19vw" },
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -96,7 +96,7 @@ export default function Quest() {
         >
           {/* Title */}
           <ThemeProvider theme={textTheme}>
-            <Typography variant="h4" align="center">
+            <Typography variant="h4" fontSize={"20pt"} align="center">
               Available Quests
             </Typography>
           </ThemeProvider>
@@ -111,7 +111,7 @@ export default function Quest() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          padding: 5,
+          padding: 2,
         }}
       >
         {/* Quests List */}
@@ -127,6 +127,7 @@ export default function Quest() {
             display="flex"
             flexDirection={"row"}
             justifyContent={"space-between"}
+            alignItems= "center"
           >
             {/* Left of Quest Container (Scroll Icon) */}
             <Grid size={{ xs: 3, sm: 2, md: 2, lg: 2 }}>
@@ -167,15 +168,15 @@ export default function Quest() {
                     {/* Quest Title */}
                     <Grid size={"auto"}>
                       <ThemeProvider theme={textTheme}>
-                        <Typography variant="h3">Quest 1</Typography>
+                        <Typography variant="h4" fontSize={"18pt"}>Quest 1</Typography>
                       </ThemeProvider>
                     </Grid>
 
                     {/* Quest Description */}
                     <Grid size={"auto"} flexWrap={"wrap"}>
                       <ThemeProvider theme={textTheme}>
-                        <Typography variant="body1">
-                          Cook one recipe.
+                        <Typography variant="h5" fontSize={"14pt"}>
+                          Add a photo to any recipe
                         </Typography>
                       </ThemeProvider>
                     </Grid>
@@ -193,6 +194,7 @@ export default function Quest() {
             display="flex"
             flexDirection={"row"}
             justifyContent={"space-between"}
+            alignItems= "center"
           >
             {/* Left of Quest Container (Scroll Icon) */}
             <Grid size={{ xs: 3, sm: 2, md: 2, lg: 2 }}>
@@ -234,15 +236,15 @@ export default function Quest() {
                     {/* Quest Title */}
                     <Grid size={"auto"}>
                       <ThemeProvider theme={textTheme}>
-                        <Typography variant="h3">Quest 2</Typography>
+                        <Typography variant="h4" fontSize={"18pt"}>Quest 2</Typography>
                       </ThemeProvider>
                     </Grid>
 
                     {/* Quest Description */}
                     <Grid size={"auto"} flexWrap={"wrap"}>
                       <ThemeProvider theme={textTheme}>
-                        <Typography variant="body1">
-                          Cook two recipes.
+                        <Typography variant="h5" fontSize={"14pt"}>
+                          Add a photo to any recipe two times
                         </Typography>
                       </ThemeProvider>
                     </Grid>

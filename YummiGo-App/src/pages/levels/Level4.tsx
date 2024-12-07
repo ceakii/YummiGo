@@ -42,8 +42,8 @@ export default function Level4() {
           {/* Image Frame */}
           <Box
             sx={{
-              width: "20vw",
-              height: "20vw",
+              width: { xs: "40vw", sm: "20vw" },
+              height: { xs: "40vw", sm: "20vw" },
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -58,8 +58,8 @@ export default function Level4() {
               image={DragonImage}
               alt="Dragon"
               sx={{
-                width: "19vw",
-                height: "19vw",
+                width: { xs: "38vw", sm: "19vw" },
+                height: { xs: "38vw", sm: "19vw" },
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -86,7 +86,7 @@ export default function Level4() {
         >
           {/* Title */}
           <ThemeProvider theme={textTheme}>
-            <Typography variant="h4" align="center">
+            <Typography variant="h4" fontSize={"16pt"} align="center" padding={1}>
               Level 4: The Hungry Dragon
             </Typography>
           </ThemeProvider>
@@ -101,7 +101,7 @@ export default function Level4() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          padding: 5
+          padding: 2
         }}
       >
         {/* Level Container (Objective + Description + Browse Recipe Button) */}
@@ -123,7 +123,7 @@ export default function Level4() {
           {/* Level Description Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
+              <Typography variant="h4" fontSize = {"14pt"}>
                 Story:
               </Typography>
             </ThemeProvider>
@@ -132,7 +132,7 @@ export default function Level4() {
           {/* Level Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h5" color="black">
+              <Typography variant="h5" fontSize = {"12pt"} color="black">
                 You have been spotted by a carnivorous Dragon! It stares at you with the intent of making you its next meal. Fighting is not an option, but fortunately you have... vegetables?
               </Typography>
             </ThemeProvider>
@@ -141,7 +141,7 @@ export default function Level4() {
           {/* Level Objective Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
+              <Typography variant="h4" fontSize = {"14pt"}>
                 Objective:
               </Typography>
             </ThemeProvider>
@@ -150,7 +150,7 @@ export default function Level4() {
           {/* Level Objective */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h5" color="black">
+              <Typography variant="h5" fontSize = {"12pt"} color="black">
                 Drive away the Dragon by answering 5 questions correctly.
               </Typography>
             </ThemeProvider>
@@ -159,7 +159,7 @@ export default function Level4() {
           {/* Level Fail Conditions Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
+              <Typography variant="h4" fontSize = {"14pt"}>
                 Failure Conditions:
               </Typography>
             </ThemeProvider>
@@ -168,7 +168,7 @@ export default function Level4() {
           {/* Level Fail Conditions */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h5" color="black">
+              <Typography variant="h5" fontSize = {"12pt"} color="black">
                 Make 3 Mistakes.
               </Typography>
             </ThemeProvider>
@@ -177,7 +177,7 @@ export default function Level4() {
           {/* Level Rewards Header */}
           <Grid size={"auto"} flexWrap={"wrap"}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h3">
+              <Typography variant="h4" fontSize = {"14pt"}>
                 Reward(s):
               </Typography>
             </ThemeProvider>
@@ -186,7 +186,7 @@ export default function Level4() {
           {/* Level Rewards Description */}
           <Grid size={"auto"} flexWrap={"wrap"} padding={2}>
             <ThemeProvider theme={textTheme}>
-              <Typography variant="h5" color="black">
+              <Typography variant="h5" fontSize = {"12pt"} color="black">
                 8 Recipes
               </Typography>
             </ThemeProvider>

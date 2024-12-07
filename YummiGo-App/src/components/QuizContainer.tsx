@@ -336,7 +336,7 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
         <Dialog open={levelComplete} onClose={handleLevelCompleteClose}>
             {/* Dialog Title */}
             <DialogTitle bgcolor={"#38E2DF"} borderBottom={2}>
-              <Box bgcolor={"#FEAF2F"} border={2}>
+              <Box>
                 <ThemeProvider theme={textTheme}>
                   <Typography
                     variant="button"
@@ -351,13 +351,15 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
 
             {/* Dialog Content */}
             {hideDialog ? null : (
-              <DialogContent sx={{ bgcolor: "#FEAF2F" }}>
+              <DialogContent sx={{ bgcolor: "#FEAF2F"}}>
                   <DialogContentText>
                     <ThemeProvider theme={textTheme}>
                       <Typography
                         variant="body1"
                         display={"flex"}
                         justifyContent={"center"}
+                        fontSize={"14pt"}
+                        marginTop={1}
                       >
                         {level === 4 ? "You earned:" : "Surprise Encounter!"}
                       </Typography>
@@ -369,6 +371,7 @@ export default function QuizContainer({ children, title, imageSrc, questions, le
                         color="black"
                         display={"flex"}
                         justifyContent={"center"}
+                        fontSize={"12pt"}
                       >
                         {level === 4 ? "8 Recipes" : "You hear a thunderous roar coming from above you. The sun is eclipsed not by storm clouds, but a Dragon!"}
                       </Typography>
